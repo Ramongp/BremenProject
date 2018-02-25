@@ -91,7 +91,7 @@ public class Unfold : MonoBehaviour {
 
 	}
 
-	void Origin()
+	public void Origin()
 	{
 		RotateSmooth(finalRotation.x,finalRotation.y,finalRotation.z);
 		button = true;

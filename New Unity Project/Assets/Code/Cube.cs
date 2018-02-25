@@ -5,8 +5,6 @@ public class Cube : MonoBehaviour {
 
 	// Use this for initialization
 	public Material Map;
-	public float horizontalSpeed = 2.0F;
-	public float verticalSpeed = 2.0F;
 	public GameObject cube, CubePL;
 	public GameObject[] GBox;
 	public Texture[] Faces;
@@ -28,46 +26,10 @@ public class Cube : MonoBehaviour {
 		/*if(Input.GetMouseButton(0)){
 			MovePL ();
 		}*/
-			// Handle native touch events
-			foreach (Touch touch in Input.touches) {
-				HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
-			}
-
-			// Simulate touch events from mouse events
-			if (Input.touchCount == 0) {
-				if (Input.GetMouseButtonDown(0) ) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				HandleTouch(10, cam, TouchPhase.Began);
-				}
-				if (Input.GetMouseButton(0) ) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				HandleTouch(10, cam, TouchPhase.Moved);
-				}
-				if (Input.GetMouseButtonUp(0) ) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-				HandleTouch(10, cam, TouchPhase.Ended);
-				}
-			}
+			
 		}
 
-		private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase) {
-			switch (touchPhase) {
-			case TouchPhase.Began:
-				// TODO
-				break;
-		case TouchPhase.Moved:
-			Debug.Log ("Move");
-				float h2 = horizontalSpeed * touchPosition.x*Mathf.Deg2Rad;
-				float v2 = verticalSpeed * touchPosition.y*Mathf.Deg2Rad;
-				//cube.transform.Rotate(v, h, 0);
-				CubePL.transform.RotateAround(Vector3.up,-h2);
-				CubePL.transform.RotateAround(Vector3.right,+v2);
-				break;
-			case TouchPhase.Ended:
-				// TODO
-				break;
-			}
-		}
+
 			
 
 	void Paint (Mesh m) { //Pintar antiguo cubo
@@ -111,7 +73,8 @@ public class Cube : MonoBehaviour {
 		UVs[23] = new Vector2(0.0f,0.0f);*/
 		mesh.uv = UVs;
 	}
-	void Move(){
+	//Obsoleto
+	/*void Move(){
 			float h = horizontalSpeed * Input.GetAxis("Mouse X")*Mathf.Deg2Rad;
 		float v = verticalSpeed * Input.GetAxis("Mouse Y")*Mathf.Deg2Rad;
 			//cube.transform.Rotate(v, h, 0);
@@ -122,6 +85,6 @@ public class Cube : MonoBehaviour {
 		//cube.transform.Rotate(v, h, 0);
 		CubePL.transform.RotateAround(Vector3.up,-h2);
 		CubePL.transform.RotateAround(Vector3.right,+v2);
-	}
+	}*/
 
 }
