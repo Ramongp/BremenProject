@@ -8,13 +8,14 @@ public class Cube : MonoBehaviour {
 	public Vector3 startPosition, endPosition;
 	public float horizontalSpeed = 0.01F;
 	public float verticalSpeed = 0.01F;
-	public float CanvasMargin = 20;
+	public float CanvasMargin;
 	public GameObject cube, CubePL, CubeFake;
 	public GameObject[] GBox;
 	public Texture[] Faces;
 	public Face[] Box;
 
 	void Start () {
+		CanvasMargin = Screen.height/10;
 		Box = new Face[6] {new Face ("S", 9, Faces [0],0), new Face ("S", 9, Faces [1],1), new Face ("S", 9, Faces [2],2),
 			new Face ("S", 9, Faces [3],3), new Face ("S", 9, Faces [4],4), new Face ("S", 9, Faces [5],5)};
 
@@ -35,7 +36,8 @@ public class Cube : MonoBehaviour {
 		}*/
 			// Handle native touch events
 			foreach (Touch touch in Input.touches) {
-				HandleTouch(touch.fingerId, Camera.main.ScreenToWorldPoint(touch.position), touch.phase);
+			Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3(Input.mousePosition.x,Input.mousePosition.y,100));
+			HandleTouch(touch.fingerId,cam, touch.phase);
 			}
 
 			// Simulate touch events from mouse events
@@ -73,6 +75,7 @@ public class Cube : MonoBehaviour {
 			endPosition = touchPosition;
 			Debug.Log ("End" + touchPosition.ToString ());
 			if(Unfold.Fold.Equals(0)&&Unfold.moving.Equals(false)){
+				Debug.Log (CanvasMargin.ToString ());
 			Compare ();
 			}
 			break;

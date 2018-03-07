@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.IO;
 
 public class Unfold : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class Unfold : MonoBehaviour {
 	public Vector3 UnfoldPosition= new Vector3 (-10, 0, 10),FoldPosition = new Vector3 (0, 0,0);
 	public static bool moving, button;
 	void Start () {
+
 		seedMove = 20;
 		//FoldPosition.localPosition = 
 		//UnfoldPositon.localPosition = new Vector3 (-10, 0, 10);
@@ -120,33 +122,39 @@ public class Unfold : MonoBehaviour {
 	public void MoveUp()
 	{
 		RotateSmooth(90,0,0);
-		button = true;	
+		button = true;
+		SaveMove ("Up");
 	}
 
 	public void MoveDown()
 	{
 		RotateSmooth(-90,0,0);
 		button = true;
+		SaveMove ("Down");
 	}
 	public void MoveLeft()
 	{
 		RotateSmooth(0,90,0);
 		button = true;
+		SaveMove ("Left");
 	}
 	public void MoveRight()
 	{
 		RotateSmooth(0,-90,0);
 		button = true;
+		SaveMove ("Right");
 	}
 	public void MoveUpLeft()
 	{
 		RotateSmooth(0,0,90);
 		button = true;
+		SaveMove ("UpLeft");
 	}
 	public void MoveUpRight()
 	{
 		RotateSmooth(0,0,-90);
 		button = true;
+		SaveMove ("UpRight");
 	}
 
 	public void SetToStart()
@@ -157,4 +165,33 @@ public class Unfold : MonoBehaviour {
 		}
 	}
 
+	private string getPath ()
+	{
+		#if UNITY_EDITOR
+		return Application.dataPath + "/CSV/" + "Moves.csv";
+		#elif UNITY_ANDROID
+		return Application.persistentDataPath+"Saved_Inventory.csv";
+		#elif UNITY_IPHONE
+		return Application.persistentDataPath+"/"+"Saved_Inventory.csv";
+		#else
+		return Application.dataPath +"/"+"Saved_Inventory.csv";
+		#endif
+		}    
+		void SaveMove (string move)
+	{
+	
+		string filePath = getPath ();
+		string delimiter = ",";  
+
+		//This is the writer, it writes to the filepath
+		//StreamWriter writer = new StreamWriter (filePath);
+
+		//This is writing the line of the type, name, damage... etc... (I set these)
+		//writer.Write(move);
+		File.AppendAllText (filePath, move+delimiter);
+		//This loops through everything in the inventory and sets the file to these.
+		//writer.Flush ();
+		//This closes the file
+	//	writer.Close ();
+	}
 }
