@@ -52,6 +52,7 @@
      <Compile Include="Assets\Code\Grafo.cs" />
      <Compile Include="Assets\Code\MouseToInput.cs" />
      <Compile Include="Assets\Code\Node.cs" />
+     <Compile Include="Assets\Code\SameCube.cs" />
      <Compile Include="Assets\Code\Torque.cs" />
      <Compile Include="Assets\Code\Unfold.cs" />
  <Reference Include="UnityEngine.UI">

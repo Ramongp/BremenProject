@@ -9,24 +9,30 @@ public class Cube : MonoBehaviour {
 	public float horizontalSpeed = 0.01F;
 	public float verticalSpeed = 0.01F;
 	public float CanvasMargin;
-	public GameObject cube, CubePL, CubeFake;
+	public GameObject CubePL, CubeFake;
 	public GameObject[] GBox;
 	public Texture[] Faces;
-	public Face[] Box;
+	public Box OrigBox, FinalBox;
+	public Quaternion startingRotation;
 
 	void Start () {
-		CanvasMargin = Screen.height/10;
-		Box = new Face[6] {new Face ("S", 9, Faces [0],0), new Face ("S", 9, Faces [1],1), new Face ("S", 9, Faces [2],2),
-			new Face ("S", 9, Faces [3],3), new Face ("S", 9, Faces [4],4), new Face ("S", 9, Faces [5],5)};
+		startingRotation = this.gameObject.transform.localRotation;
+		CanvasMargin = (Screen.height
+			/Camera.main.orthographicSize)/20;
+		OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 0,2),
+			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
+		FinalBox = new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 0,2),
+			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
+		
 
-		for (int i = 0; i < Box.Length; i++) {
+		for (int i = 0; i < Faces.Length; i++) {
 			//Box [i].image.TextureWrapMode.Mirror;
-			GBox [i].GetComponent<Renderer> ().material.mainTexture = Box[i].image;
+			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
 			Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
 		}
-
+		RandomCube (CubeFake, FinalBox);
 		//CubeFake.transform.rotation = Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
-		CubeFake.transform.rotation = Quaternion.Euler(-15, 30	,-10)*Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
+		//CubeFake.transform.rotation = Quaternion.Euler(-15, 30	,-10)*Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
 	}
 	
 	// Update is called once per frame
@@ -124,18 +130,6 @@ public class Cube : MonoBehaviour {
 		UVs[23] = new Vector2(0.0f,0.0f);*/
 		mesh.uv = UVs;
 	}
-	void Move(){
-			float h = horizontalSpeed * Input.GetAxis("Mouse X")*Mathf.Deg2Rad;
-		float v = verticalSpeed * Input.GetAxis("Mouse Y")*Mathf.Deg2Rad;
-			//cube.transform.Rotate(v, h, 0);
-		}
-	void MovePL(){
-		float h2 = horizontalSpeed * Input.GetAxis("Mouse X")*Mathf.Deg2Rad;
-		float v2 = verticalSpeed * Input.GetAxis("Mouse Y")*Mathf.Deg2Rad;
-		//cube.transform.Rotate(v, h, 0);
-		CubePL.transform.RotateAround(Vector3.up,-h2);
-		CubePL.transform.RotateAround(Vector3.right,+v2);
-	}
 
 		public void Compare()
 		{
@@ -179,4 +173,53 @@ public class Cube : MonoBehaviour {
 		}
 			
 		}
+
+	void RandomCube(GameObject g, Box b)
+	{
+		
+		Debug.Log ("Orig " + b.Status());
+		Debug.Log ("Pasos ");
+		int i = Random.Range (1, 4);
+		for (int e = 0; e < i; e++) {
+			int x=0, y=0, z=0;
+			int u = Random.Range (0, 5);
+			switch (u) {
+			case 0:
+				Debug.Log ("Up ");
+				b.MoveUp ();
+				x += 90;
+				break;
+			case 1:
+				Debug.Log ("Down ");
+				b.MoveDown ();
+				x -= 90;
+				break;
+			case 2:
+				Debug.Log ("Right ");
+				b.MoveRight ();
+				y -= 90;
+				break;
+			case 3:
+				Debug.Log ("Left ");
+				b.MoveLeft ();
+				y += 90;
+				break;
+			case 4:
+				Debug.Log ("TUR ");
+				b.MoveUpRight ();
+				z -= 90;
+				break;
+			case 5:
+				Debug.Log ("TUL ");
+				b.MoveUpLeft ();
+				z += 90;
+				break;
+			}
+			g.transform.localRotation = Quaternion.Euler(x,y,z)*startingRotation;
+			startingRotation=this.transform.localRotation;
+		}
+		Debug.Log ("Final " + b.Status());
+		FinalBox.Front.localization = 0;FinalBox.Up.localization = 2;FinalBox.Right.localization = 4;
+		this.GetComponent<SameCube> ().Compare (OrigBox.Front, OrigBox.Up, OrigBox.Right, FinalBox.Front, FinalBox.Up, FinalBox.Right);
+	}
 }
