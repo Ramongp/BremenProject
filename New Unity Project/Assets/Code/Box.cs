@@ -24,7 +24,9 @@ public class Box {
 		Face temp = Front;
 		Front = Down;
 		Down = Back;
+		FromBack (Down);
 		Back = Up;
+		FromBack (Back);
 		Up = temp;
 	}
 	public void MoveDown()
@@ -38,7 +40,9 @@ public class Box {
 		Face temp = Front;
 		Front = Up;
 		Up = Back;
+		FromBack (Up);
 		Back = Down;
+		FromBack (Back);
 		Down = temp;
 	}
 	public void MoveRight()
@@ -72,7 +76,7 @@ public class Box {
 	}
 	public void MoveUpRight()
 	{
-		Clockwise (Front);
+		Clockwise (Front); Clockwise (Up);Clockwise (Right);Clockwise (Down);Clockwise (Left);
 		Counterclockwise (Back);
 		/*Up.localization=4;
 		Left.localization=2;
@@ -88,7 +92,7 @@ public class Box {
 	public void MoveUpLeft()
 	{
 		Clockwise (Back);
-		Counterclockwise (Front);
+		Counterclockwise (Front); Counterclockwise (Up);Counterclockwise (Right);Counterclockwise (Down);Counterclockwise (Left);
 		/*Up.localization=5;
 		Left.localization=3;
 		Down.localization=4;
@@ -114,7 +118,7 @@ public class Box {
 			f.orientation = 3;
 			break;
 		case 1:
-			f.orientation = 1;
+			f.orientation = 2;
 			break;
 		};
 	}
@@ -137,12 +141,29 @@ public class Box {
 			break;
 		};
 	}
-
 	public string Status ()
 	{
 		return ("Front: loc " + Front.localization.ToString() + " orient " + Front.orientation.ToString() + " symbol " + Front.symbol.ToString() +
 			" Up: loc " + Up.localization.ToString() + " orient " + Up.orientation.ToString() + " symbol " + Up.symbol.ToString() +
 			" Right: loc " + Right.localization.ToString() + " orient " + Right.orientation.ToString() + " symbol " + Right.symbol.ToString());
+	}
+	void FromBack(Face f)
+	{
+		switch (f.orientation) {
+
+		case 0:
+			f.orientation = 2;
+			break;
+		case 3:
+			f.orientation = 1;
+			break;
+		case 2:
+			f.orientation = 0;
+			break;
+		case 1:
+			f.orientation = 3;
+			break;
+		};
 	}
 
 }

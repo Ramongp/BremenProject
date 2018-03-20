@@ -9,6 +9,7 @@ public class Unfold : MonoBehaviour {
 	public static int Fold;
 	public int speedRotation, seedMove;
 	public Quaternion startingRotation,finalRotation;
+	public static Quaternion AfterRandom;
 	public float MarginError;
 	public Vector3 UnfoldPosition,FoldPosition;
 	public static bool moving, button;
@@ -19,7 +20,7 @@ public class Unfold : MonoBehaviour {
 		//FoldPosition.localPosition = 
 		//UnfoldPositon.localPosition = new Vector3 (-10, 0, 10);
 		button = false;
-		UnfoldPosition = new Vector3 (-5, -10, 20);
+		UnfoldPosition = new Vector3 (-7, -6, 20);
 		FoldPosition = new Vector3 (0, 0,0);
 		MarginError = 0.003f;
 		speedRotation = 10;
@@ -28,7 +29,6 @@ public class Unfold : MonoBehaviour {
 		finalRotation = startingRotation;
 		Fold = 0;
 		end = true;
-		Debug.Log (end.ToString ());
 	}
 	
 	// Update is called once per frame
@@ -50,42 +50,45 @@ public class Unfold : MonoBehaviour {
 			}
 			}
 
+		if (Cube.help) {
+			if (Input.GetKeyDown ("up")) {
+				UnfoldBox ();
+				//end = false;
+				//if (Fold.Equals (0)&& this.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 /*&& this.gameObject.GetComponent<Animator>().IsInTransition(0)*/) {
 
-		if (Input.GetKeyDown ("up")) {
-			UnfoldBox ();
-			//end = false;
-			//if (Fold.Equals (0)&& this.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime > 1 /*&& this.gameObject.GetComponent<Animator>().IsInTransition(0)*/) {
+			}
 
-		}
+			if (Input.GetKeyDown ("w") && Fold.Equals (0) && moving.Equals (false)) {
+				//this.gameObject.transform.Rotate (90, 0, 0);
+				MoveUp ();
+			}
+			if (Input.GetKeyDown ("a") && Fold.Equals (0) && moving.Equals (false)) {
+				MoveLeft ();
+			}
+			if (Input.GetKeyDown ("d") && Fold.Equals (0) && moving.Equals (false)) {
+				MoveRight ();
+			}
+			if (Input.GetKeyDown ("s") && Fold.Equals (0) && moving.Equals (false)) {
+				MoveDown ();
+			}
+			if (Input.GetKeyDown ("e") && Fold.Equals (0) && moving.Equals (false)) {
+				MoveUpRight ();
+			}
+			if (Input.GetKeyDown ("q") && Fold.Equals (0) && moving.Equals (false)) {
+				MoveUpLeft ();
+			}
 
-		if (Input.GetKeyDown ("w")&& Fold.Equals(0)&&moving.Equals(false)) {
-			//this.gameObject.transform.Rotate (90, 0, 0);
-			MoveUp();
-		}
-		if (Input.GetKeyDown ("a")&& Fold.Equals(0)&&moving.Equals(false)) {
-			MoveLeft();
-		}
-		if (Input.GetKeyDown ("d")&& Fold.Equals(0)&&moving.Equals(false)) {
-			MoveRight();
-		}
-		if (Input.GetKeyDown ("s")&& Fold.Equals(0)&&moving.Equals(false)) {
-			MoveDown();
-		}
-		if (Input.GetKeyDown ("e")&& Fold.Equals(0)&&moving.Equals(false)) {
-			MoveUpRight();
-		}
-		if (Input.GetKeyDown ("q")&& Fold.Equals(0)&&moving.Equals(false)) {
-			MoveUpLeft();
-		}
+			if ((Input.GetKeyDown ("space")) && (Fold.Equals (0)) && (moving.Equals (false)) && ((Mathf.Abs (this.gameObject.transform.localRotation.x - finalRotation.x) > MarginError) ||
+				(Mathf.Abs (this.gameObject.transform.localRotation.y - finalRotation.y) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.z - finalRotation.z) > MarginError))) {
+				//SetToStart ();
 
-		if ((Input.GetKeyDown ("space"))&& (Fold.Equals(0))&&(moving.Equals(false))&&((Mathf.Abs(this.gameObject.transform.localRotation.x - finalRotation.x) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.y - finalRotation.y) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.z - finalRotation.z) > MarginError)))  {
-			SetToStart ();
-
+			}
 		}
 
 
 		if (button) {
-			if ((Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.x )- Mathf.Abs (finalRotation.x)) < MarginError) && (Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.y )- Mathf.Abs (finalRotation.y)) < MarginError) && (Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.z )- Mathf.Abs (finalRotation.z)) < MarginError)) {
+			if ((Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.x )- Mathf.Abs (finalRotation.x)) < MarginError) && (Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.y )- Mathf.Abs (finalRotation.y)) < MarginError) &&
+				(Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.z )- Mathf.Abs (finalRotation.z)) < MarginError)) {
 				moving = false;
 				this.gameObject.transform.localRotation = finalRotation;
 				startingRotation = finalRotation;
@@ -168,7 +171,8 @@ public class Unfold : MonoBehaviour {
 
 	public void SetToStart()
 	{
-		if(((Mathf.Abs(this.gameObject.transform.localRotation.x - finalRotation.x) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.y - finalRotation.y) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.z - finalRotation.z) > MarginError))){
+		if(((Mathf.Abs(this.gameObject.transform.localRotation.x - finalRotation.x) > MarginError) || (Mathf.Abs (this.gameObject.transform.localRotation.y - finalRotation.y) > MarginError) ||
+			(Mathf.Abs (this.gameObject.transform.localRotation.z - finalRotation.z) > MarginError))){
 		RotateSmooth(finalRotation.x,finalRotation.y,finalRotation.z);
 		button = true;
 		}
@@ -220,4 +224,26 @@ public class Unfold : MonoBehaviour {
 		//This closes the file
 		//	writer.Close ();
 		}
+
+
+		public void SetToAfterRandom()
+	{
+		if ((Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.x )- Mathf.Abs (finalRotation.x)) < MarginError) && (Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.y )- Mathf.Abs (finalRotation.y)) < MarginError) &&
+		(Mathf.Abs (Mathf.Abs (this.gameObject.transform.localRotation.z )- Mathf.Abs (finalRotation.z)) < MarginError)) {
+
+		finalRotation = AfterRandom;
+			button = true;
+			Debug.Log (AfterRandom.ToString ());
+			SaveMove ("SetToStart");
+		moving = true;
+		}
+	}
+
+		public void WriteHelp()
+	{
+		SaveMove ("Help used ,");
+		startingRotation = AfterRandom;
+		finalRotation = startingRotation;
+		AfterRandom = finalRotation;
+	}
 }
