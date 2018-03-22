@@ -9,6 +9,7 @@ public class SameCube : MonoBehaviour {
 	Face Fo,Uo,Ro,Ff,Uf,Rf,S1,S2,S3,T1,T2,T3,So1,So2,So3; //Caras originales, finales, repetidas (sides) y no repetidas (tapadas)
 	string[] movs; //Conjunto de strings de movimientos de cada cara
 	string S1mov,S2mov,S3mov;
+	public static Face Fx;
 	int SameSymbols,DiffSymbols;
 	Box FakeBox;
 	public static bool IsSameCube;
@@ -103,6 +104,7 @@ public class SameCube : MonoBehaviour {
 				Debug.Log ("Mismo cubo");
 				IsSameCube = true;
 			} else {
+				Fx = S1;
 				Debug.Log ("Cubo diferente");
 				IsSameCube = false;
 			}
@@ -112,7 +114,7 @@ public class SameCube : MonoBehaviour {
 			Debug.Log ("Se repiten dos simbolos");
 			if ((!string.IsNullOrEmpty(S1mov))&&
 				(!string.IsNullOrEmpty(S2mov))&&
-				(Compare2Sides ()) && (NoVisible (T1))) {
+				(Compare2Sides ()) ) {
 				Debug.Log ("Mismo cubo");
 				IsSameCube = true;
 			} 
@@ -274,10 +276,25 @@ public class SameCube : MonoBehaviour {
 		Debug.Log (" Tras mover con R=2 " + F1.symbol + " habría hecho "+S2mov+" Habria acabado en " + TradLocaton( F1.localization)+ " como "+TradLocaton(S1.localization) + " y " + F2.symbol + " habría hecho "+S1mov+ " habria acabado en " +TradLocaton( F2.localization)+ " como "+TradLocaton(S2.localization ));
 		if (((F1.localization ==S1.localization))&&((F2.localization == S2.localization))) {
 			Debug.Log ("Acaban en el mismo sitio");
-			return true;
+
+			if (NoVisible (T1)) {
+				return true;
+			} 
+			else {
+				Fx = T1;
+				return false;
+			}
+
 		} 
 		else {
 			Debug.Log ("Acaban en sitios diferentes");
+
+			if (NoVisible (T1)) {
+				Fx = S2;
+			} 
+			else {
+				Fx = S1;
+			}
 			return false;
 		}
 	}
