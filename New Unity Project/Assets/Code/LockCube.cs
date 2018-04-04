@@ -12,6 +12,7 @@ public class LockCube : MonoBehaviour {
 	public GameObject[] GBox;
 	public Texture[] Faces;
 	public Box OrigBox;
+	public string move;
 	public static string MoveNeeded;
 	public Quaternion startingRotation;
 	//public Button BHelp, BReset, BUnfold;
@@ -40,6 +41,8 @@ public class LockCube : MonoBehaviour {
 			/Camera.main.orthographicSize)/20;
 		CreateTest (Test);
 		help = true;
+		move=GameObject.Find("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);
+		Debug.Log (move);
 	}
 
 	// Update is called once per frame
@@ -308,4 +311,41 @@ public class LockCube : MonoBehaviour {
 		}
 	}
 
+
+	public void ShowWay ()
+	{
+		string tempmov = move;
+		string[] listmov = tempmov.Split (',');
+		for (int i = 0; i < listmov.Length-1; i++) {
+			Debug.Log (listmov.Length.ToString() + " " + i.ToString());
+			Arrows [i].gameObject.SetActive (true);
+			Arrows [i].sprite = Movs [MovetoInt (listmov [i])];
+		}
+	}
+	public int  MovetoInt(string move)
+	{
+		switch (move) {
+		case "Up":
+			return 0;
+			break;
+		case "Down":
+			return 1;
+			break;
+		case "Left":
+			return 3;
+			break;
+		case "Right":
+			return 2;
+			break;
+		case "Toward-up-right":
+			return 4;
+			break;
+		case "Toward-up-left":
+			return 5;
+			break;
+		default:
+			return 0;
+			break;
+		}
+	}
 }

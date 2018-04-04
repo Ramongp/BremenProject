@@ -15,7 +15,12 @@ public class SameCube : MonoBehaviour {
 	public static bool IsSameCube;
 	int[,] OrientconRot;
 	void Start () { //Tablas con cambios de orientaciones
-		
+		Forient= new string[4,4] {{" ","Toward-up-right,","Toward-up-right,Toward-up-right,","Toward-up-left,"},{"Toward-up-left,"," ","Toward-up-right,","Toward-up-right,Toward-up-right,"},{"Toward-up-left,Toward-up-left,","Toward-up-left,"," ","Toward-up-right,"},{"Toward-up-right,","Toward-up-left,Toward-up-left","Toward-up-left,"," "}};
+		Uorient= new string[4,4] {{" ","Left,","Left,Left,","Right,"},{"Right,"," ","Left,","Left,Left,"},{"Right,Right,","Right,"," ","Left,"},{"Left,","Right,Right,","Right,"," "}};
+		Rorient= new string[4,4] {{" ","Up,","Up,Up,","Down,"},{"Down,"," ","Up,","Up,Up,"},{"Down,Down,","Down,"," ","Up,"},{"Up,","Down,Down,","Down,"," "}};
+		Rot = new string[3, 3]{ { " ", "Up,", "Right," }, { "Down,", " ", "Toward-up-right," }, { "Left,", "Toward-up-left,", " " } };
+		OrientconRot = new int[3, 3]{ {0, 0, 0 }, { 0, 0, -1 }, {0, 1, 0 } };// Está al
+		movs = new string[3];
 	}
 	
 	// Update is called once per frame
@@ -29,18 +34,34 @@ public class SameCube : MonoBehaviour {
 		Fo = F1; Uo = U1; Ro = R1; Ff = F2; Uf = U2; Rf = R2;
 		SidesO =new Face[]{Fo,Uo,Ro};
 		SidesF =new Face[]{Ff,Uf,Rf};
-		movs = new string[3];
-		Forient= new string[4,4] {{" ","Toward-up-right,","Toward-up-right,Toward-up-right,","Toward-up-left,"},{"Toward-up-left,"," ","Toward-up-right,","Toward-up-right,Toward-up-right,"},{"Toward-up-left,Toward-up-left,","Toward-up-left,"," ","Toward-up-right,"},{"Toward-up-right,","Toward-up-left,Toward-up-left","Toward-up-left,"," "}};
-		Uorient= new string[4,4] {{" ","Left,","Left,Left,","Right,"},{"Right,"," ","Left,","Left,Left,"},{"Right,Right,","Right,"," ","Left,"},{"Left,","Right,Right,","Right,"," "}};
-		Rorient= new string[4,4] {{" ","Up,","Up,Up,","Down,"},{"Down,"," ","Up,","Up,Up,"},{"Down,Down,","Down,"," ","Up,"},{"Up,","Down,Down,","Down,"," "}};
-		Rot = new string[3, 3]{ { " ", "Up,", "Right," }, { "Down,", " ", "Toward-up-right," }, { "Left,", "Toward-up-left,", " " } };
-		OrientconRot = new int[3, 3]{ {0, 0, 0 }, { 0, 0, -1 }, {0, 1, 0 } };// Está al
+
+
 		FakeBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 0,2),new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
 
 		FindSides ();
 
 	}
 
+	public string  LockTest(Face F1, Face F2, Face F3)
+	{
+		Debug.Log("pasa");
+		Fo=F1;
+		Uo=F2;
+		Ro=F3;
+		int Slock=0;
+		SidesO =new Face[]{Fo,Uo,Ro};
+		for(int i=0;i<SidesO.Length;i++)
+		{ if (SidesO [i].symbol.Equals ("Lock"))
+				Slock = i;
+			}
+	
+
+		SidesF = new Face[] {new Face("Lock", 0, 0)};
+		CreateMov (Slock, 0, 0);
+	
+
+			return S1mov;
+	}
 	 void FindSides()
 	{
 		SameSymbols = 0;
