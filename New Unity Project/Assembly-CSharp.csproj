@@ -48,14 +48,22 @@
      <Compile Include="Assets\Code\Arista.cs" />
      <Compile Include="Assets\Code\Box.cs" />
      <Compile Include="Assets\Code\Cube.cs" />
-     <Compile Include="Assets\Code\Face.cs" />
      <Compile Include="Assets\Code\Grafo.cs" />
+     <Compile Include="Assets\Code\Lang.cs" />
+     <Compile Include="Assets\Code\LangTest.cs" />
+     <Compile Include="Assets\Code\LockCube.cs" />
      <Compile Include="Assets\Code\MouseToInput.cs" />
      <Compile Include="Assets\Code\Node.cs" />
+     <Compile Include="Assets\Code\Points.cs" />
      <Compile Include="Assets\Code\SameCube.cs" />
+     <Compile Include="Assets\Code\SendGmail.cs" />
+     <Compile Include="Assets\Code\TestGui.cs" />
      <Compile Include="Assets\Code\Timer.cs" />
      <Compile Include="Assets\Code\Torque.cs" />
+     <Compile Include="Assets\Code\Training.cs" />
+     <Compile Include="Assets\Code\TrainingCube.cs" />
      <Compile Include="Assets\Code\Unfold.cs" />
+     <None Include="Assets\XML\lang.xml" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>

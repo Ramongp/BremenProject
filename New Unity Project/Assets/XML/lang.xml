@@ -1,0 +1,59 @@
+ <languages>
+        <English>
+            <string name="app_name">Unity Multiple Language Support</string>
+            <string name="description">This script provides convenient multiple language support.</string>
+            <string name="select">Select the lenguage of the game</string>
+            <string name="NextButton">Next</string>
+            <string name="StartTraining">Hi, I need to open this treasue but I can't find the lock. Can you help me?</string>
+            <string name="MSign">Movement</string>
+             <string name="TrainingB0">Yes, let's do this</string>
+             <string name="TrainingB1">Nice</string>
+              <string name="TrainingB2">Yes</string>
+            <string name="Training0">To see the lock we need to rotate the cube, I'll show you how to do that</string>
+            <string name="Training1">This movement it's called Down. First slide your finger from Up to Down the screen</string>
+            <string name="Training2">Nice, one more time</string>
+            <string name="Training3">Now I can see the lock, I'll show you another movement</string>
+            <string name="Training4">Now, Slide your finger from Left to the Right of the screen</string>  
+            <string name="Training5">Great, another one</string>
+            <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
+            <string name="Training7">slide your finger from Up to Down the screen</string>
+        </English>
+        <Spanish>
+            <string name="app_name">Uniti multiples juegos</string>
+            <string name="description">Este script aporta diferentes lenguajes.</string>
+            <string name="select">Selecciona el idioma del juego</string>
+            <string name="NextButton">Siguiente</string>
+            <string name="StartTraining">Hola! Necesito abrir este tesoro pero no ecnuentro la cerradura ¿Puedes ayudarme?</string>
+                   <string name="MSign">Movimiento</string>
+             <string name="TrainingB0">Claro que sí</string>
+             <string name="TrainingB1">Perfecto</string>
+              <string name="TrainingB2">Sí!</string>
+            <string name="Training0">To see the lock we need to rotate the cube, I'll show you how to do that</string>
+            <string name="Training1">First, slide your finger from Up to Down the screen</string>
+            <string name="Training2">Nice, one more time</string>
+            <string name="Training3">Now I can see the lock, I'll show you another movement</string>
+            <string name="Training4">Now, Slide your finger from Left to the Right of the screen</string>
+            <string name="Training5">Great, another one</string>
+            <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
+            <string name="Training7">slide your finger from Up to Down the screen</string>
+        </Spanish>
+         <German>
+            <string name="app_name">Videospiel</string>
+            <string name="description">Dieses Skript bietet eine komfortable Unterstützung mehrerer Sprachen.</string>
+             <string name="select">Wähle die Spielsprache aus</string>
+             <string name="NextButton">Folgendes</string>
+             <string name="StartTraining">Hallo! Ich muss diesen Schatz öffnen, aber ich kann das Schloss nicht finden. Kannst du mir helfen?</string>
+             <string name="MSign">Bewegen</string>
+              <string name="TrainingB0">Natürlich, ja!</string>
+              <string name="TrainingB1">Schön!</string>
+               <string name="TrainingB2">Ja!</string>
+            <string name="Training0">To see the lock we need to rotate the cube, I'll show you how to do that</string>
+            <string name="Training1">First, slide your finger from Up to Down the screen</string>
+            <string name="Training2">Nice, one more time</string>
+            <string name="Training3">Now I can see the lock, I'll show you another movement</string>
+            <string name="Training4">Now, Slide your finger from Left to the Right of the screen</string>
+            <string name="Training5">Great, another one</string>
+            <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
+            <string name="Training7">slide your finger from Up to Down the screen</string>
+        </German>
+    </languages>

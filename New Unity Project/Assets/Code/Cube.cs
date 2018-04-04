@@ -20,7 +20,7 @@ public class Cube : MonoBehaviour {
 	public static bool help; //boolean for the button
 
 	void Start () {
-		
+		Unfold.Test = true;
 		CanvasMargin = (Screen.height
 			/Camera.main.orthographicSize)/20;
 		Restart ();
@@ -264,6 +264,7 @@ public class Cube : MonoBehaviour {
 	{
 		//Escoger la cara que recibe el cambio
 		int change = Random.Range (0, 3);
+		//int change=4; //comprobar metodo 2quarters
 		//int change =2; //mirar que pasa con la orientacion
 		int repeatFaces = 0;
 		Face SideWithChange;
@@ -304,6 +305,11 @@ public class Cube : MonoBehaviour {
 		case 3:
 			Debug.Log ("Change Orientation "+SideWithChange.symbol+" to 3_quarters ");
 			PaintRotate3Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
+			SideWithChange.orientation = 3;
+			break;
+		case 4:
+			Debug.Log ("Change Orientation "+SideWithChange.symbol+" to 2_quarters ");
+			PaintRotate2Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
 			SideWithChange.orientation = 2;
 			break;
 		}
@@ -368,6 +374,29 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 	mesh.uv = UVs;
 }
 
+	void PaintRotate2Q (Mesh m) { //orientacion igual a tres-cuartos
+
+		Mesh mesh = m;
+		Vector2[] UVs = new Vector2[mesh.vertices.Length];
+
+
+
+		// Bottom del cubo que hace de cara (plane) //Estan al reves para hacer mirror de la textura
+		UVs[14] = new Vector2(0.0f, 1.0f); //top right
+		UVs[15] = new Vector2(0.3f,1.0f);//btm right
+		UVs[13] = new Vector2(0.0f, 0.0f);	//btm left
+		UVs[12] = new Vector2(1.0f, 0.0f);//top left
+
+
+		// Top del cubo que hace de cara (plane) 
+		UVs[9] = new Vector2(0.0f, 1.0f); //top l
+		//UVs[4] = new Vector2(1.0f, 1.0f);//top r
+		UVs[8] = new Vector2(1.0f, 1.0f);//top r
+		UVs[5] = new Vector2(0.0f, 0.0f);//btm l
+		UVs[4] = new Vector2(1.0f,0.0f);//btm r
+
+		mesh.uv = UVs;
+	}
 
 	public void Same()
 	{
@@ -414,5 +443,8 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		Timer.start = true;
 	}
 
-
+	public void ShowFace(GameObject g)
+	{
+		
+	}
 }

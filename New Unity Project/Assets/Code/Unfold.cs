@@ -12,10 +12,9 @@ public class Unfold : MonoBehaviour {
 	public static Quaternion AfterRandom;
 	public float MarginError;
 	public Vector3 UnfoldPosition,FoldPosition;
-	public static bool moving, button;
+	public static bool moving, button, Test;
 	void Start () {
 
-		WriteTest ();
 		seedMove = 20;
 		//FoldPosition.localPosition = 
 		//UnfoldPositon.localPosition = new Vector3 (-10, 0, 10);
@@ -29,6 +28,9 @@ public class Unfold : MonoBehaviour {
 		finalRotation = startingRotation;
 		Fold = 0;
 		end = true;
+		if (Test) {
+			WriteTest ();
+		}
 	}
 	
 	// Update is called once per frame
@@ -192,7 +194,7 @@ public class Unfold : MonoBehaviour {
 		}    
 		void SaveMove (string move)
 	{
-	
+		if(Test){
 		string filePath = getPath ();
 		string delimiter = ",";  
 
@@ -206,13 +208,14 @@ public class Unfold : MonoBehaviour {
 		//writer.Flush ();
 		//This closes the file
 	//	writer.Close ();
+		}
 	}
 		void WriteTest ()
 		{
 
 		string filePath = getPath ();
 		string delimiter = ",";  
-		string test = "Test 1";
+		string test = "\nTest 1";
 		//This is the writer, it writes to the filepath
 		//StreamWriter writer = new StreamWriter (filePath);
 
@@ -246,4 +249,5 @@ public class Unfold : MonoBehaviour {
 		finalRotation = startingRotation;
 		AfterRandom = finalRotation;
 	}
+
 }

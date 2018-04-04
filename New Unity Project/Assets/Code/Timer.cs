@@ -16,7 +16,6 @@ public class Timer : MonoBehaviour {
 	public Image TimeFill,Bag;
 	public Button TaparN,TaparE;
 	public Image Message;
-	public ParticleSystem ParticleF, ParticleR, ParticleU;
 	void Start () {
 		
 		Bag.gameObject.SetActive (false);
@@ -46,9 +45,6 @@ public class Timer : MonoBehaviour {
 
 	void SetTimer()
 	{
-		ParticleF.gameObject.SetActive (false);
-		ParticleR.gameObject.SetActive (false);
-		ParticleU.gameObject.SetActive (false);
 		Message.gameObject.SetActive (false);
 		TimeLevel = 60;
 		pointsLevel = 10;
