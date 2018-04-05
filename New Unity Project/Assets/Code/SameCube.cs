@@ -4,23 +4,25 @@ using System.Collections;
 public class SameCube : MonoBehaviour {
 
 	// Use this for initialization
-	string[,] Forient,Rorient,Uorient,Rot;
+	public string[,] Forient,Rorient,Uorient,Rot;
 	Face[] SidesO,SidesF;
 	Face Fo,Uo,Ro,Ff,Uf,Rf,S1,S2,S3,T1,T2,T3,So1,So2,So3; //Caras originales, finales, repetidas (sides) y no repetidas (tapadas)
-	string[] movs; //Conjunto de strings de movimientos de cada cara
+	public string[] movs; //Conjunto de strings de movimientos de cada cara
 	string S1mov,S2mov,S3mov;
 	public static Face Fx;
 	int SameSymbols,DiffSymbols;
 	Box FakeBox;
 	public static bool IsSameCube;
 	int[,] OrientconRot;
-	void Start () { //Tablas con cambios de orientaciones
+	void Awake () { //Tablas con cambios de orientaciones
+
+		movs = new string[3];
 		Forient= new string[4,4] {{" ","Toward-up-right,","Toward-up-right,Toward-up-right,","Toward-up-left,"},{"Toward-up-left,"," ","Toward-up-right,","Toward-up-right,Toward-up-right,"},{"Toward-up-left,Toward-up-left,","Toward-up-left,"," ","Toward-up-right,"},{"Toward-up-right,","Toward-up-left,Toward-up-left","Toward-up-left,"," "}};
 		Uorient= new string[4,4] {{" ","Left,","Left,Left,","Right,"},{"Right,"," ","Left,","Left,Left,"},{"Right,Right,","Right,"," ","Left,"},{"Left,","Right,Right,","Right,"," "}};
 		Rorient= new string[4,4] {{" ","Up,","Up,Up,","Down,"},{"Down,"," ","Up,","Up,Up,"},{"Down,Down,","Down,"," ","Up,"},{"Up,","Down,Down,","Down,"," "}};
 		Rot = new string[3, 3]{ { " ", "Up,", "Right," }, { "Down,", " ", "Toward-up-right," }, { "Left,", "Toward-up-left,", " " } };
 		OrientconRot = new int[3, 3]{ {0, 0, 0 }, { 0, 0, -1 }, {0, 1, 0 } };// Está al
-		movs = new string[3];
+
 	}
 	
 	// Update is called once per frame
@@ -31,6 +33,7 @@ public class SameCube : MonoBehaviour {
 
 	public void Compare(Face F1,Face U1,Face R1,Face F2,Face U2,Face R2)
 	{	
+		
 		Fo = F1; Uo = U1; Ro = R1; Ff = F2; Uf = U2; Rf = R2;
 		SidesO =new Face[]{Fo,Uo,Ro};
 		SidesF =new Face[]{Ff,Uf,Rf};
@@ -44,7 +47,6 @@ public class SameCube : MonoBehaviour {
 
 	public string  LockTest(Face F1, Face F2, Face F3)
 	{
-		Debug.Log("pasa");
 		Fo=F1;
 		Uo=F2;
 		Ro=F3;
@@ -57,6 +59,7 @@ public class SameCube : MonoBehaviour {
 	
 
 		SidesF = new Face[] {new Face("Lock", 0, 0)};
+		Debug.Log ("Slock " + Slock.ToString ()+ " movs length " + movs.Length.ToString());
 		CreateMov (Slock, 0, 0);
 	
 

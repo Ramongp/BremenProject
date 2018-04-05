@@ -22,7 +22,7 @@ public class LockCube : MonoBehaviour {
 	public Sprite[] Movs;
 	public int moveCont, AxX,AxY,AxZ, Test;
 	void Start () {
-		Test = 2;
+		Test = Random.Range(0,2);
 		moveCont = 0;
 		Arrows [0].gameObject.SetActive (false);
 		Arrows [1].gameObject.SetActive (false);
@@ -43,6 +43,7 @@ public class LockCube : MonoBehaviour {
 		help = true;
 		move=GameObject.Find("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);
 		Debug.Log (move);
+		Unfold.AfterRandom = CubePL.transform.localRotation;
 	}
 
 	// Update is called once per frame
@@ -172,6 +173,9 @@ public class LockCube : MonoBehaviour {
 					AxY--;
 					if (AxY.Equals (-2)) {
 						OrigBox.MoveLeft();
+						if (moveCont.Equals (3)){
+							HideArrows ();
+						}
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [3];
 						AxY = 0;
@@ -183,6 +187,9 @@ public class LockCube : MonoBehaviour {
 					AxY++;
 					if (AxY.Equals (2)) {
 						OrigBox.MoveRight ();
+						if (moveCont.Equals (3)){
+							HideArrows ();
+						}
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [2];
 						AxY = 0;
@@ -198,6 +205,9 @@ public class LockCube : MonoBehaviour {
 						AxX++;
 						if (AxX.Equals (2)) {
 							OrigBox.MoveDown ();
+							if (moveCont.Equals (3)){
+								HideArrows ();
+							}
 							Arrows [moveCont].gameObject.SetActive (true);
 							Arrows [moveCont].sprite = Movs [1];
 							AxX = 0;
@@ -210,6 +220,9 @@ public class LockCube : MonoBehaviour {
 						AxX--;
 						if (AxX.Equals (-2)) {
 							OrigBox.MoveUp ();
+							if (moveCont.Equals (3)){
+								HideArrows ();
+							}
 							Arrows [moveCont].gameObject.SetActive (true);
 							Arrows [moveCont].sprite = Movs [0];
 							AxX = 0;
@@ -224,6 +237,9 @@ public class LockCube : MonoBehaviour {
 							AxZ++;
 							if (AxZ.Equals (2)) {
 								OrigBox.MoveUpLeft ();
+								if (moveCont.Equals (3)){
+									HideArrows ();
+								}
 								Arrows [moveCont].gameObject.SetActive (true);
 								Arrows [moveCont].sprite = Movs [5];
 								AxZ = 0;
@@ -237,6 +253,9 @@ public class LockCube : MonoBehaviour {
 							OrigBox.MoveUpLeft ();
 							AxZ++;
 							if (AxZ.Equals (2)) {
+								if (moveCont.Equals (3)){
+									HideArrows ();
+								}
 								Arrows [moveCont].gameObject.SetActive (true);
 								Arrows [moveCont].sprite = Movs [5];
 								AxZ = 0;
@@ -249,6 +268,9 @@ public class LockCube : MonoBehaviour {
 							AxZ--;
 							if (AxZ.Equals (-2)) {
 								OrigBox.MoveUpRight ();
+								if (moveCont.Equals (3)){
+									HideArrows ();
+								}
 								Arrows [moveCont].gameObject.SetActive (true);
 								Arrows [moveCont].sprite = Movs [4];
 								AxZ = 0;
@@ -260,6 +282,9 @@ public class LockCube : MonoBehaviour {
 							AxZ--;
 							if (AxZ.Equals (-2)) {
 								OrigBox.MoveUpRight ();
+								if (moveCont.Equals (3)){
+									HideArrows ();
+								}
 								Arrows [moveCont].gameObject.SetActive (true);
 								Arrows [moveCont].sprite = Movs [4];
 								AxZ = 0;
@@ -276,11 +301,9 @@ public class LockCube : MonoBehaviour {
 			CubePL.GetComponent<Unfold> ().SetToStart();
 		}
 
-		if((OrigBox.Front.symbol.Equals("Lock"))&&(OrigBox.Front.orientation.Equals(0)))
-			{
+		if ((OrigBox.Front.symbol.Equals ("Lock")) && (OrigBox.Front.orientation.Equals (0))) {
 			Debug.Log ("Movimiento Logrado");
-		}
-
+		} 
 	}
 	void CreateTest(int test){
 		switch (Test) {
@@ -348,4 +371,19 @@ public class LockCube : MonoBehaviour {
 			break;
 		}
 	}
+
+	public void HideArrows ()
+	{
+		moveCont = 0;
+		Arrows [0].gameObject.SetActive (false);
+		Arrows [1].gameObject.SetActive (false);
+		Arrows [2].gameObject.SetActive (false);
+	}
+
+	public	void ResetLock()
+		{
+		HideArrows();
+		CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
+		AxX = 0;AxY=0;AxZ = 0;
+		}
 }

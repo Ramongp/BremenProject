@@ -5,16 +5,16 @@
       <File FileName="Assets\Code\Training.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Lang.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Unfold.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\Cube.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\Cube.cs" Line="240" Column="16" />
       <File FileName="Assets\Code\Timer.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\SameCube.cs" Line="218" Column="3" />
+      <File FileName="Assets\Code\SameCube.cs" Line="15" Column="32" />
       <File FileName="Assets\Code\Box.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\TrainingCube.cs" Line="1" Column="1" />
+      <File FileName="Assets\Code\TrainingCube.cs" Line="202" Column="21" />
       <File FileName="Assets\Code\LangTest.cs" Line="1" Column="1" />
       <File FileName="Assets\XML\lang.xml" Line="1" Column="1" />
       <File FileName="Assets\Code\SendGmail.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Points.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\LockCube.cs" Line="321" Column="43" />
+      <File FileName="Assets\Code\LockCube.cs" Line="389" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
