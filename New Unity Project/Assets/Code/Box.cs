@@ -120,6 +120,8 @@ public class Box {
 		case 1:
 			f.orientation = 2;
 			break;
+		case 4:
+			break;
 		};
 	}
 
@@ -138,6 +140,8 @@ public class Box {
 			break;
 		case 1:
 			f.orientation = 0;
+			break;
+		case 4:
 			break;
 		};
 	}
@@ -162,6 +166,8 @@ public class Box {
 			break;
 		case 1:
 			f.orientation = 3;
+			break;
+		case 4:
 			break;
 		};
 	}

@@ -1,9 +1,12 @@
+
  <languages>
         <English>
             <string name="app_name">Unity Multiple Language Support</string>
             <string name="description">This script provides convenient multiple language support.</string>
             <string name="select">Select the lenguage of the game</string>
             <string name="NextButton">Next</string>
+
+
             <string name="StartTraining">Hi, I need to open this treasue but I can't find the lock. Can you help me?</string>
             <string name="MSign">Movement</string>
              <string name="TrainingB0">Yes, let's do this</string>
@@ -16,13 +19,42 @@
             <string name="Training4">Now, Slide your finger from Left to the Right of the screen</string>  
             <string name="Training5">Great, another one</string>
             <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
-            <string name="Training7">slide your finger from Up to Down the screen</string>
+            <string name="Training7">Slide your finger from Up to Down the screen</string>
+            <string name="Training8">Almost there, are you ready for the last movement?</string>
+            <string name="Training9">This one is a little tricky, slide your finger from the right bottom to the top left</string>
+            <string name="Training10">Ups, too many movements, Luckily you can do the opposite of the movement</string>
+            <string name="Training11">So every movement has their own opposite</string>
+            <string name="Training12">Now I can open it, Let's try the next level</string>
+             <string name="Training13">"The last one</string>
+            <string name="ErrorTraining">Sorry, but that was not the movement that we need</string>
+             <string name="ErrorTrainingB">Try Again</string>
+           	
+           	  	
+           	  <string name="PassedLockTest">Well Done!</string>
+           	  <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
+
+
+
+           	  <string name="NoFaceSame">These are the hidden sides from the previous position</string>
+           	  <string name="DiffBecause">They are different because of the symbol of the </string>
+           	  <string name="DontMatch"> side does not match</string>
+           	    <string name="Front"> front</string>
+           	    <string name="Back"> back</string>
+           	    <string name="Up"> up</string>
+           	    <string name="Down"> down</string>
+           	    <string name="Right"> right</string>
+           	    <string name="Left"> left</string>
+           	    <string name="FollowPath"> Using these movements you can see it</string>
+
+
         </English>
         <Spanish>
             <string name="app_name">Uniti multiples juegos</string>
             <string name="description">Este script aporta diferentes lenguajes.</string>
             <string name="select">Selecciona el idioma del juego</string>
             <string name="NextButton">Siguiente</string>
+
+           
             <string name="StartTraining">Hola! Necesito abrir este tesoro pero no ecnuentro la cerradura ¿Puedes ayudarme?</string>
                    <string name="MSign">Movimiento</string>
              <string name="TrainingB0">Claro que sí</string>
@@ -36,12 +68,39 @@
             <string name="Training5">Great, another one</string>
             <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
             <string name="Training7">slide your finger from Up to Down the screen</string>
+             <string name="Training8">Almost there, are you ready for the last movement?</string>
+            <string name="Training9">This one is a little tricky, slide your finger from the right bottom to the top left</string>
+            <string name="Training10">Ups, too many movements, Luckily you can do the opposite of the movement</string>
+            <string name="Training11">So every movement has their own opposite</string>
+            <string name="Training12">Now I can open it, Let's try the next level</string>
+             <string name="Training13">"The last one</string>
+            <string name="ErrorTraining">Sorry, but that was not the movement that we need</string>
+             <string name="ErrorTrainingB">Try Again</string>
+           
+            
+           	  <string name="PassedLockTest">¡Conseguido!</string>
+           	  <string name="PassedLockTestLevel">Has abierto todos los tesoros!</string>
+
+
+           	  <string name="NoFaceSame">Estos son los lados que no se podían ver con la anterior posición</string>
+           	    <string name="DiffBecause">Son diferentes debido a que el símbolo de la cara</string>
+           	    <string name="DontMatch"> no es igual</string>
+           	    <string name="Front"> frontal</string>
+           	    <string name="Back"> trasera</string>
+           	    <string name="Up"> superior</string>
+           	    <string name="Down"> inferior</string>
+           	    <string name="Right"> derecha</string>
+           	    <string name="Left"> izquierda</string>
+           	     <string name="FollowPath"> Con estos movimientos puedes comprobarlo</string>
+
         </Spanish>
          <German>
             <string name="app_name">Videospiel</string>
             <string name="description">Dieses Skript bietet eine komfortable Unterstützung mehrerer Sprachen.</string>
              <string name="select">Wähle die Spielsprache aus</string>
-             <string name="NextButton">Folgendes</string>
+             <string name="NextButton">Folgendes</string>		
+
+             																							
              <string name="StartTraining">Hallo! Ich muss diesen Schatz öffnen, aber ich kann das Schloss nicht finden. Kannst du mir helfen?</string>
              <string name="MSign">Bewegen</string>
               <string name="TrainingB0">Natürlich, ja!</string>
@@ -55,5 +114,31 @@
             <string name="Training5">Great, another one</string>
             <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
             <string name="Training7">slide your finger from Up to Down the screen</string>
+             <string name="Training8">Almost there, are you ready for the last movement?</string>
+            <string name="Training9">This one is a little tricky, slide your finger from the right bottom to the top left</string>
+            <string name="Training10">Ups, too many movements, Luckily you can do the opposite of the movement</string>
+            <string name="Training11">So every movement has their own opposite</string>
+            <string name="Training12">Now I can open it, Let's try the next level</string>
+             <string name="Training13">"The last one</string>
+            <string name="ErrorTraining">Sorry, but that was not the movement that we need</string>
+             <string name="ErrorTrainingB">Try Again</string>
+
+            	
+           	  <string name="PassedLockTest">Gut gemacht!</string>
+           	  <string name="PassedLockTestLevel">Du hast alle Schätze geöffnet!</string>
+
+
+           	<string name="NoFaceSame">Dies sind die Seiten, die mit der vorherigen Position nicht gesehen werden konnten</string>
+           	<string name="DiffBecause">Sie sind anders, weil das Symbol auf der </string>
+           	<string name="DontMatch"> nicht das gleiche ist</string>
+           	   <string name="Front"> frontal</string>
+           	    <string name="Back"> hinten</string>
+           	    <string name="Up"> oben</string>
+           	    <string name="Down"> unten</string>
+           	    <string name="Right"> rechts</string>
+           	    <string name="Left"> links</string>
+           	    <string name="FollowPath"> Mit diesen Bewegungen können Sie es überprüfen</string>
+
+
         </German>
     </languages>

@@ -43,7 +43,12 @@ public class Training : MonoBehaviour {
 			GameObject.Find("CubePl").GetComponent<Unfold> ().SetToAfterRandom ();
 			TrainingCube.help = true;
 		}
+		if(currentOrder.Equals(16))
+		{
+			Application.LoadLevel ("Map Select Level");	
+		}
 		next.gameObject.SetActive (false);
+
 		currentOrder += 1;
 
 	}
@@ -70,6 +75,7 @@ public class Training : MonoBehaviour {
 
 		case 2:
 			Anchor.gameObject.SetActive (true);
+			MLetrero.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
 			Correct.gameObject.SetActive(true);
 			text.text = LangTest.LMan.getString ("Training2");
@@ -80,7 +86,7 @@ public class Training : MonoBehaviour {
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);
 			next.gameObject.SetActive (true);
-			next.GetComponentInChildren<Text> ().text = "Ok";
+			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			text.text = LangTest.LMan.getString ("Training3");
 			break;
 		case 4:
@@ -94,6 +100,7 @@ public class Training : MonoBehaviour {
 			break;
 		case 5:
 			Correct.gameObject.SetActive(true);
+			MLetrero.gameObject.SetActive (true);
 			text.text = LangTest.LMan.getString ("Training5");
 			Anchor.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("Right", true);
@@ -119,7 +126,8 @@ public class Training : MonoBehaviour {
 			break;
 		case 8:
 			Correct.gameObject.SetActive(true);
-			text.text = "Great, another one";
+			MLetrero.gameObject.SetActive (true);
+			text.text = LangTest.LMan.getString ("Training5");
 			Anchor.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
 			break;
@@ -127,7 +135,7 @@ public class Training : MonoBehaviour {
 			Correct.Emit (20);
 			Anchor.GetComponent<Animator> ().SetBool ("Down", false);
 			Anchor.gameObject.SetActive (false);
-			text.text = "Almos there, are you ready for the last movement?";
+			text.text = LangTest.LMan.getString ("Training8");
 			MLetrero.gameObject.SetActive (false);
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
@@ -135,61 +143,63 @@ public class Training : MonoBehaviour {
 			break;
 		case 10:
 			Correct.gameObject.SetActive(false);
-			text.text = "This one is a little tricky, slide your finger from the right bottom to the top left";
+			text.text = LangTest.LMan.getString ("Training9");
 			MLetrero.gameObject.SetActive (true);
 			Movement.sprite = MovsSprites [2];
 			Anchor.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
 			break;
 		case 11:
+			MLetrero.gameObject.SetActive (true);
 			Anchor.gameObject.SetActive (true);
 			Correct.gameObject.SetActive(true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
-			text.text = "Great, another one";
+			text.text = LangTest.LMan.getString ("Training5");
 			break;
 		case 12:
+			MLetrero.gameObject.SetActive (true);
 			Anchor.gameObject.SetActive (true);
 			Correct.Emit (20);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
-			text.text = "The last one";
+			text.text = LangTest.LMan.getString ("Training13");
 			break;
 		case 13:
 			Correct.Emit (20);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", false);
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);
-			text.text = "Ups, too many movements, Luckily you can do the opposite of the movement";
+			text.text = LangTest.LMan.getString ("Training10");
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			break;
 		case 14:
 			TrainingCube.MoveNeeded = "TowardUpRight";
-			text.text = "So every movement has their own opposite";
+			text.text = LangTest.LMan.getString ("Training11");;
 			Correct.gameObject.SetActive (false);
-			MLetrero.gameObject.SetActive (true);
-			Movement.sprite = MovsSprites [3];
+			MLetrero.gameObject.SetActive (true);	Movement.sprite = MovsSprites [3];
 			Anchor.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpRight", true);
 			break;
 		case 15:
 			Correct.gameObject.SetActive (true);
-			text.text = "Now I can open it";
+			text.text = LangTest.LMan.getString ("Training12");
 			MLetrero.gameObject.SetActive (false);
 			next.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpRight", false);
 			Anchor.gameObject.SetActive (false);
 			TrainingCube.help = false;
-			Points.animation = true;
 			break;
+			
 		}
 	}
 	void Error()
 	{
+		MLetrero.gameObject.SetActive (false);
 		TrainingCube.help = false;
 		Anchor.gameObject.SetActive (false);
-		text.text = "Sorry, but that was not the movement that we need";
+		text.text = LangTest.LMan.getString ("ErrorTraining");
 		next.gameObject.SetActive (true);
-		next.GetComponentInChildren<Text> ().text = "Try Again";
+		next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("ErrorTrainingB");
 		//order-=1;
 	}
 }

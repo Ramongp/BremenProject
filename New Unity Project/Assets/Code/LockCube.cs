@@ -17,33 +17,16 @@ public class LockCube : MonoBehaviour {
 	public Quaternion startingRotation;
 	//public Button BHelp, BReset, BUnfold;
 	public static bool help; //boolean for the button
+	public bool passed;
 	// Use this for initialization
 	public Image[] Arrows;
 	public Sprite[] Movs;
-	public int moveCont, AxX,AxY,AxZ, Test;
+	public int moveCont, AxX,AxY,AxZ;
+	public static int Test;
 	void Start () {
-		Test = Random.Range(0,2);
-		moveCont = 0;
-		Arrows [0].gameObject.SetActive (false);
-		Arrows [1].gameObject.SetActive (false);
-		Arrows [2].gameObject.SetActive (false);
-		Unfold.AfterRandom=CubePL.transform.localRotation;
-		horizontalSpeed = 0.5F;
-		verticalSpeed = 0.5F;
-		Unfold.Test = false;
-		for (int i = 0; i < Faces.Length; i++) {
-			//Box [i].image.TextureWrapMode.Mirror;
-			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
-			Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
-		}
-		startingRotation = this.gameObject.transform.localRotation;
-		CanvasMargin = (Screen.height
-			/Camera.main.orthographicSize)/20;
-		CreateTest (Test);
-		help = true;
-		move=GameObject.Find("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);
-		Debug.Log (move);
+		Test = 0;
 		Unfold.AfterRandom = CubePL.transform.localRotation;
+		Set ();
 	}
 
 	// Update is called once per frame
@@ -300,9 +283,10 @@ public class LockCube : MonoBehaviour {
 		else {
 			CubePL.GetComponent<Unfold> ().SetToStart();
 		}
-
-		if ((OrigBox.Front.symbol.Equals ("Lock")) && (OrigBox.Front.orientation.Equals (0))) {
-			Debug.Log ("Movimiento Logrado");
+		if ((OrigBox.Front.symbol.Equals ("Lock")) && (OrigBox.Front.orientation.Equals (0))&& !passed) {
+			passed = true;
+				Debug.Log ("Movimiento Logrado");
+				GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Pass ();
 		} 
 	}
 	void CreateTest(int test){
@@ -350,25 +334,24 @@ public class LockCube : MonoBehaviour {
 		switch (move) {
 		case "Up":
 			return 0;
-			break;
+
 		case "Down":
 			return 1;
-			break;
+
 		case "Left":
 			return 3;
-			break;
+
 		case "Right":
 			return 2;
-			break;
+
 		case "Toward-up-right":
 			return 4;
-			break;
+
 		case "Toward-up-left":
 			return 5;
-			break;
+
 		default:
 			return 0;
-			break;
 		}
 	}
 
@@ -386,4 +369,37 @@ public class LockCube : MonoBehaviour {
 		CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
 		AxX = 0;AxY=0;AxZ = 0;
 		}
+
+
+
+	public void Set()
+	{
+		if (!Points.exchange) {
+			passed = false;
+			HideArrows ();
+			moveCont = 0;
+			CubePL.transform.localRotation = Unfold.AfterRandom;
+			horizontalSpeed = 0.5F;
+			verticalSpeed = 0.5F;
+			Unfold.Test = false;
+			for (int i = 0; i < Faces.Length; i++) {
+				//Box [i].image.TextureWrapMode.Mirror;
+				GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces [i];
+				Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
+			}
+			startingRotation = this.gameObject.transform.localRotation;
+			CanvasMargin = (Screen.height
+			/ Camera.main.orthographicSize) / 20;
+			CreateTest (Test);
+			help = true;
+			move = GameObject.Find ("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);
+			Debug.Log (move);
+			GameObject.Find ("Reward").GetComponent<Points> ().Set ();
+			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Set ();
+			CubePL.GetComponent<Unfold> ().finalRotation = Unfold.AfterRandom;
+			CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
+			Test++;
+
+		}
+	}
 }

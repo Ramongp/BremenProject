@@ -6,7 +6,7 @@ public class LockTimer : MonoBehaviour {
 
 	public float TimeLeft, maxTime;
 	public Slider TimeSlider;
-	public Button Tapar;
+	public Button Tapar, TaparNextLevel;
 	public GameObject Key;
 	public Text Text;
 	public ParticleSystem Correct;
@@ -29,6 +29,7 @@ public class LockTimer : MonoBehaviour {
 	{
 		testing = false;
 		Correct.gameObject.SetActive (true);
+		Tapar.interactable = true; 
 		Tapar.gameObject.SetActive (true);
 		Text.gameObject.SetActive (true);
 		Text.text = LangTest.LMan.getString ("PassedLockTest");
@@ -39,23 +40,34 @@ public class LockTimer : MonoBehaviour {
 	}
 	public void Points()
 	{
-		
-		GameObject.Find ("Reward").GetComponent<Points> ().RewardAnimation (TimeLeft);
-		TimeSlider.gameObject.SetActive (false);
-		//Text.gameObject.SetActive (false);
-		Tapar.gameObject.SetActive (false);
+		Tapar.interactable = false; 
+			GameObject.Find ("Reward").GetComponent<Points> ().RewardAnimation (TimeLeft);
+			TimeSlider.gameObject.SetActive (false);
+			//Text.gameObject.SetActive (false);
+			Tapar.gameObject.SetActive (false);
+
 	}
 	public void Set()
 	{
-		TimeSlider.gameObject.SetActive (true);
-		Tapar.gameObject.SetActive (false);
-		Text.gameObject.SetActive (false);
-		Correct.gameObject.SetActive (false);
-		testing = true;
-		maxTime = 60;
-		TimeLeft = maxTime;
-		TimeSlider.maxValue = maxTime;
-		TimeSlider.value = maxTime;
-		Buttons.SetActive (true);
+		if (LockCube.Test < 3) {
+			TaparNextLevel.gameObject.SetActive (false);
+			TimeSlider.gameObject.SetActive (true);
+			Tapar.gameObject.SetActive (false);
+			Text.gameObject.SetActive (false);
+			Correct.gameObject.SetActive (false);
+			testing = true;
+			maxTime = 60;
+			TimeLeft = maxTime;
+			TimeSlider.maxValue = maxTime;
+			TimeSlider.value = maxTime;
+			Buttons.SetActive (true);
+		} else {
+			TaparNextLevel.gameObject.SetActive (true);
+			TaparNextLevel.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("PassedLockTestLevel");
+		}
+	}
+	public void nextLvl()
+	{
+		Application.LoadLevel ("Map Select Level");	
 	}
 }

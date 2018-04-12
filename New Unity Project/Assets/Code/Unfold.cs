@@ -12,7 +12,9 @@ public class Unfold : MonoBehaviour {
 	public static Quaternion AfterRandom;
 	public float MarginError;
 	public Vector3 UnfoldPosition,FoldPosition;
-	public static bool moving, button, Test;
+	public static bool moving, button, Test, restart, ShowExpl;
+	public int contWay;
+	public string[] way;
 	void Start () {
 
 		seedMove = 20;
@@ -49,7 +51,7 @@ public class Unfold : MonoBehaviour {
 			this.gameObject.transform.localPosition= Vector3.MoveTowards(this.transform.localPosition,UnfoldPosition,seedMove*Time.deltaTime);
 			if (this.transform.localScale.x > 0.7) {
 				this.transform.localScale -= new Vector3 (Time.deltaTime, Time.deltaTime, Time.deltaTime);
-			}
+			} 
 			}
 
 		if (Cube.help) {
@@ -95,6 +97,10 @@ public class Unfold : MonoBehaviour {
 				this.gameObject.transform.localRotation = finalRotation;
 				startingRotation = finalRotation;
 				button = false;
+				if (ShowExpl) {
+					ShowWay ();
+				}
+
 			} else {
 				//	Debug.Log ("GameObject" + this.gameObject.transform.rotation.x.ToString() + "Final" + finalRotation.x.ToString()+"Resultado"+Mathf.Abs(this.gameObject.transform.rotation.x-finalRotation.x).ToString());
 				this.transform.localRotation = Quaternion.Lerp (this.transform.localRotation, finalRotation, Time.deltaTime * speedRotation);
@@ -113,7 +119,7 @@ public class Unfold : MonoBehaviour {
 
 	}
 
-	void Origin()
+	public void Origin()
 	{
 		RotateSmooth(finalRotation.x,finalRotation.y,finalRotation.z);
 		button = true;
@@ -125,10 +131,16 @@ public class Unfold : MonoBehaviour {
 			Fold = 1;
 		} else {
 			if (this.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Unfold")&& Fold.Equals(1)) {
-				this.gameObject.GetComponent<Animator> ().SetTrigger ("Close");
+				if (restart) {
+					this.gameObject.GetComponent<Animator> ().SetTrigger ("Restart");
+					restart = false;
+				} else {
+					this.gameObject.GetComponent<Animator> ().SetTrigger ("Close");
+				}
 				RotateSmooth(finalRotation.x,finalRotation.y,finalRotation.z);
 				button = true;
 				Fold = 0;
+
 			}
 		}
 	}
@@ -249,5 +261,58 @@ public class Unfold : MonoBehaviour {
 		finalRotation = startingRotation;
 		AfterRandom = finalRotation;
 	}
+		public void Restart()
+		{
+		startingRotation = AfterRandom;
+		finalRotation = startingRotation;
+		AfterRandom = finalRotation;
+		}
 
+		public void CreateWay()
+		{
+		string expl = "Restart,";
+		expl += SameCube.Way;
+		way = expl.Split (',');
+		contWay = 0;
+		ShowWay ();
+		ShowExpl = true;
+		Debug.Log ("Camino a seguir " + expl);
+		speedRotation = 4;
+		}
+
+		public void ShowWay()
+		{
+		if(contWay.Equals(way.Length))
+		{
+			contWay = 0;
+		}
+		string Move = way [way.Length-1-contWay];
+		button = true;
+		switch (Move) { //Do the opposite Move
+		case "Up":
+		RotateSmooth(-90,0,0);
+		break;
+		case "Down":
+		RotateSmooth(90,0,0);
+		break;
+		case "Left":
+		RotateSmooth(0,-90,0);
+		break;
+		case "Right":
+		RotateSmooth(0,90,0);
+		break;
+		case "Toward-up-right":
+		RotateSmooth(0,0,90);
+		break;
+		case "Toward-up-left":
+		RotateSmooth(0,0,-90);
+		break;
+		case "Restart":
+			finalRotation = AfterRandom;
+			moving = true;
+			break;
+		}
+		contWay++;
+
+		}
 }

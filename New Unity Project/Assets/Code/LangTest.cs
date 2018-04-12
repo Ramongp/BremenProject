@@ -77,7 +77,7 @@ public class LangTest : MonoBehaviour {
 
 	public void NextScene()
 	{
-		Application.LoadLevel ("Training");
+		Application.LoadLevel ("Map Select Level");
 
 	}
 }

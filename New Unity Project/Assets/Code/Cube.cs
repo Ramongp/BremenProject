@@ -11,15 +11,17 @@ public class Cube : MonoBehaviour {
 	public float verticalSpeed = 0.01F;
 	public float CanvasMargin;
 	public GameObject CubePL, OrigCube;
-	public GameObject[] GBox;
+	public GameObject[] GBox, OGbox;
 	public Texture[] Faces;
 	public Box OrigBox, FinalBox;
 	public Quaternion startingRotation;
 	public Texture Fake;
-	public Button BHelp, BReset, BUnfold;
+	public Button BHelp, BReset, BUnfold, SameDiff;
+	public static int change, Test;
 	public static bool help; //boolean for the button
 
 	void Start () {
+		Test = 0;
 		Unfold.Test = true;
 		CanvasMargin = (Screen.height
 			/Camera.main.orthographicSize)/20;
@@ -234,7 +236,7 @@ public class Cube : MonoBehaviour {
 			}
 		}
 		RandomChange ();
-		Debug.Log ("Rotaciones" + FinalBox.Front.symbol + " " + FinalBox.Front.orientation + " "+ FinalBox.Up.symbol + " " + FinalBox.Up.orientation + " "+ FinalBox.Right.symbol + " " + FinalBox.Right.orientation);
+		Debug.Log ("Rotaciones " + FinalBox.Front.symbol + " " + FinalBox.Front.orientation + " "+ FinalBox.Up.symbol + " " + FinalBox.Up.orientation + " "+ FinalBox.Right.symbol + " " + FinalBox.Right.orientation);
 		Debug.Log(RandomSure().ToString());
 		FinalBox.Front.localization = 0;FinalBox.Up.localization = 2;FinalBox.Right.localization = 4;
 		Unfold.AfterRandom = CubePL.transform.localRotation;
@@ -263,54 +265,111 @@ public class Cube : MonoBehaviour {
 	void RandomChange()
 	{
 		//Escoger la cara que recibe el cambio
-		int change = Random.Range (0, 3);
 		//int change=4; //comprobar metodo 2quarters
 		//int change =2; //mirar que pasa con la orientacion
-		int repeatFaces = 0;
+		int repeatFaces = 0, facesWithOri=0;
 		Face SideWithChange;
 		int[] position = new int[3];
 		Face[] FrontSides = new Face[] { FinalBox.Front, FinalBox.Up, FinalBox.Right };
 		Face[] FrontSidesChange = new Face[3];
 		for (int i = 0; i < FrontSides.Length; i++) {
 			if ((FrontSides [i].localization.Equals (0)) || (FrontSides [i].localization.Equals (2)) || (FrontSides [i].localization.Equals (4))) {
-				FrontSidesChange [repeatFaces] = FrontSides [i];
-				position [i] = FrontSides [i].localization;
-				repeatFaces++;
+				if (!(FrontSides [i].orientation.Equals (4))) {
+					facesWithOri++;
+					FrontSidesChange [repeatFaces] = FrontSides [i];
+					position [i] = FrontSides [i].localization;
+					repeatFaces++;
+				}
+
 			}
 		}
-		int frontface = 0;
+		change = Random.Range (1, 3);
+		if ((repeatFaces>1)&&(facesWithOri>1)) { // Only when there are two or more visibles sides from the original cube one symbol can be changed, otherwise if the three symbols are different it has to be the same cube, and also one face needs to have visible orientation
+			change = Random.Range (0, 3);
+		}
+		//int frontface = 0;
 			if (repeatFaces.Equals (0)) {
 				SideWithChange = FrontSides [0];
 			} else {
 			int rand = Random.Range (0, repeatFaces - 1);
-			frontface = position [rand];
+			//frontface = position [rand];
 			SideWithChange = FrontSidesChange [rand];
 			}
 
 
-		switch (change){	
+		switch (change){
 		case 0:
-			Debug.Log ("No changes");
+			Debug.Log ("Change " + SideWithChange.symbol + " Symbol");
+			GBox [SideWithChange.localization].GetComponent<Renderer> ().material.mainTexture = Fake;
+			SideWithChange.symbol = "X";
+			SideWithChange.orientation = 0;
 			break;
 		case 1:
-			Debug.Log ("Change "+SideWithChange.symbol+" Symbol");
-			GBox [SideWithChange.localization].GetComponent<Renderer> ().material.mainTexture = Fake;
-			SideWithChange.symbol="X";
+			Debug.Log ("No changes");
 			break;
 		case 2:
-			Debug.Log ("Change Orientation "+ SideWithChange.symbol+" to 1_quarter ");
+			Debug.Log ("Change Orientation " + SideWithChange.symbol + " + 1_quarter ");
 			PaintRotate1Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
-			SideWithChange.orientation = 1;
+			switch (SideWithChange.orientation) {
+			case 0:
+				SideWithChange.orientation = 1;
+				break;
+			case 1:
+				SideWithChange.orientation = 2;
+				break;
+			case 2:
+				SideWithChange.orientation = 3;
+				break;
+			case 3:
+				SideWithChange.orientation = 0;
+				break;
+			case 4:
+				Debug.Log ("Pasa por 4");
+				break;
+			}
+
 			break;
 		case 3:
-			Debug.Log ("Change Orientation "+SideWithChange.symbol+" to 3_quarters ");
+			Debug.Log ("Change Orientation "+SideWithChange.symbol+" + 3_quarters ");
 			PaintRotate3Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
-			SideWithChange.orientation = 3;
+			switch (SideWithChange.orientation) {
+			case 0:
+				SideWithChange.orientation = 3;
+				break;
+			case 1:
+				SideWithChange.orientation = 0;
+				break;
+			case 2:
+				SideWithChange.orientation = 1;
+				break;
+			case 3:
+				SideWithChange.orientation = 2;
+				break;
+			case 4:
+				Debug.Log ("Pasa por 4");
+				break;
+			}
 			break;
 		case 4:
-			Debug.Log ("Change Orientation "+SideWithChange.symbol+" to 2_quarters ");
+			Debug.Log ("Change Orientation "+SideWithChange.symbol+" + 2_quarters ");
 			PaintRotate2Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
-			SideWithChange.orientation = 2;
+			switch (SideWithChange.orientation) {
+			case 0:
+				SideWithChange.orientation = 2;
+				break;
+			case 1:
+				SideWithChange.orientation = 3;
+				break;
+			case 2:
+				SideWithChange.orientation = 0;
+				break;
+			case 3:
+				SideWithChange.orientation = 1;
+				break;
+			case 4:
+				Debug.Log ("Pasa por 4");
+				break;
+			}
 			break;
 		}
 			
@@ -400,20 +459,24 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 	public void Same()
 	{
+		Hide ();
 		Timer.end = true;
 		if (SameCube.IsSameCube) {
 			GameObject.Find ("Time").GetComponent<Timer> ().Animation (true,0);
 			Debug.Log ("Correcto Son el mismo cubo ------------");
 
 		} else {
+			Timer.TimeLeft = 0;
 			GameObject.Find ("Time").GetComponent<Timer> ().Animation (false,2);
 			Debug.Log ("Fallo No son el mismo cubo -------------");
 		}
 	}
 	public void Different()
 	{
+		Hide ();
 		Timer.end = true;
 		if (SameCube.IsSameCube) {
+			Timer.TimeLeft = 0;
 			GameObject.Find ("Time").GetComponent<Timer> ().Animation (false,3);
 			Debug.Log ("Fallo Son el mismo cubo ------------");
 		} else {
@@ -421,13 +484,25 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 			Debug.Log ("Correcto No son el mismo cubo ------------");
 		}
 	}
+	public void Hide()
+	{
+		help = true;
+		SameDiff.gameObject.SetActive (false);
+		BHelp.gameObject.SetActive (false);
+		BReset.gameObject.SetActive (false);
+		BUnfold.gameObject.SetActive (false);
+
+	}
 
 	public void Restart()
 	{
-		OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 0,2),
+		BHelp.gameObject.SetActive (true);
+		SameDiff.gameObject.SetActive (true);
+		GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", false);
+		OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 4,2),
 			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
 
-		FinalBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 0,2),
+		FinalBox = new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 4,2),
 			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
 		startingRotation = this.gameObject.transform.localRotation;
 		help = false;
@@ -437,14 +512,24 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		for (int i = 0; i < Faces.Length; i++) {
 			//Box [i].image.TextureWrapMode.Mirror;
 			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
+			OGbox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
+			GBox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
+			OGbox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
 			Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
 		}
 		RandomCube ();
+		CubePL.GetComponent<Unfold> ().finalRotation = startingRotation;
 		Timer.start = true;
+		CubePL.GetComponent<Unfold> ().speedRotation = 10;
+		if (Unfold.Fold.Equals (1)) {
+			Unfold.restart = true;
+			CubePL.GetComponent<Unfold> ().UnfoldBox ();
+			CubePL.GetComponent<Unfold> ().Restart ();
+
+		}
+
+		Test++;
 	}
 
-	public void ShowFace(GameObject g)
-	{
-		
-	}
+
 }
