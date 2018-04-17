@@ -1,0 +1,109 @@
+Initialize engine version: 5.4.1f1 (649f48bbbf0f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce 840M (ID=0x1341)
+    Vendor:   NVIDIA
+    VRAM:     2020 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.043 seconds
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\System.dll (this message is harmless)
+desktop: 1600x900 60Hz; virtual: 1600x900 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.688075 ms
+Platform assembly: F:\BremenProject\New Unity Project\PirataMapexe_Data\Managed\System.Xml.dll (this message is harmless)
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1c10 -> priority: 1 
+  Thread -> id: 32cc -> priority: 1 
+Unloading 8 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.435950 ms
+
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 267.
+Total: 0.388787 ms (FindLiveObjects: 0.017242 ms CreateObjectMapping: 0.011905 ms MarkObjects: 0.284508 ms  DeleteObjects: 0.074719 ms)
+
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.934402 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 778.
+Total: 0.556289 ms (FindLiveObjects: 0.050907 ms CreateObjectMapping: 0.020116 ms MarkObjects: 0.476233 ms  DeleteObjects: 0.009032 ms)
+
+Change Orientation R + 1_quarter 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Rotaciones U 4 B 2 R 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Pasos Down 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Final Front: loc 0 orient 4 symbol U Up: loc 2 orient 2 symbol B Right: loc 4 orient 0 symbol R
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+No se repite F
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Se repite U
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Orient: U So 4 Sf 4
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Local: U So Up Sf Front
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+U Down,
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Se repite R
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Orient: R So 0 Sf 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Local: R So Right Sf Right
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+R 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+Se repiten dos simbolos
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
+
+NullReferenceException: Object reference not set to an instance of an object
+  at SameCube.FindSides () [0x00000] in <filename unknown>:0 
+  at SameCube.Compare (.Face F1, .Face U1, .Face R1, .Face F2, .Face U2, .Face R2) [0x00000] in <filename unknown>:0 
+  at Cube.RandomCube () [0x00000] in <filename unknown>:0 
+  at Cube.Restart () [0x00000] in <filename unknown>:0 
+  at Cube.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+

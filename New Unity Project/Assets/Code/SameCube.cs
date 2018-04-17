@@ -148,9 +148,20 @@ public class SameCube : MonoBehaviour {
 			break;
 		case 2:
 			Debug.Log ("Se repiten dos simbolos");
-			if ((!string.IsNullOrEmpty(S1mov))&&
-				(!string.IsNullOrEmpty(S2mov))||
-				((S1.orientation.Equals(4))||(S2.orientation.Equals(4))) ) {
+			if ((string.IsNullOrEmpty (S1mov)) &&
+			    (!S1.orientation.Equals (4))) {
+				Fx = So1;
+				Debug.Log ("Cubo diferente");
+				IsSameCube = false;
+				break;
+			}
+			if ((string.IsNullOrEmpty (S2mov)) &&
+				(!S2.orientation.Equals (4))) {
+				Fx = So2;
+				Debug.Log ("Cubo diferente");
+				IsSameCube = false;
+				break;
+			}
 				if((S1.orientation.Equals(4))&&(S2.orientation.Equals(4)))
 					{
 					Way = S1mov;
@@ -200,16 +211,7 @@ public class SameCube : MonoBehaviour {
 					Debug.Log ("Cubo diferente");
 					IsSameCube = false;
 				}
-
-			} 
-			else {
-				if (string.IsNullOrEmpty (S1mov))
-					Fx = So1;
-				if (string.IsNullOrEmpty (S2mov))
-					Fx = So2;
-				Debug.Log ("Cubo diferente");
-				IsSameCube = false;
-			}
+				
 			break;
 		case 3:
 			Debug.Log ("Se repiten tres simbolos");

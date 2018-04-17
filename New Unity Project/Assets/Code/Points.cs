@@ -7,7 +7,7 @@ public class Points : MonoBehaviour {
 
 	// Use this for initialization
 	public Slider TimeSlider, MoneySlider;
-	public Text points;
+	public Text points,TimeText,MoneyText;
 	public Image bag, star0, star1,star2;
 	public Color32 StarOff, StarOn;
 	public float speed;
@@ -24,7 +24,7 @@ public class Points : MonoBehaviour {
 			if (TimeSlider.value > 0) {
 				TimeSlider.value -= Time.deltaTime * speed;
 				MoneySlider.value += Time.deltaTime * speed;
-				points.text = ((int)(MoneySlider.value*10)).ToString () + " pts";
+				points.text = ((int)(MoneySlider.value*10)).ToString () + LangTest.LMan.getString ("Points");
 				if ((MoneySlider.value > 0) && (star0.color==StarOff)) {
 					star0.color = StarOn;
 					Debug.Log ("Pasa");
@@ -60,6 +60,8 @@ public class Points : MonoBehaviour {
 	}
 	public void Set()
 	{
+		TimeText.text = LangTest.LMan.getString ("Time");
+		MoneyText.text = LangTest.LMan.getString ("Money");
 		exchange = false;
 		speed = 8;
 		next.gameObject.SetActive (false);

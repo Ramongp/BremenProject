@@ -39,7 +39,7 @@ public class Training : MonoBehaviour {
 	}
 	public void Next()
 	{
-		if (next.GetComponentInChildren<Text> ().text.Equals ("Try Again")) {
+		if (next.GetComponentInChildren<Text> ().text.Equals (LangTest.LMan.getString ("ErrorTrainingB"))) {
 			GameObject.Find("CubePl").GetComponent<Unfold> ().SetToAfterRandom ();
 			TrainingCube.help = true;
 		}

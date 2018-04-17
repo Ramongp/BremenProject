@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.IO;
+using System;
 
 public class Unfold : MonoBehaviour {
 
 	// Use this for initialization
+	public static string Info;
 	public bool end;
 	public static int Fold;
 	public int speedRotation, seedMove;
@@ -30,9 +32,6 @@ public class Unfold : MonoBehaviour {
 		finalRotation = startingRotation;
 		Fold = 0;
 		end = true;
-		if (Test) {
-			WriteTest ();
-		}
 	}
 	
 	// Update is called once per frame
@@ -149,38 +148,38 @@ public class Unfold : MonoBehaviour {
 	{
 		RotateSmooth(45,0,0);
 		button = true;
-		SaveMove ("Up");
+		//SaveMove ("Up");
 	}
 
 	public void MoveDown()
 	{
 		RotateSmooth(-45,0,0);
 		button = true;
-		SaveMove ("Down");
+		Info+="Down";
 	}
 	public void MoveLeft()
 	{
 		RotateSmooth(0,45,0);
 		button = true;
-		SaveMove ("Left");
+		Info+="Left";
 	}
 	public void MoveRight()
 	{
 		RotateSmooth(0,-45,0);
 		button = true;
-		SaveMove ("Right");
+		Info+="Right";
 	}
 	public void MoveUpLeft()
 	{
 		RotateSmooth(0,0,45);
 		button = true;
-		SaveMove ("UpLeft");
+		Info+="UpLeft";
 	}
 	public void MoveUpRight()
 	{
 		RotateSmooth(0,0,-45);
 		button = true;
-		SaveMove ("UpRight");
+		Info+="UpRight";
 	}
 
 	public void SetToStart()
@@ -192,54 +191,8 @@ public class Unfold : MonoBehaviour {
 		}
 	}
 
-	private string getPath ()
-	{
-		#if UNITY_EDITOR
-		return Application.dataPath + "/CSV/" + "Moves.csv";
-		#elif UNITY_ANDROID
-		return Application.persistentDataPath+"Saved_Inventory.csv";
-		#elif UNITY_IPHONE
-		return Application.persistentDataPath+"/"+"Saved_Inventory.csv";
-		#else
-		return Application.dataPath +"/"+"Saved_Inventory.csv";
-		#endif
-		}    
-		void SaveMove (string move)
-	{
-		if(Test){
-		string filePath = getPath ();
-		string delimiter = ",";  
-
-		//This is the writer, it writes to the filepath
-		//StreamWriter writer = new StreamWriter (filePath);
-
-		//This is writing the line of the type, name, damage... etc... (I set these)
-		//writer.Write(move);
-		File.AppendAllText (filePath, move+delimiter);
-		//This loops through everything in the inventory and sets the file to these.
-		//writer.Flush ();
-		//This closes the file
-	//	writer.Close ();
-		}
-	}
-		void WriteTest ()
-		{
-
-		string filePath = getPath ();
-		string delimiter = ",";  
-		string test = "\nTest 1";
-		//This is the writer, it writes to the filepath
-		//StreamWriter writer = new StreamWriter (filePath);
-
-		//This is writing the line of the type, name, damage... etc... (I set these)
-		//writer.Write(move);
-		File.AppendAllText (filePath, test+delimiter);
-		//This loops through everything in the inventory and sets the file to these.
-		//writer.Flush ();
-		//This closes the file
-		//	writer.Close ();
-		}
-
+  
+		
 
 		public void SetToAfterRandom()
 	{
@@ -249,14 +202,14 @@ public class Unfold : MonoBehaviour {
 		finalRotation = AfterRandom;
 			button = true;
 			Debug.Log (AfterRandom.ToString ());
-			SaveMove ("SetToStart");
+		Info+="SetToStart";
 		moving = true;
 		}
 	}
 
 		public void WriteHelp()
 	{
-		SaveMove ("Help used ,");
+		Info+="Help used,";
 		startingRotation = AfterRandom;
 		finalRotation = startingRotation;
 		AfterRandom = finalRotation;

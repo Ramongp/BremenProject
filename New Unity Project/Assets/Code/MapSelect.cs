@@ -1,11 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MapSelect : MonoBehaviour {
 
+	string NextLevel;
+	public GameObject Panel;
+	string LangExpli;
+	public Text Explic;
+	public Button Play,Cancel;
 	// Use this for initialization
 	void Start () {
-	
+		Play.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Play");
+		Cancel.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Cancel");
+		Hide ();
 	}
 	
 	// Update is called once per frame
@@ -15,16 +23,41 @@ public class MapSelect : MonoBehaviour {
 
 	public void GoTutorial()
 	{
-		Application.LoadLevel ("Training");
+		NextLevel ="Training";
+		LangExpli = "ExplTraining";
+		ExplLevel ();
 	}
 
 	public void GoLockTest()
 	{
-		Application.LoadLevel ("LockTraining");
+		NextLevel ="LockTraining";
+		LangExpli = "ExplLock";
+		ExplLevel ();
 	}
 
 	public void GoPirateTestHelp()
 	{
-		Application.LoadLevel ("Test Pirate");
+		NextLevel ="Test Pirate";
+		LangExpli = "ExplTest";
+		ExplLevel ();
+	}
+
+	public void GoNextLevel()
+	{
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest (NextLevel);
+		Application.LoadLevel (NextLevel);
+	}
+
+	public void ExplLevel()
+	{
+		Panel.SetActive (true);
+		Explic.text= LangTest.LMan.getString (LangExpli);
+
+		
+	}
+
+	public void Hide()
+	{
+		Panel.SetActive (false);
 	}
 }

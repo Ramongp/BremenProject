@@ -16,11 +16,16 @@ public class Cube : MonoBehaviour {
 	public Box OrigBox, FinalBox;
 	public Quaternion startingRotation;
 	public Texture Fake;
-	public Button BHelp, BReset, BUnfold, SameDiff;
+	public Button BHelp, BReset, BUnfold, SameDiff, BSame,BDiff;
 	public static int change, Test;
 	public static bool help; //boolean for the button
 
 	void Start () {
+		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("ResetB");
+		BReset.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");
+		BHelp.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HelpB");
+		BSame.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("SameB");
+		BDiff.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("DiffB");
 		Test = 0;
 		Unfold.Test = true;
 		CanvasMargin = (Screen.height
@@ -295,19 +300,22 @@ public class Cube : MonoBehaviour {
 			//frontface = position [rand];
 			SideWithChange = FrontSidesChange [rand];
 			}
-
+		string expChange="";
 
 		switch (change){
 		case 0:
+			expChange = "Change " + Timer.TradLocaton (SideWithChange.localization) + " Symbol";
 			Debug.Log ("Change " + SideWithChange.symbol + " Symbol");
 			GBox [SideWithChange.localization].GetComponent<Renderer> ().material.mainTexture = Fake;
 			SideWithChange.symbol = "X";
 			SideWithChange.orientation = 0;
 			break;
 		case 1:
+			expChange = "No changes";
 			Debug.Log ("No changes");
 			break;
 		case 2:
+			expChange = "Change Orientation " + Timer.TradLocaton (SideWithChange.localization) + " + 1_quarter ";
 			Debug.Log ("Change Orientation " + SideWithChange.symbol + " + 1_quarter ");
 			PaintRotate1Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
 			switch (SideWithChange.orientation) {
@@ -330,6 +338,7 @@ public class Cube : MonoBehaviour {
 
 			break;
 		case 3:
+			expChange = "Change Orientation " + Timer.TradLocaton (SideWithChange.localization) + " + 3_quarters ";
 			Debug.Log ("Change Orientation "+SideWithChange.symbol+" + 3_quarters ");
 			PaintRotate3Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
 			switch (SideWithChange.orientation) {
@@ -351,6 +360,7 @@ public class Cube : MonoBehaviour {
 			}
 			break;
 		case 4:
+			expChange = "Change Orientation " + Timer.TradLocaton (SideWithChange.localization) + " + 2_quarters ";
 			Debug.Log ("Change Orientation "+SideWithChange.symbol+" + 2_quarters ");
 			PaintRotate2Q (GBox [SideWithChange.localization].GetComponent<MeshFilter> ().mesh);
 			switch (SideWithChange.orientation) {
@@ -382,6 +392,8 @@ public class Cube : MonoBehaviour {
 		if (FinalBox.Right.localization.Equals (SideWithChange.localization)) {
 			FinalBox.Right = SideWithChange;
 		}
+
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (expChange);
 	}
 
 		void PaintRotate3Q (Mesh m) { //orientacion igual a tres-cuartos
@@ -496,7 +508,12 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 	public void Restart()
 	{
-		BHelp.gameObject.SetActive (true);
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ("Cubo " + Test.ToString ());
+		if (LangTest.Comments) {
+			BHelp.gameObject.SetActive (true);
+		} else {
+			BHelp.gameObject.SetActive (false);
+		}
 		SameDiff.gameObject.SetActive (true);
 		GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", false);
 		OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 4,2),
@@ -508,7 +525,6 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		help = false;
 		BReset.gameObject.SetActive (false);
 		BUnfold.gameObject.SetActive (false);
-		BHelp.gameObject.SetActive (true);
 		for (int i = 0; i < Faces.Length; i++) {
 			//Box [i].image.TextureWrapMode.Mirror;
 			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
@@ -530,6 +546,5 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 		Test++;
 	}
-
 
 }

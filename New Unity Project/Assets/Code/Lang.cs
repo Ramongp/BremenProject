@@ -54,8 +54,13 @@ public class Lang
     setLanguageWeb function
     */
 	public void setLanguage ( string path, string language) {
+
+		TextAsset textAsset = (TextAsset)Resources.Load(path, typeof(TextAsset));
+
 		var xml = new XmlDocument();
-		xml.Load(path);
+		//xml.Load(path);
+		xml.LoadXml ( textAsset.text );
+
 
 		Strings = new Hashtable();
 		var element = xml.DocumentElement[language];

@@ -6,7 +6,7 @@ public class Timer : MonoBehaviour {
 
 	// Use this for initialization
 	public static float TimeLeft, AnimationTime;
-	public Slider TimeSlider, MoneySlider;
+	public Slider TimeSlider;
 	public static bool start, end, animation;
 	public static float TimeLevel;
 	public static int pointsLevel, points;
@@ -14,16 +14,15 @@ public class Timer : MonoBehaviour {
 	public int moneySpeed; 
 	public Text Solution, PointText;
 	public Image TimeFill,Bag;
-	public Button TaparN, TaparE;
-	public Image Message;
+	public Button TaparN, TaparE, NextBoxB;
+	public Image Message, StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3;
 	public Image[] Arrows;
+	public Color StarOn, StarOff;
 	public Sprite[] ArrowsSp;
 	void Start () {
 		
 		Bag.gameObject.SetActive (false);
-		PointText.gameObject.SetActive (false);moneySpeed = 20;
-		MoneySlider.value = 0;
-		MoneySlider.maxValue = 100;
+		moneySpeed = 20;
 	}
 	
 	// Update is called once per frame
@@ -35,19 +34,30 @@ public class Timer : MonoBehaviour {
 		if (!end) {
 			TimeLeft -= Time.deltaTime;
 			TimeSlider.value = TimeLeft;
-				points = pointsLevel ;//Ecuacion puntos
-				ColorBlock c = TimeSlider.colors;
-				c.normalColor = Color.red;
-			TimeFill.color= (Color.green/2+(Color.red/TimeLeft));
+			if (TimeLeft < 40) {
+				StarSlid1.color= StarOff;
+			}
+			if (TimeLeft < 20) {
+				StarSlid2.color= StarOff;
+			}
+			if (TimeLeft<1) {
+				StarSlid3.color= StarOff;
+			}
 			} 
-		if (MoneySlider.value <currentValue) {
-			MoneySlider.value += Time.deltaTime*moneySpeed;
+
 		}
-	}
 
 	void SetTimer()
 	{
-		GameObject.Find ("Reward 1").GetComponent<Points> ().Set ();
+		Bag.gameObject.SetActive (false);
+		TimeSlider.gameObject.SetActive (true);
+		//GameObject.Find ("Reward 1").GetComponent<Points> ().Set ();
+		StarSlid1.color= StarOn;
+		StarSlid2.color= StarOn;
+		StarSlid3.color= StarOn;
+		StarP1.color= StarOn;
+		StarP2.color= StarOn;
+		StarP3.color= StarOn;
 		Message.gameObject.SetActive (false);
 		TimeLevel = 60;
 		pointsLevel = 10;
@@ -57,6 +67,8 @@ public class Timer : MonoBehaviour {
 		TimeSlider.value = TimeSlider.maxValue;
 		TaparN.gameObject.SetActive (false);
 		TaparE.gameObject.SetActive (false);
+		NextBoxB.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NextBox");
+		NextBoxB.gameObject.SetActive (false);
 		animation = false;
 		end = false;
 		Solution.gameObject.SetActive (false);
@@ -68,18 +80,21 @@ public class Timer : MonoBehaviour {
 
 	public void Animation(bool correct,int answer)
 	{
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SaveMove (Unfold.Info);
+		Unfold.Info="";
 		this.answer = answer;
 		Message.gameObject.SetActive (true);
 		TaparE.gameObject.SetActive (true);
 		animation = true;
 		AnimationTime = 2;
 		if (correct) {
+			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ("Correct");
 			switch (answer) {
 			case 0:
-				Solution.text = "Yes, it is the same";
+				Solution.text = LangTest.LMan.getString ("YesSame");
 				break;
 			case 1:
-				Solution.text = "Yes, They are different";
+				Solution.text = LangTest.LMan.getString ("YesDiff");
 				break;
 			}
 			Solution.gameObject.SetActive (true);
@@ -87,17 +102,19 @@ public class Timer : MonoBehaviour {
 			currentValue += points;
 		} 
 		else {
+			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ("Failed");
 			switch (answer) {
 			case 2:
-				Solution.text = "No, They are different";
+				Solution.text = LangTest.LMan.getString ("NoDiff");
 				break;
 			case 3:
-				Solution.text = "No, it is the same";
+				Solution.text = LangTest.LMan.getString ("NoSame");
 				break;
 			}
 			Solution.gameObject.SetActive (true);
 			Solution.GetComponent<Animator> ().SetBool ("Wrong", true);
 		}
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Time " + TimeLeft.ToString());
 	}
 
 	public void NextBox()
@@ -106,17 +123,33 @@ public class Timer : MonoBehaviour {
 			Message.gameObject.SetActive (false);
 			Solution.gameObject.SetActive (false);
 			Unfold.ShowExpl = false;
-			GameObject.Find ("Reward 1").GetComponent<Points> ().RewardAnimation (TimeLeft);
+		TimeSlider.gameObject.SetActive (false);
+		PointText.text="+ "+((int)(TimeLeft*10)).ToString () + LangTest.LMan.getString ("Points");
+		if (TimeLeft < 40) {
+			StarP3.color= StarOff;
+		}
+		if (TimeLeft < 20) {
+			StarP2.color= StarOff;
+		}
+		if (TimeLeft<1) {
+			StarP1.color= StarOff;
+		}
+		Bag.gameObject.SetActive (true);
+		NextBoxB.gameObject.SetActive (true);
+			//GameObject.Find ("Reward 1").GetComponent<Points> ().RewardAnimation (TimeLeft);
 	}
 
 	public void PostReward()
 	{
-		if (Cube.Test < 10) {
+		
+		if (Cube.Test < 3) { //In final version probably 10, for testing 3
 			//if (!Points.exchange) { // If animation is over
 			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
 			//}
 		} else {
-			Application.LoadLevel ("Map Select Level");
+			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
+			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
+			Application.LoadLevel ("Questionnaire");
 		}
 	}
 
@@ -127,7 +160,6 @@ public class Timer : MonoBehaviour {
 		TaparE.gameObject.SetActive (false);
 		TaparN.gameObject.SetActive (true);
 		Bag.gameObject.SetActive (false);
-		PointText.gameObject.SetActive (false);
 
 		if (answer < 2) {
 			Solution.GetComponent<Animator> ().SetBool ("Correct", false);
@@ -174,7 +206,7 @@ public class Timer : MonoBehaviour {
 		
 	}
 
-	string TradLocaton(int l)
+	public static string TradLocaton(int l)
 	{
 		switch (l)
 		{

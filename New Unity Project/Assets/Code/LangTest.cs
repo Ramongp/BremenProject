@@ -7,7 +7,10 @@ C# version by O. Glorieux
 */
 
 using System.IO;
-using UnityEditor;
+#if UNITY_EDITOR
+	using UnityEditor;
+#endif
+
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -16,6 +19,10 @@ public class LangTest : MonoBehaviour {
 	public static Lang LMan;
 	public static string currentLang = "English";
 	public Text text, textB;
+	public Toggle Comment;
+	public static bool Comments;
+	string ToggleText;
+	int cont;
 	void Start()
 		{
 		DontDestroyOnLoad(this.gameObject);
@@ -46,38 +53,69 @@ public class LangTest : MonoBehaviour {
 		if (Application.systemLanguage == SystemLanguage.German) {
 			currentLang = "German";
 		}
-		LMan = new Lang("Assets/XML/lang.xml", currentLang, false);
+		LMan = new Lang( "lang", currentLang, false);
 		text.text = LMan.getString ("select");
 		textB.text = LMan.getString ("NextButton");
+		Comments = true;
+		ToggleText = LMan.getString ("Comment");
+		Comment.GetComponentInChildren<Text>().text=ToggleText;
 	}
 
 
 	public void Spanish()
 	{
 		currentLang = "Spanish";
-		LMan.setLanguage("Assets/XML/lang.xml", currentLang);
-		text.text = LMan.getString ("select");
-		textB.text = LMan.getString ("NextButton");
+		ChangeCanvas ();
 	}
 	public void English()
 	{
 		currentLang = "English";
-		LMan.setLanguage("Assets/XML/lang.xml", currentLang);
-		text.text = LMan.getString ("select");
-		textB.text = LMan.getString ("NextButton");
+		ChangeCanvas ();
 	}
 
 	public void German()
 	{
 		currentLang = "German";
-		LMan.setLanguage("Assets/XML/lang.xml", currentLang);
-		text.text = LMan.getString ("select");
-		textB.text = LMan.getString ("NextButton");
+		ChangeCanvas ();
+
 	}
 
 	public void NextScene()
 	{
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Comments"+ Comment.ToString());
 		Application.LoadLevel ("Map Select Level");
 
 	}
+
+	void ChangeCanvas()
+	{
+		LMan.setLanguage("lang", currentLang);
+		text.text = LMan.getString ("select");
+		textB.text = LMan.getString ("NextButton");
+		if (cont.Equals (1)) {
+			ToggleText = LMan.getString ("NoComment");
+		} else {
+			ToggleText = LMan.getString ("Comment");
+		}
+		Comment.GetComponentInChildren<Text>().text=ToggleText;
+	}
+
+	public void ChangeToggle()
+	{
+		
+		if (cont.Equals(0)) {
+			Comments = false;
+			ToggleText = LMan.getString ("NoComment");
+			Comment.GetComponentInChildren<Text>().text=ToggleText;
+			cont++;
+		} 
+		else {
+			Comments = true;
+			ToggleText = LMan.getString ("Comment");
+			Comment.GetComponentInChildren<Text> ().text = ToggleText;
+			cont = 0;
+		}
+	}
+
+
 }

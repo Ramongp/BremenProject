@@ -233,9 +233,9 @@ public class LockCube : MonoBehaviour {
 						} else {
 							//	Debug.Log ("Towards-up-left");
 							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
-							OrigBox.MoveUpLeft ();
 							AxZ++;
 							if (AxZ.Equals (2)) {
+								OrigBox.MoveUpLeft ();
 								if (moveCont.Equals (3)){
 									HideArrows ();
 								}
@@ -289,7 +289,7 @@ public class LockCube : MonoBehaviour {
 				GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Pass ();
 		} 
 	}
-	void CreateTest(int test){
+	void CreateTest(){
 		switch (Test) {
 		case 0:
 			OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("Lock", 0,2),
@@ -316,6 +316,7 @@ public class LockCube : MonoBehaviour {
 			Paint  (GBox [1].GetComponent<MeshFilter> ().mesh);
 			break;
 		}
+		Test++;
 	}
 
 
@@ -368,6 +369,8 @@ public class LockCube : MonoBehaviour {
 		HideArrows();
 		CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
 		AxX = 0;AxY=0;AxZ = 0;
+		Test--;
+		CreateTest ();
 		}
 
 
@@ -390,7 +393,7 @@ public class LockCube : MonoBehaviour {
 			startingRotation = this.gameObject.transform.localRotation;
 			CanvasMargin = (Screen.height
 			/ Camera.main.orthographicSize) / 20;
-			CreateTest (Test);
+			CreateTest ();
 			help = true;
 			move = GameObject.Find ("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);
 			Debug.Log (move);
@@ -398,7 +401,6 @@ public class LockCube : MonoBehaviour {
 			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Set ();
 			CubePL.GetComponent<Unfold> ().finalRotation = Unfold.AfterRandom;
 			CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
-			Test++;
 
 		}
 	}
