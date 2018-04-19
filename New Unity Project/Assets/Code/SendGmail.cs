@@ -30,9 +30,10 @@ public class SendGmail : MonoBehaviour {
 		mail.Subject = "Test Mail";
 		mail.Body = "This is for testing SMTP mail from GMAIL";
 
-		string path = Application.dataPath + "/Moves.csv";
+	//	string path = Application.dataPath + "/Moves.csv";
+		//Directory.GetFiles(System.Environment.CurrentDirectory+"/Resources","Moves");
 
-		mail.Attachments.Add(new Attachment(path));
+		mail.Attachments.Add(new Attachment( getPath()));
 		//mail.Attachments.Add(new Attachment("/CSV/Moves.csv"));
 
 		SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
@@ -52,14 +53,20 @@ public class SendGmail : MonoBehaviour {
 		//string path = Application.dataPath + "/Moves";
 		string path= getPath();
 		path = path.Replace(Application.dataPath, "Assets");
+		#if UNITY_EDITOR
 		AssetDatabase.DeleteAsset (path);
+		#endif
 	}
-	private string getPath ()
+	public string getPath ()
 	{
 		#if UNITY_EDITOR
 		return  Application.dataPath + "/"+"Moves.csv";
 		#elif UNITY_ANDROID
-		return Application.persistentDataPath+"Moves.csv";
+		/*File file = new File (Environment.getExternalStorageDirectory(),"Moves.csv");
+		Uri uri = Uri.fromFile(file);
+		return Uri.getPath();*/
+		return Application.persistentDataPath+"/"+"Moves.csv";
+
 		#elif UNITY_IPHONE
 		return Application.persistentDataPath+"/"+"Moves.csv";
 		#else

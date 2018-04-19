@@ -26,6 +26,7 @@ public class Training : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+//		Mtext.text = TrainingCube.Tangle.ToString(); //Provisional
 		if (currentOrder>order) {
 			Action ();
 			order = currentOrder;
@@ -41,14 +42,13 @@ public class Training : MonoBehaviour {
 	{
 		if (next.GetComponentInChildren<Text> ().text.Equals (LangTest.LMan.getString ("ErrorTrainingB"))) {
 			GameObject.Find("CubePl").GetComponent<Unfold> ().SetToAfterRandom ();
-			TrainingCube.help = true;
 		}
 		if(currentOrder.Equals(16))
 		{
 			Application.LoadLevel ("Map Select Level");	
 		}
 		next.gameObject.SetActive (false);
-
+		TrainingCube.help = true;
 		currentOrder += 1;
 
 	}
@@ -58,6 +58,7 @@ public class Training : MonoBehaviour {
 		switch (order) {
 		case 0: //le da al botón
 			text.text = LangTest.LMan.getString ("Training0");
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			break;
@@ -85,6 +86,7 @@ public class Training : MonoBehaviour {
 			Anchor.GetComponent<Animator> ().SetBool ("Down", false);
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			text.text = LangTest.LMan.getString ("Training3");
@@ -112,6 +114,7 @@ public class Training : MonoBehaviour {
 			Anchor.gameObject.SetActive (false);
 			text.text = LangTest.LMan.getString ("Training6");
 			MLetrero.gameObject.SetActive (false);
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			break;
@@ -137,6 +140,7 @@ public class Training : MonoBehaviour {
 			Anchor.gameObject.SetActive (false);
 			text.text = LangTest.LMan.getString ("Training8");
 			MLetrero.gameObject.SetActive (false);
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			TrainingCube.MoveNeeded="TowardUpLeft";
@@ -169,6 +173,7 @@ public class Training : MonoBehaviour {
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);
 			text.text = LangTest.LMan.getString ("Training10");
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			break;
@@ -184,6 +189,7 @@ public class Training : MonoBehaviour {
 			Correct.gameObject.SetActive (true);
 			text.text = LangTest.LMan.getString ("Training12");
 			MLetrero.gameObject.SetActive (false);
+			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpRight", false);
 			Anchor.gameObject.SetActive (false);

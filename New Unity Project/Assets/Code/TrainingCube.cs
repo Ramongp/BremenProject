@@ -4,9 +4,8 @@ using UnityEngine.UI;
 
 public class TrainingCube : MonoBehaviour {
 
-	public Vector3 startPosition, endPosition;
-	public float horizontalSpeed = 10F;
-	public float verticalSpeed = 10F;
+	public Vector3 startPosition, endPosition, OrigPos;
+	public float horizontalSpeed = 10F,verticalSpeed = 10F, OrigAngle, angle;
 	public float CanvasMargin;
 	public GameObject CubePL;
 	public GameObject[] GBox;
@@ -16,6 +15,7 @@ public class TrainingCube : MonoBehaviour {
 	public Quaternion startingRotation;
 	//public Button BHelp, BReset, BUnfold;
 	public static bool help; //boolean for the button
+//	public static float Tangle;
 	// Use this for initialization
 	void Start () {
 		Unfold.AfterRandom=CubePL.transform.localRotation;
@@ -35,24 +35,29 @@ public class TrainingCube : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Handle native touch events
-		foreach (Touch touch in Input.touches) {
-			Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-			HandleTouch (touch.fingerId, cam, touch.phase);
-		}
+		if ((Input.touchCount.Equals (2))&& help) {
+			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
+				} 
+		else {
+			foreach (Touch touch in Input.touches) {
+				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+				HandleTouch (touch.fingerId, cam, touch.phase);
+			}
 
-		// Simulate touch events from mouse events
-		if (Input.touchCount == 0) {
-			if (Input.GetMouseButtonDown (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Began);
-			}
-			if (Input.GetMouseButton (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Moved);
-			}
-			if (Input.GetMouseButtonUp (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Ended);
+			// Simulate touch events from mouse events
+			if (Input.touchCount == 0) {
+				if (Input.GetMouseButtonDown (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Began);
+				}
+				if (Input.GetMouseButton (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Moved);
+				}
+				if (Input.GetMouseButtonUp (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Ended);
+				}
 			}
 		}
 	}
@@ -81,6 +86,48 @@ public class TrainingCube : MonoBehaviour {
 			break;
 		}
 	}
+
+	private void HandleTouch2(Touch p1, Touch p2) {
+
+
+		if((p1.phase.Equals(TouchPhase.Began))&&(p2.phase.Equals(TouchPhase.Began))){
+			if (p1.position.y < p2.position.y) {
+				Touch temp = p1;
+				p1 = p2;
+				p2 = temp;
+			}
+			
+
+			OrigPos = p1.position;
+			Vector3 diff = p2.position - p1.position;
+			angle = Mathf.Atan2 (diff.y, diff.x);
+			OrigAngle = Mathf.Rad2Deg * angle;
+			return;
+
+		}
+		if ((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Moved))) {
+			if (help) {
+				Vector3 diff3 = p2.position - p1.position;
+				angle = Mathf.Atan2 (diff3.y, diff3.x);
+				angle = (Mathf.Rad2Deg * angle) - OrigAngle;
+				//Tangle = angle;
+				CubePL.transform.localRotation = Quaternion.Euler (CubePL.transform.localRotation.x, CubePL.transform.localRotation.y, CubePL.transform.localRotation.z+angle);
+			}
+			return;
+		}
+		if((p1.phase.Equals(TouchPhase.Ended))&&(p2.phase.Equals(TouchPhase.Ended))){
+			if (angle > 1) {
+				CubePL.GetComponent<Unfold> ().MoveUpLeft();
+				Training.currentOrder--;
+			} else {
+				if (angle < -1) {
+				CubePL.GetComponent<Unfold> ().MoveUpRight();
+				Training.currentOrder--;
+				}
+			}
+		}
+	}
+
 	void Paint (Mesh m) { //Pintar antiguo cubo
 
 		Mesh mesh = m;

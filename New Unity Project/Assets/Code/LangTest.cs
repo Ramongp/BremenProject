@@ -82,7 +82,7 @@ public class LangTest : MonoBehaviour {
 
 	public void NextScene()
 	{
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Comments"+ Comment.ToString());
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Comments"+ Comments.ToString());
 		Application.LoadLevel ("Map Select Level");
 
 	}
