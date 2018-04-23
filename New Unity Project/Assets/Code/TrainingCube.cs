@@ -5,17 +5,19 @@ using UnityEngine.UI;
 public class TrainingCube : MonoBehaviour {
 
 	public Vector3 startPosition, endPosition, OrigPos;
-	public float horizontalSpeed = 10F,verticalSpeed = 10F, OrigAngle, angle;
-	public float CanvasMargin;
+	public float horizontalSpeed = 10F,verticalSpeed = 10F, OrigAngle,angle;
+	public float CanvasMargin, AxisX, AxisY, RotMargin =1F;
 	public GameObject CubePL;
 	public GameObject[] GBox;
 	public Texture[] Faces;
 	public Box OrigBox;
 	public static string MoveNeeded;
+	public int Quadrant;
 	public Quaternion startingRotation;
 	//public Button BHelp, BReset, BUnfold;
-	public static bool help; //boolean for the button
-//	public static float Tangle;
+	public static bool help, Assigned; //boolean for the button
+	//Rotation testing
+	public static float Tangle,Zangle, AxisRot,prevAngle, restAngle,RefAngle; //AxisRot 0=z,1=x,2=y
 	// Use this for initialization
 	void Start () {
 		Unfold.AfterRandom=CubePL.transform.localRotation;
@@ -71,13 +73,15 @@ public class TrainingCube : MonoBehaviour {
 			break;
 		case TouchPhase.Moved:
 			if (help) {
-				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X") * Mathf.Deg2Rad;
-				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y") * Mathf.Deg2Rad;
-				CubePL.transform.RotateAround (Vector3.up, -h2);
-				CubePL.transform.RotateAround (Vector3.right, +v2);
+				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X");
+				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y") ;
+				//CubePL.transform.RotateAround (Vector3.up, -h2);
+				CubePL.transform.Rotate (Vector3.up, -h2, Space.World);
+				CubePL.transform.Rotate (Vector3.right, +v2, Space.World);
 			}
 			break;
 		case TouchPhase.Ended:
+			Assigned = false;
 			endPosition = touchPosition;
 			//Debug.Log ("End" + touchPosition.ToString ());
 			if (Unfold.Fold.Equals (0) && Unfold.moving.Equals (false) && (help)) {
@@ -89,44 +93,81 @@ public class TrainingCube : MonoBehaviour {
 
 	private void HandleTouch2(Touch p1, Touch p2) {
 
-
-		if((p1.phase.Equals(TouchPhase.Began))&&(p2.phase.Equals(TouchPhase.Began))){
-			if (p1.position.y < p2.position.y) {
-				Touch temp = p1;
-				p1 = p2;
-				p2 = temp;
-			}
-			
-
-			OrigPos = p1.position;
-			Vector3 diff = p2.position - p1.position;
-			angle = Mathf.Atan2 (diff.y, diff.x);
-			OrigAngle = Mathf.Rad2Deg * angle;
-			return;
-
-		}
-		if ((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Moved))) {
+		if (((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Stationary)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Stationary)))){
 			if (help) {
 				Vector3 diff3 = p2.position - p1.position;
 				angle = Mathf.Atan2 (diff3.y, diff3.x);
-				angle = (Mathf.Rad2Deg * angle) - OrigAngle;
+				angle = (Mathf.Rad2Deg * angle);
+				if ((prevAngle>0)&&(angle < 0)){
+					if (prevAngle > 90) {
+						Quadrant += 360;
+					}
+					prevAngle*=-1;
+				}
+				if ((prevAngle<0)&&(angle > 0)){
+					if (prevAngle < -90) {
+						Quadrant -= 360;
+					}
+					prevAngle*=-1;
+				}
+
+				restAngle = angle - prevAngle;
+				prevAngle= angle;
+				//angle = (Mathf.Rad2Deg * angle);
 				//Tangle = angle;
-				CubePL.transform.localRotation = Quaternion.Euler (CubePL.transform.localRotation.x, CubePL.transform.localRotation.y, CubePL.transform.localRotation.z+angle);
+				RefAngle = angle + Quadrant;
+			//	CubePL.transform.rotation= Quaternion.Euler (CubePL.transform.rotation.x, CubePL.transform.rotation.y, CubePL.transform.rotation.z+angle);
+				//CubePL.transform.RotateAround (Vector3.forward, angle*Mathf.Deg2Rad*Time.deltaTime);
+				CubePL.transform.Rotate (Vector3.forward, (Mathf.Deg2Rad* restAngle)/Time.deltaTime, Space.World);
+			
 			}
 			return;
 		}
-		if((p1.phase.Equals(TouchPhase.Ended))&&(p2.phase.Equals(TouchPhase.Ended))){
-			if (angle > 1) {
+		if((p1.phase.Equals(TouchPhase.Ended))||(p2.phase.Equals(TouchPhase.Ended))){
+			Assigned = false;
+
+			if (RefAngle > OrigAngle+RotMargin) {
 				CubePL.GetComponent<Unfold> ().MoveUpLeft();
-				Training.currentOrder--;
+				if (MoveNeeded.Equals ("TowardUpLeft")) {
+					Training.currentOrder++;
+					Unfold.AfterRandom = CubePL.GetComponent<Unfold> ().finalRotation;
+				} else {
+					Training.currentOrder--;
+
+				}	
 			} else {
-				if (angle < -1) {
+				if (RefAngle < OrigAngle-RotMargin) {
 				CubePL.GetComponent<Unfold> ().MoveUpRight();
 				Training.currentOrder--;
 				}
 			}
+			return;
 		}
-	}
+
+
+			/*if (p1.position.y < p2.position.y) {
+				Touch temp = p1;
+				p1 = p2;
+				p2 = temp;
+			}*/
+
+		//Conseguir angulo de referencia 
+		if (!Assigned) {
+			Assigned = true;
+			OrigPos = p1.position;
+			Vector3 diff = p2.position - p1.position;
+			angle = Mathf.Atan2 (diff.y, diff.x);
+			Zangle = CubePL.transform.rotation.z;
+			Quadrant = 0;
+			RefAngle = (Mathf.Rad2Deg * angle);
+			OrigAngle = RefAngle;
+			prevAngle = OrigAngle;
+			Tangle = OrigAngle;
+		}
+
+		}
 
 	void Paint (Mesh m) { //Pintar antiguo cubo
 
@@ -217,7 +258,7 @@ public class TrainingCube : MonoBehaviour {
 					Training.currentOrder--;
 						//Debug.Log ("Arriba");
 					}
-				} else {
+				} /*else {
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
@@ -265,7 +306,7 @@ public class TrainingCube : MonoBehaviour {
 						
 						}
 					}
-				}
+				}*/
 			}
 		} 
 		else {

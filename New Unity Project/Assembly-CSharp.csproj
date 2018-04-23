@@ -50,6 +50,7 @@
      <Compile Include="Assets\Code\Cube.cs" />
      <Compile Include="Assets\Code\Face.cs" />
      <Compile Include="Assets\Code\Grafo.cs" />
+     <Compile Include="Assets\Code\InfoRotation.cs" />
      <Compile Include="Assets\Code\Lang.cs" />
      <Compile Include="Assets\Code\LangTest.cs" />
      <Compile Include="Assets\Code\LockCube.cs" />

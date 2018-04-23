@@ -1,6 +1,6 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\TrainingCube.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\InfoRotation.cs">
     <Files>
       <File FileName="Assets\Code\Timer.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\LangTest.cs" Line="1" Column="1" />
@@ -10,7 +10,8 @@
       <File FileName="Assets\Code\Unfold.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\SendMailTest.cs" Line="1" Column="1" />
       <File FileName="Assets\Code\Training.cs" Line="1" Column="1" />
-      <File FileName="Assets\Code\TrainingCube.cs" Line="97" Column="15" />
+      <File FileName="Assets\Code\TrainingCube.cs" Line="20" Column="74" />
+      <File FileName="Assets\Code\InfoRotation.cs" Line="16" Column="115" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
