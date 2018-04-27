@@ -87,6 +87,7 @@ public class Timer : MonoBehaviour {
 		TaparE.gameObject.SetActive (true);
 		animation = true;
 		AnimationTime = 2;
+		Solution.fontSize = 40;
 		if (correct) {
 			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ("Correct");
 			switch (answer) {
@@ -148,7 +149,7 @@ public class Timer : MonoBehaviour {
 			//}
 		} else {
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
-		//	GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
+			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
 			Application.LoadLevel ("Questionnaire");
 		}
 	}
@@ -160,7 +161,7 @@ public class Timer : MonoBehaviour {
 		TaparE.gameObject.SetActive (false);
 		TaparN.gameObject.SetActive (true);
 		Bag.gameObject.SetActive (false);
-
+		Solution.fontSize = 25;
 		if (answer < 2) {
 			Solution.GetComponent<Animator> ().SetBool ("Correct", false);
 		} else {

@@ -16,6 +16,7 @@ public class MapSelect : MonoBehaviour {
 		Tutorial.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Tutorial");
 		Play.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Play");
 		Cancel.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Cancel");
+
 		Hide ();
 	}
 	
@@ -47,7 +48,7 @@ public class MapSelect : MonoBehaviour {
 
 	public void GoNextLevel()
 	{
-	//	GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest (NextLevel);
+		//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest (NextLevel);
 		Application.LoadLevel (NextLevel);
 	}
 

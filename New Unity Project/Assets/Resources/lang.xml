@@ -84,6 +84,8 @@
            	        <string name="Rama3"> Ingenieria</string>
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
+           	        <string name="RateGame"> Rate the game</string>
+
 
 
         </English>
@@ -176,6 +178,7 @@
            	        <string name="Rama3"> Ingenieria</string>
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
+           	         <string name="RateGame"> Puntua el juego</string>
 
         </Spanish>
          <German>
@@ -263,6 +266,8 @@
            	        <string name="Rama3"> Ingenieria</string>
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
+           	          <string name="RateGame">Bewerte das Spiel</string>
+
 
 
         </German>

@@ -37,7 +37,7 @@ public class Cube : MonoBehaviour {
 		Test = 0;
 		Unfold.Test = true;
 		CanvasMargin = (Screen.height
-			/Camera.main.orthographicSize)/20;
+			/Camera.main.orthographicSize)/40;
 		Restart ();
 
 		//CubeFake.transform.rotation = Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
@@ -588,7 +588,7 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 	public void Restart()
 	{
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ( Test.ToString ());
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (Test.ToString ());
 		if (LangTest.Comments) {
 			BHelp.gameObject.SetActive (true);
 		} else {

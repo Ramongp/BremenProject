@@ -485,7 +485,7 @@ public class LockCube : MonoBehaviour {
 			}
 			startingRotation = this.gameObject.transform.localRotation;
 			CanvasMargin = (Screen.height
-			/ Camera.main.orthographicSize) / 20;
+				/ Camera.main.orthographicSize) / 40;
 			CreateTest ();
 			help = true;
 			move = GameObject.Find ("Main Camera").GetComponent<SameCube> ().LockTest (OrigBox.Front, OrigBox.Up, OrigBox.Right);

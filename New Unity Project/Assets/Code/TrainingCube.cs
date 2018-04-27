@@ -31,7 +31,7 @@ public class TrainingCube : MonoBehaviour {
 		}
 		startingRotation = this.gameObject.transform.localRotation;
 		CanvasMargin = (Screen.height
-			/Camera.main.orthographicSize)/20;
+			/Camera.main.orthographicSize)/40;
 	}
 	
 	// Update is called once per frame

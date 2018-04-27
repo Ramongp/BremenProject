@@ -1,16 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
+
 
 public class Questionnarie : MonoBehaviour {
 
 	// Use this for initialization
 	public GameObject Panel0, Panel1,Panel2;
 	int cont0,cont1,cont2;
-	public Text Question1,Question2,Question3, Answ1,Answ2,Answ3;
+	public Text Question1,Question2,Question3, Answ1,Answ2,Answ3,RateGameText;
 	public string LangA1, LangA2, LangA3;
 	public Button[] Q1Answ, Q2Answ, Q3Answ;
 	public string[] StringsQ2 = new string[]{"Estudios0","Estudios1","Estudios2","Estudios3","Estudios4","Estudios5"},StringsQ3 = new string[]{"Rama0","Rama1","Rama2","Rama3","Rama4","Rama5"};
+	public Image[] Stars1;
+	public Slider RateSGamelider;
 	public Button Send;
 	void Start () {
 		Panel0.SetActive (false);
@@ -19,6 +23,7 @@ public class Questionnarie : MonoBehaviour {
 		Question1.text=LangTest.LMan.getString ("Question1");
 		Question2.text=LangTest.LMan.getString ("Question2");
 		Question3.text=LangTest.LMan.getString ("Question3");
+		RateGameText.text=LangTest.LMan.getString ("RateGame");
 		//Poner a los botones el texto de Lang
 		for (int i = 0; i < StringsQ2.Length; i++) {
 			Q2Answ[i].GetComponentInChildren<Text>().text= LangTest.LMan.getString (StringsQ2[i]);
@@ -92,11 +97,29 @@ public class Questionnarie : MonoBehaviour {
 
 	public void SendInfo()
 	{
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangA1);
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangA2);
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangA3);
+		String temp = LangTest.currentLang;
+		LangTest.currentLang = "English";
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA1));
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA2));
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA3));
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (Math.Ceiling (RateSGamelider.value).ToString());
+
+		LangTest.currentLang = temp;
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send();
 		Application.LoadLevel ("Language");
+
 		
+	}
+
+	public void RateGame ()
+	{
+		for (int i = 0; i < Stars1.Length; i++) {
+			Stars1 [i].color = Color.white;
+		}
+
+
+		for (int i = 0; i < Math.Ceiling(RateSGamelider.value); i++) {
+			Stars1 [i].color = Color.yellow;
+		}
 	}
 }
