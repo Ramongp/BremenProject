@@ -10,6 +10,7 @@ public class Questionnarie : MonoBehaviour {
 	public Text Question1,Question2,Question3, Answ1,Answ2,Answ3;
 	public string LangA1, LangA2, LangA3;
 	public Button[] Q1Answ, Q2Answ, Q3Answ;
+	public string[] StringsQ2 = new string[]{"Estudios0","Estudios1","Estudios2","Estudios3","Estudios4","Estudios5"},StringsQ3 = new string[]{"Rama0","Rama1","Rama2","Rama3","Rama4","Rama5"};
 	public Button Send;
 	void Start () {
 		Panel0.SetActive (false);
@@ -19,6 +20,10 @@ public class Questionnarie : MonoBehaviour {
 		Question2.text=LangTest.LMan.getString ("Question2");
 		Question3.text=LangTest.LMan.getString ("Question3");
 		//Poner a los botones el texto de Lang
+		for (int i = 0; i < StringsQ2.Length; i++) {
+			Q2Answ[i].GetComponentInChildren<Text>().text= LangTest.LMan.getString (StringsQ2[i]);
+			Q3Answ[i].GetComponentInChildren<Text>().text= LangTest.LMan.getString (StringsQ3[i]);
+		}
 		Answ1.text = Q1Answ [0].GetComponentInChildren<Text> ().text;
 		Answ2.text = Q2Answ [0].GetComponentInChildren<Text> ().text;
 		Answ3.text = Q3Answ [0].GetComponentInChildren<Text> ().text;

@@ -8,9 +8,12 @@ public class MapSelect : MonoBehaviour {
 	public GameObject Panel;
 	string LangExpli;
 	public Text Explic;
-	public Button Play,Cancel;
+	public Button Play,Cancel, Tutorial, LockTest,FinalTest;
 	// Use this for initialization
 	void Start () {
+		LockTest.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("LockTest");
+		FinalTest.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("FinalTest");
+		Tutorial.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Tutorial");
 		Play.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Play");
 		Cancel.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Cancel");
 		Hide ();

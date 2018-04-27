@@ -49,7 +49,7 @@ public class LockTimer : MonoBehaviour {
 	}
 	public void Set()
 	{
-		if (LockCube.Test < 3) {
+		if (LockCube.Test < 4) {
 			TaparNextLevel.gameObject.SetActive (false);
 			TimeSlider.gameObject.SetActive (true);
 			Tapar.gameObject.SetActive (false);

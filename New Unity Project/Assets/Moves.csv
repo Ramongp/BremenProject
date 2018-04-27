@@ -1,2 +1,12 @@
+ID_Machine,Date,Time,Question,Cube,Changes,Answer,Time,Total Time
+76fad87165fd11d1f1ea47293c023b2800ba1dce,26/04/2018,11:36:34
 CommentsTrue
 Training
+LockTraining
+Test Pirate,Cubo 0,No changesDownDownDownDownUpRightSetToStartUpLeftUpLeftUpLeftUpLeftUpLeftUpRightSetToStartDownDownSetToStartDownDownLeftLeftSetToStartLeftLeftLeftLeftDownDownSetToStart,Failed
+Time 0,Cubo 1,Change Orientation Front + 1_quarter ,Correct
+Time 59.13042,Cubo 2,No changes,Failed
+Time 0,Cubo 3,Change Right Symbol,Correct
+Time 59.33706,Cubo 4,No changes,Failed
+Time 0
+Questionnaire

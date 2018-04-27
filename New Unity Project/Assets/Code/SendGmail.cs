@@ -19,6 +19,7 @@ public class SendGmail : MonoBehaviour {
 		#if UNITY_EDITOR
 		DeletePreviousText ();
 		#endif
+		StartInfo ();
 	}
 
 	public void Send ()
@@ -56,6 +57,7 @@ public class SendGmail : MonoBehaviour {
 		#if UNITY_EDITOR
 		AssetDatabase.DeleteAsset (path);
 		#endif
+
 	}
 	public string getPath ()
 	{
@@ -96,15 +98,29 @@ public class SendGmail : MonoBehaviour {
 		{
 		string filePath = getPath ();
 		//string delimiter = ",";  
-		string test =  Test+Environment.NewLine;
+		string test =  Environment.NewLine+Test;
 		File.AppendAllText (filePath, test);
 		}
 		public void WriteCell (string info)
 		{
 		string filePath = getPath ();
 		string delimiter = ",";  
-		File.AppendAllText (filePath, info+delimiter);
+		File.AppendAllText (filePath, delimiter+info);
+		}
+		public void WriteFirstCell (string info)
+		{
+		string filePath = getPath ();
+		File.AppendAllText (filePath, info);
 		}
 
-
+		void StartInfo()
+	{
+		if (!File.Exists (getPath ())) {
+		WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Question");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");WriteCell ("Total Time");
+		}
+		WriteTest(SystemInfo.deviceUniqueIdentifier);
+		WriteCell (System.DateTime.Now.ToString("dd/MM/yyyy")); 
+		WriteCell (System.DateTime.Now.ToString("hh:mm:ss"));
+		Send ();
+	}
 }

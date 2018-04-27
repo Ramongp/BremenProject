@@ -5,8 +5,10 @@ using UnityEngine.UI;
 public class LockCube : MonoBehaviour {
 
 	public Vector3 startPosition, endPosition;
-	public float horizontalSpeed = 10F;
-	public float verticalSpeed = 10F;
+	public float horizontalSpeed = 10F,verticalSpeed = 10F,RotMargin =1F;
+	public float angle, restAngle, prevAngle, RefAngle, OrigAngle;
+	public int Quadrant;
+	public bool Assigned;
 	public float CanvasMargin;
 	public GameObject CubePL;
 	public GameObject[] GBox;
@@ -32,24 +34,28 @@ public class LockCube : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Handle native touch events
-		foreach (Touch touch in Input.touches) {
-			Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-			HandleTouch (touch.fingerId, cam, touch.phase);
-		}
+		if ((Input.touchCount.Equals (2)) && help) {
+			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
+		} else {
+			foreach (Touch touch in Input.touches) {
+				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+				HandleTouch (touch.fingerId, cam, touch.phase);
+			}
 
-		// Simulate touch events from mouse events
-		if (Input.touchCount == 0) {
-			if (Input.GetMouseButtonDown (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Began);
-			}
-			if (Input.GetMouseButton (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Moved);
-			}
-			if (Input.GetMouseButtonUp (0)) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-				HandleTouch (10, cam, TouchPhase.Ended);
+			// Simulate touch events from mouse events
+			if (Input.touchCount == 0) {
+				if (Input.GetMouseButtonDown (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Began);
+				}
+				if (Input.GetMouseButton (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Moved);
+				}
+				if (Input.GetMouseButtonUp (0)) {
+					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					HandleTouch (10, cam, TouchPhase.Ended);
+				}
 			}
 		}
 	}
@@ -99,7 +105,94 @@ public class LockCube : MonoBehaviour {
 
 		mesh.uv = UVs;
 	}
+	private void HandleTouch2(Touch p1, Touch p2) {
 
+		if (((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Stationary)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Stationary)))){
+			if (help) {
+				Vector3 diff3 = p2.position - p1.position;
+				angle = Mathf.Atan2 (diff3.y, diff3.x);
+				angle = (Mathf.Rad2Deg * angle);
+				if ((prevAngle>0)&&(angle < 0)){
+					if (prevAngle > 90) {
+						Quadrant += 360;
+					}
+					prevAngle*=-1;
+				}
+				if ((prevAngle<0)&&(angle > 0)){
+					if (prevAngle < -90) {
+						Quadrant -= 360;
+					}
+					prevAngle*=-1;
+				}
+
+				restAngle = angle - prevAngle;
+				prevAngle= angle;
+				//angle = (Mathf.Rad2Deg * angle);
+				//Tangle = angle;
+				RefAngle = angle + Quadrant;
+				//	CubePL.transform.rotation= Quaternion.Euler (CubePL.transform.rotation.x, CubePL.transform.rotation.y, CubePL.transform.rotation.z+angle);
+				//CubePL.transform.RotateAround (Vector3.forward, angle*Mathf.Deg2Rad*Time.deltaTime);
+				CubePL.transform.Rotate (Vector3.forward, (Mathf.Deg2Rad* restAngle)/Time.deltaTime, Space.World);
+
+			}
+			return;
+		}
+		if((p1.phase.Equals(TouchPhase.Ended))||(p2.phase.Equals(TouchPhase.Ended))){
+			Assigned = false;
+
+			if (RefAngle > OrigAngle+RotMargin) {
+				CubePL.GetComponent<Unfold> ().MoveUpLeft ();
+				AxZ++;
+				if (AxZ.Equals (2)) {
+					OrigBox.MoveUpLeft ();
+					if (moveCont.Equals (3)){
+						HideArrows ();
+					}
+					Arrows [moveCont].gameObject.SetActive (true);
+					Arrows [moveCont].sprite = Movs [5];
+					AxZ = 0;
+					moveCont++;
+				}
+			} else {
+				if (RefAngle < OrigAngle-RotMargin) {
+					CubePL.GetComponent<Unfold> ().MoveUpRight ();
+					AxZ--;
+					if (AxZ.Equals (-2)) {
+						OrigBox.MoveUpRight ();
+						if (moveCont.Equals (3)){
+							HideArrows ();
+						}
+						Arrows [moveCont].gameObject.SetActive (true);
+						Arrows [moveCont].sprite = Movs [4];
+						AxZ = 0;
+						moveCont++;
+					}
+				}
+			}
+			return;
+		}
+
+
+		/*if (p1.position.y < p2.position.y) {
+				Touch temp = p1;
+				p1 = p2;
+				p2 = temp;
+			}*/
+
+		//Conseguir angulo de referencia 
+		if (!Assigned) {
+			Assigned = true;
+			Vector3 diff = p2.position - p1.position;
+			angle = Mathf.Atan2 (diff.y, diff.x);
+			Quadrant = 0;
+			RefAngle = (Mathf.Rad2Deg * angle);
+			OrigAngle = RefAngle;
+			prevAngle = OrigAngle;
+		}
+
+	}
 	void PaintRotate2Q (Mesh m) { //orientacion igual a tres-cuartos
 
 		Mesh mesh = m;
@@ -213,7 +306,7 @@ public class LockCube : MonoBehaviour {
 						}
 						//Debug.Log ("Arriba");
 					}
-				} else {
+				} else { //Para testear
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
@@ -277,7 +370,7 @@ public class LockCube : MonoBehaviour {
 
 						}
 					}
-				}
+				} //*/
 			}
 		} 
 		else {

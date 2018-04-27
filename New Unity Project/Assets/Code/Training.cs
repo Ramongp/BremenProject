@@ -82,7 +82,7 @@ public class Training : MonoBehaviour {
 			text.text = LangTest.LMan.getString ("Training2");
 			break;
 		case 3:
-			Correct.Emit(20);
+			Correct.Emit(100);
 			Anchor.GetComponent<Animator> ().SetBool ("Down", false);
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);
@@ -93,59 +93,41 @@ public class Training : MonoBehaviour {
 			break;
 		case 4:
 			Correct.gameObject.SetActive(false);
-			TrainingCube.MoveNeeded="Right";
 			MLetrero.gameObject.SetActive (true);
-			Movement.sprite = MovsSprites [1];
 			Anchor.gameObject.SetActive (true);
-			Anchor.GetComponent<Animator> ().SetBool ("Right", true);
-			text.text = LangTest.LMan.getString ("Training4");
+			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
+			text.text = LangTest.LMan.getString ("Training2");
 			break;
 		case 5:
 			Correct.gameObject.SetActive(true);
 			MLetrero.gameObject.SetActive (true);
 			text.text = LangTest.LMan.getString ("Training5");
 			Anchor.gameObject.SetActive (true);
-			Anchor.GetComponent<Animator> ().SetBool ("Right", true);
+			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
 			break;
 		case 6:
-			TrainingCube.MoveNeeded="Down";
-			Correct.Emit (20);
-			Anchor.GetComponent<Animator> ().SetBool ("Right", false);
-			Anchor.gameObject.SetActive (false);
-			text.text = LangTest.LMan.getString ("Training6");
-			MLetrero.gameObject.SetActive (false);
-			TrainingCube.help = false;
-			next.gameObject.SetActive (true);
-			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
-			break;
-		case 7:
-			Correct.gameObject.SetActive(false);
-			MLetrero.gameObject.SetActive (true);
-			Movement.sprite = MovsSprites [0];
-			Anchor.gameObject.SetActive (true);
-			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
-			text.text = LangTest.LMan.getString ("Training7");
-
-			break;
-		case 8:
-			Correct.gameObject.SetActive(true);
-			MLetrero.gameObject.SetActive (true);
-			text.text = LangTest.LMan.getString ("Training5");
-			Anchor.gameObject.SetActive (true);
-			Anchor.GetComponent<Animator> ().SetBool ("Down", true);
-			break;
-		case 9:
-			Correct.Emit (20);
-			Anchor.GetComponent<Animator> ().SetBool ("Down", false);
+			TrainingCube.MoveNeeded="TowardUpLeft";
+			Correct.Emit (100);
+			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", false);
 			Anchor.gameObject.SetActive (false);
 			text.text = LangTest.LMan.getString ("Training8");
 			MLetrero.gameObject.SetActive (false);
 			TrainingCube.help = false;
 			next.gameObject.SetActive (true);
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
+			break;
+		case 7:
+			//Correct.Emit (100);
+			Anchor.GetComponent<Animator> ().SetBool ("Down", false);
+			Anchor.gameObject.SetActive (false);
+			text.text = LangTest.LMan.getString ("Training9");
+			MLetrero.gameObject.SetActive (false);
+			TrainingCube.help = false;
+			next.gameObject.SetActive (true);
+			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("TrainingB1");
 			TrainingCube.MoveNeeded="TowardUpLeft";
 			break;
-		case 10:
+		case 8:
 			Correct.gameObject.SetActive(false);
 			text.text = LangTest.LMan.getString ("Training9");
 			MLetrero.gameObject.SetActive (true);
@@ -153,22 +135,38 @@ public class Training : MonoBehaviour {
 			Anchor.gameObject.SetActive (true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
 			break;
-		case 11:
+		case 9:
 			MLetrero.gameObject.SetActive (true);
 			Anchor.gameObject.SetActive (true);
 			Correct.gameObject.SetActive(true);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
 			text.text = LangTest.LMan.getString ("Training5");
 			break;
+		case 10:
+			MLetrero.gameObject.SetActive (true);
+			Anchor.gameObject.SetActive (true);
+			Correct.gameObject.SetActive (true);
+			Correct.Emit (100);
+			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
+			text.text = LangTest.LMan.getString ("Training5");
+			break;
+		case 11:
+			MLetrero.gameObject.SetActive (true);
+			Anchor.gameObject.SetActive (true);
+			Correct.gameObject.SetActive(true);
+			Correct.Emit (100);
+			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
+			text.text = LangTest.LMan.getString ("Training5");
+			break;
 		case 12:
 			MLetrero.gameObject.SetActive (true);
 			Anchor.gameObject.SetActive (true);
-			Correct.Emit (20);
+			Correct.Emit (100);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", true);
 			text.text = LangTest.LMan.getString ("Training13");
 			break;
 		case 13:
-			Correct.Emit (20);
+			Correct.Emit (100);
 			Anchor.GetComponent<Animator> ().SetBool ("TowardUpLeft", false);
 			Anchor.gameObject.SetActive (false);
 			MLetrero.gameObject.SetActive (false);

@@ -7,8 +7,10 @@ public class Cube : MonoBehaviour {
 	// Use this for initialization
 	public Material Map;
 	public Vector3 startPosition, endPosition;
-	public float horizontalSpeed = 0.01F;
-	public float verticalSpeed = 0.01F;
+	public float horizontalSpeed = 10F,verticalSpeed = 10F,RotMargin =1F;
+	public float angle, restAngle, prevAngle, RefAngle, OrigAngle;
+	public int Quadrant;
+	public bool Assigned;
 	public float CanvasMargin;
 	public GameObject CubePL, OrigCube;
 	public GameObject[] GBox, OGbox;
@@ -16,11 +18,17 @@ public class Cube : MonoBehaviour {
 	public Box OrigBox, FinalBox;
 	public Quaternion startingRotation;
 	public Texture Fake;
+	public RandomBox[] QuestionsCube;
 	public Button BHelp, BReset, BUnfold, SameDiff, BSame,BDiff;
 	public static int change, Test;
 	public static bool help; //boolean for the button
 
 	void Start () {
+		QuestionsCube = new RandomBox[] {new RandomBox (new Box (new Face ("F", 0, 0), new Face ("B", 0, 1), new Face ("U", 4, 2),
+						new Face ("D", 0, 3), new Face ("R", 0, 4), new Face ("L", 0, 5)), 0),
+						new RandomBox (new Box (new Face ("F", 0, 0), new Face ("B", 0, 1), new Face ("U", 4, 2),
+						new Face ("D", 0, 3), new Face ("R", 0, 4), new Face ("L", 0, 5)), 0)
+		};
 		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("ResetB");
 		BReset.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");
 		BHelp.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HelpB");
@@ -42,6 +50,9 @@ public class Cube : MonoBehaviour {
 			MovePL ();
 		}*/
 			// Handle native touch events
+		if ((Input.touchCount.Equals (2)) && help) {
+			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
+		} else {
 			foreach (Touch touch in Input.touches) {
 				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
 				HandleTouch (touch.fingerId, cam, touch.phase);
@@ -63,6 +74,7 @@ public class Cube : MonoBehaviour {
 				}
 			}
 		}
+	}
 
 		private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase) {
 
@@ -90,6 +102,74 @@ public class Cube : MonoBehaviour {
 		}
 	}
 			
+	private void HandleTouch2(Touch p1, Touch p2) {
+
+		if (((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Stationary)) && (p2.phase.Equals (TouchPhase.Moved)))
+			||((p1.phase.Equals (TouchPhase.Moved)) && (p2.phase.Equals (TouchPhase.Stationary)))){
+			if (help) {
+				Vector3 diff3 = p2.position - p1.position;
+				angle = Mathf.Atan2 (diff3.y, diff3.x);
+				angle = (Mathf.Rad2Deg * angle);
+				if ((prevAngle>0)&&(angle < 0)){
+					if (prevAngle > 90) {
+						Quadrant += 360;
+					}
+					prevAngle*=-1;
+				}
+				if ((prevAngle<0)&&(angle > 0)){
+					if (prevAngle < -90) {
+						Quadrant -= 360;
+					}
+					prevAngle*=-1;
+				}
+
+				restAngle = angle - prevAngle;
+				prevAngle= angle;
+				//angle = (Mathf.Rad2Deg * angle);
+				//Tangle = angle;
+				RefAngle = angle + Quadrant;
+				//	CubePL.transform.rotation= Quaternion.Euler (CubePL.transform.rotation.x, CubePL.transform.rotation.y, CubePL.transform.rotation.z+angle);
+				//CubePL.transform.RotateAround (Vector3.forward, angle*Mathf.Deg2Rad*Time.deltaTime);
+				CubePL.transform.Rotate (Vector3.forward, (Mathf.Deg2Rad* restAngle)/Time.deltaTime, Space.World);
+
+			}
+			return;
+		}
+		if((p1.phase.Equals(TouchPhase.Ended))||(p2.phase.Equals(TouchPhase.Ended))){
+			Assigned = false;
+
+			if (RefAngle > OrigAngle+RotMargin) {
+				//	Debug.Log ("Towards-up-left");
+				CubePL.GetComponent<Unfold> ().MoveUpLeft ();
+			} else {
+				if (RefAngle < OrigAngle-RotMargin) {
+					//	Debug.Log ("Towards-up-left");
+					CubePL.GetComponent<Unfold> ().MoveUpRight ();
+				}
+			}
+			return;
+		}
+
+
+		/*if (p1.position.y < p2.position.y) {
+				Touch temp = p1;
+				p1 = p2;
+				p2 = temp;
+			}*/
+
+		//Conseguir angulo de referencia 
+		if (!Assigned) {
+			Assigned = true;
+			Vector3 diff = p2.position - p1.position;
+			angle = Mathf.Atan2 (diff.y, diff.x);
+			Quadrant = 0;
+			RefAngle = (Mathf.Rad2Deg * angle);
+			OrigAngle = RefAngle;
+			prevAngle = OrigAngle;
+		}
+
+	}
 
 	void Paint (Mesh m) { //Pintar antiguo cubo
 
@@ -153,7 +233,7 @@ public class Cube : MonoBehaviour {
 						CubePL.GetComponent<Unfold> ().MoveUp ();
 						//Debug.Log ("Arriba");
 					}
-				} else {
+				} else { //Para testear
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 						//	Debug.Log ("Towards-up-left");
@@ -171,7 +251,7 @@ public class Cube : MonoBehaviour {
 							CubePL.GetComponent<Unfold> ().MoveUpRight ();
 						}
 					}
-				}
+				}  //*/
 			}
 		} 
 		else {
@@ -545,6 +625,11 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		}
 
 		Test++;
+	}
+
+	public void TradSymbol(string s)
+	{
+		
 	}
 
 }

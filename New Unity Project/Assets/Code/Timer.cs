@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour {
 	public Image TimeFill,Bag;
 	public Button TaparN, TaparE, NextBoxB;
 	public Image Message, StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3;
-	public Image[] Arrows;
+	public Image[] MArrows,Arrows;
 	public Color StarOn, StarOff;
 	public Sprite[] ArrowsSp;
 	void Start () {
@@ -72,7 +72,7 @@ public class Timer : MonoBehaviour {
 		animation = false;
 		end = false;
 		Solution.gameObject.SetActive (false);
-		foreach (Image i in Arrows) {
+		foreach (Image i in MArrows) {
 			i.gameObject.SetActive (false);
 		}
 		points = pointsLevel;
@@ -142,7 +142,7 @@ public class Timer : MonoBehaviour {
 	public void PostReward()
 	{
 		
-		if (Cube.Test < 3) { //In final version probably 10, for testing 3
+		if (Cube.Test < 5) { //In final version probably 10, for testing 5
 			//if (!Points.exchange) { // If animation is over
 			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
 			//}
@@ -234,7 +234,7 @@ public class Timer : MonoBehaviour {
 
 		for (int i = 0; i < way.Length-1; i++) {
 			string Move = way [way.Length-2-i];
-			Arrows [i].gameObject.SetActive (true);
+			MArrows [i].gameObject.SetActive (true);
 			switch (Move) { //Do the opposite Move
 			case "Up":
 				Arrows [i].sprite = ArrowsSp [1];

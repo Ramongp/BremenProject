@@ -60,6 +60,7 @@
      <Compile Include="Assets\Code\Node.cs" />
      <Compile Include="Assets\Code\Points.cs" />
      <Compile Include="Assets\Code\Questionnarie.cs" />
+     <Compile Include="Assets\Code\RandomBox.cs" />
      <Compile Include="Assets\Code\SameCube.cs" />
      <Compile Include="Assets\Code\SendGmail.cs" />
      <Compile Include="Assets\Code\SendMailTest.cs" />
