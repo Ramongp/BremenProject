@@ -9,5 +9,6 @@ public class RandomBox {
 	{
 		b = B;
 		change = Change;
+		//int movements that will receive the cube
 	}
 }

@@ -4,6 +4,7 @@ using System.Collections;
 public class Box {
 
 	public Face Front, Back, Up, Down, Right, Left;
+	public Face[] Sides;
 	public Box(Face F,Face B,Face U, Face D,Face R, Face L) {
 		Front = F;
 		Back = B;
@@ -11,6 +12,7 @@ public class Box {
 		Down = D;
 		Right = R;
 		Left = L;
+		Sides = new Face[] { Front, Back, Up, Down, Right, Left };
 	}
 
 	public void MoveUp()

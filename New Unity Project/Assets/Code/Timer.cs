@@ -114,7 +114,7 @@ public class Timer : MonoBehaviour {
 			Solution.gameObject.SetActive (true);
 			Solution.GetComponent<Animator> ().SetBool ("Wrong", true);
 		}
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Time " + TimeLeft.ToString());
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TimeLeft.ToString());
 	}
 
 	public void NextBox()
@@ -148,7 +148,7 @@ public class Timer : MonoBehaviour {
 			//}
 		} else {
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
-			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
+		//	GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
 			Application.LoadLevel ("Questionnaire");
 		}
 	}

@@ -47,7 +47,7 @@ public class MapSelect : MonoBehaviour {
 
 	public void GoNextLevel()
 	{
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest (NextLevel);
+	//	GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest (NextLevel);
 		Application.LoadLevel (NextLevel);
 	}
 

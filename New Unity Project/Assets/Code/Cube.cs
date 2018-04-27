@@ -588,7 +588,7 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 	public void Restart()
 	{
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ("Cubo " + Test.ToString ());
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell ( Test.ToString ());
 		if (LangTest.Comments) {
 			BHelp.gameObject.SetActive (true);
 		} else {
@@ -605,7 +605,7 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		help = false;
 		BReset.gameObject.SetActive (false);
 		BUnfold.gameObject.SetActive (false);
-		for (int i = 0; i < Faces.Length; i++) {
+		for (int i = 0; i < GBox.Length; i++) {
 			//Box [i].image.TextureWrapMode.Mirror;
 			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
 			OGbox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
