@@ -121,6 +121,6 @@ public class SendGmail : MonoBehaviour {
 		WriteTest(SystemInfo.deviceUniqueIdentifier);
 		WriteCell (System.DateTime.Now.ToString("dd/MM/yyyy")); 
 		WriteCell (System.DateTime.Now.ToString("hh:mm:ss"));
-		Send ();
+		//Send ();
 	}
 }

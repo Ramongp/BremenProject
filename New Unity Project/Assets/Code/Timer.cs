@@ -170,6 +170,11 @@ public class Timer : MonoBehaviour {
 			Solution.text =LangTest.LMan.getString ("NoFaceSame");
 
 			if (!SameCube.Fx.symbol.Equals("NoFaceSame")) {
+
+				if (Unfold.Fold.Equals (1)) {
+					GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
+				}
+
 				Cube.help = false;
 				Solution.text = LangTest.LMan.getString (SameCube.Fx.symbol);
 				GameObject.Find ("CubePl").GetComponent<Unfold> ().CreateWay ();
@@ -179,7 +184,9 @@ public class Timer : MonoBehaviour {
 			Solution.text = LangTest.LMan.getString ("DiffBecause")+ LangTest.LMan.getString (TradLocaton(SameCube.Fx.localization))+LangTest.LMan.getString ("DontMatch");
 			GameObject.Find("Camera").GetComponent<Cube>().GBox[SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
 			GameObject.Find("Camera").GetComponent<Cube>().OGbox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
-			GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
+			if (Unfold.Fold.Equals (0)) {
+				GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
+			}
 			GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", true);
 		}
 

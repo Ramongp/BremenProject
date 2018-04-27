@@ -29,8 +29,8 @@ public class Cube : MonoBehaviour {
 						new RandomBox (new Box (new Face ("F", 0, 0), new Face ("B", 0, 1), new Face ("U", 4, 2),
 						new Face ("D", 0, 3), new Face ("R", 0, 4), new Face ("L", 0, 5)), 0)
 		};
-		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("ResetB");
-		BReset.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");
+		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");
+		BReset.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("ResetB");
 		BHelp.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HelpB");
 		BSame.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("SameB");
 		BDiff.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("DiffB");
@@ -596,11 +596,11 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		}
 		SameDiff.gameObject.SetActive (true);
 		GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", false);
-		OrigBox =new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 4,2),
-			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
+		OrigBox =new Box(new Face ("Hook", 0,0), new Face ("Skull", 0,1), new Face ("Lifesv", 4,2),
+			new Face ("Spy", 0,3), new Face ("Rum", 0,4), new Face ("Bomb", 0,5));
 
-		FinalBox = new Box(new Face ("F", 0,0), new Face ("B", 0,1), new Face ("U", 4,2),
-			new Face ("D", 0,3), new Face ("R", 0,4), new Face ("L", 0,5));
+		FinalBox = new Box(new Face ("Hook", 0,0), new Face ("Skull", 0,1), new Face ("Lifesv", 4,2),
+			new Face ("Spy", 0,3), new Face ("Rum", 0,4), new Face ("Bomb", 0,5));
 		startingRotation = this.gameObject.transform.localRotation;
 		help = false;
 		BReset.gameObject.SetActive (false);
@@ -627,9 +627,46 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		Test++;
 	}
 
-	public void TradSymbol(string s)
+	public int TradSymbol(string s)
 	{
-		
+		switch (s) {
+		case "Hook":
+			return 0;
+			break;
+		case "Skull":
+			return 1;
+			break;
+		case "Lifesv":
+			return 2;
+			break;
+		case "Spy":
+			return 3;
+			break;
+		case "Rum":
+			return 4;
+			break;
+		case "Bomb":
+			return 5;
+			break;
+		case "Sword":
+			return 6;
+			break;
+		case "Fish":
+			return 7;
+			break;
+		case "Rose":
+			return 8;
+			break;
+		case "Parrot":
+			return 9;
+			break;
+		case "Barrel":
+			return 10;
+			break;
+		 default:
+			return 10;
+			break;
+		}
 	}
 
 }

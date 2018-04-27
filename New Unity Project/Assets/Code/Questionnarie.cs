@@ -71,17 +71,23 @@ public class Questionnarie : MonoBehaviour {
 	{
 		Answ1.text = LangAnsw;
 		LangA1 = Answ1.text;
+		Panel0.SetActive (false);
+		cont0 = 0;
 	}
 
 	public void AnswerQ2 (string LangAnws)
 	{
 		LangA2 = LangAnws;
 		Answ2.text = LangTest.LMan.getString (LangAnws);
+		Panel1.SetActive (false);
+		cont1 = 0;
 	}
 	public void AnswerQ3 (string LangAnws)
 	{
 		LangA3 = LangAnws;
 		Answ3.text = LangTest.LMan.getString (LangAnws);
+		Panel2.SetActive (false);
+		cont2 = 0;
 	}
 
 	public void SendInfo()
