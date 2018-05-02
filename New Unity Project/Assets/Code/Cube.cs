@@ -19,16 +19,37 @@ public class Cube : MonoBehaviour {
 	public Quaternion startingRotation;
 	public Texture Fake;
 	public RandomBox[] QuestionsCube;
+	public static string[] Symbols = new string[] {"Hook","Skull","Lifesv","Spy","Rum","Bomb","Sword","Fish","Rose","Parrot","Barrel","Bones","Lock"};
 	public Button BHelp, BReset, BUnfold, SameDiff, BSame,BDiff;
 	public static int change, Test;
 	public static bool help; //boolean for the button
 
 	void Start () {
-		QuestionsCube = new RandomBox[] {new RandomBox (new Box (new Face ("F", 0, 0), new Face ("B", 0, 1), new Face ("U", 4, 2),
-						new Face ("D", 0, 3), new Face ("R", 0, 4), new Face ("L", 0, 5)), 0),
-						new RandomBox (new Box (new Face ("F", 0, 0), new Face ("B", 0, 1), new Face ("U", 4, 2),
-						new Face ("D", 0, 3), new Face ("R", 0, 4), new Face ("L", 0, 5)), 0)
-		};
+		QuestionsCube = new RandomBox[] { //Box,Moves {} and {Face with change and the change}
+			new RandomBox (new Box (new Face (Symbols[0], 0, 0), new Face (Symbols[1], 0, 1), new Face (Symbols[6], 0, 2), 
+									new Face (Symbols[3], 0, 3), new Face (Symbols[4], 0, 4), new Face (Symbols[5], 0, 5)),new int[] {3},new int[] {0,1}),
+			new RandomBox (new Box (new Face (Symbols[8], 4, 0), new Face (Symbols[10], 0, 1), new Face (Symbols[9], 0, 2),
+									new Face (Symbols[5], 0, 3), new Face (Symbols[7], 0, 4), new Face (Symbols[3], 0, 5)),new int[] {3},new int[] {4,2}),
+			new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[10], 0, 1), new Face (Symbols[8], 4, 2),
+									new Face (Symbols[5], 0, 3), new Face (Symbols[2], 4, 4), new Face (Symbols[3], 0, 5)),new int[] {0,3},new int[] {0,1}),
+			new RandomBox (new Box (new Face (Symbols[3], 1, 0), new Face (Symbols[9], 0, 1), new Face (Symbols[5], 1, 2),
+								 	new Face (Symbols[7], 0, 3), new Face (Symbols[1], 0, 4), new Face (Symbols[10], 0, 5)),new int[] {5,5,0},new int[] {2,4}),
+			new RandomBox (new Box (new Face (Symbols[2], 4, 0), new Face (Symbols[10], 0, 1), new Face (Symbols[7], 3, 2),
+									new Face (Symbols[5], 0, 3), new Face (Symbols[12], 0, 4), new Face (Symbols[4], 0, 5)),new int[] {4},new int[] {2,4}),
+			new RandomBox (new Box (new Face (Symbols[8], 4, 0), new Face (Symbols[10], 0, 1), new Face (Symbols[6], 3, 2),
+									new Face (Symbols[7], 2, 3), new Face (Symbols[9], 0, 4), new Face (Symbols[12], 2, 5)),new int[] {4,4},new int[] {0,1}),
+			new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[3], 0, 1), new Face (Symbols[4], 3, 2),
+									new Face (Symbols[10], 2, 3), new Face (Symbols[5], 0, 4), new Face (Symbols[6], 2, 5)),new int[] {4,4,1},new int[] {0,1}),
+			new RandomBox (new Box (new Face (Symbols[9], 0, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[0], 3, 2),
+									new Face (Symbols[10], 0, 3), new Face (Symbols[7], 1, 4), new Face (Symbols[6], 0, 5)),new int[] {3,5},new int[] {0,1}),
+			new RandomBox (new Box (new Face (Symbols[4], 0, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[8], 4, 2),
+									new Face (Symbols[1], 0, 3), new Face (Symbols[12], 0, 4), new Face (Symbols[6], 0, 5)),new int[] {4,0},new int[] {0,3}),
+			new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[7], 1, 2),
+									new Face (Symbols[1], 0, 3), new Face (Symbols[8], 4, 4), new Face (Symbols[6], 0, 5)),new int[] {5,2},new int[] {2,0})};
+		
+		
+		
+		
 		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");
 		BReset.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("ResetB");
 		BHelp.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HelpB");
@@ -85,10 +106,10 @@ public class Cube : MonoBehaviour {
 				break;
 		case TouchPhase.Moved:
 			if (help) {
-				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X") * Mathf.Deg2Rad;
-				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y") * Mathf.Deg2Rad;
-				CubePL.transform.RotateAround (Vector3.up, -h2);
-				CubePL.transform.RotateAround (Vector3.right, +v2);
+				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X");
+				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y");
+				CubePL.transform.Rotate (Vector3.up, -h2, Space.World);
+				CubePL.transform.Rotate (Vector3.right, +v2, Space.World);
 			}
 				break;
 			case TouchPhase.Ended:
@@ -271,10 +292,10 @@ public class Cube : MonoBehaviour {
 		while(RandomSure()){
 
 		Pasos = "Pasos ";
-		int i = Random.Range (1, 4);
+			int i = QuestionsCube[Test].moves.Length;
 		for (int e = 0; e < i; e++) {
 			int x=0, y=0, z=0;
-			int u = Random.Range (0, 5);
+				int u = QuestionsCube [Test].moves [e];
 			switch (u) {
 			case 0:
 				Pasos+= "Up ";
@@ -352,7 +373,7 @@ public class Cube : MonoBehaviour {
 		//Escoger la cara que recibe el cambio
 		//int change=4; //comprobar metodo 2quarters
 		//int change =2; //mirar que pasa con la orientacion
-		int repeatFaces = 0, facesWithOri=0;
+		/*int repeatFaces = 0, facesWithOri=0;
 		Face SideWithChange;
 		int[] position = new int[3];
 		Face[] FrontSides = new Face[] { FinalBox.Front, FinalBox.Up, FinalBox.Right };
@@ -367,9 +388,12 @@ public class Cube : MonoBehaviour {
 				}
 
 			}
-		}
-		change = Random.Range (1, 3);
-		if ((repeatFaces>1)&&(facesWithOri>1)) { // Only when there are two or more visibles sides from the original cube one symbol can be changed, otherwise if the three symbols are different it has to be the same cube, and also one face needs to have visible orientation
+		}*/
+
+		Face SideWithChange = FinalBox.Sides [QuestionsCube [Test].change [0]];
+		change = QuestionsCube [Test].change [1];
+		string expChange="";
+		/*if ((repeatFaces>1)&&(facesWithOri>1)) { // Only when there are two or more visibles sides from the original cube one symbol can be changed, otherwise if the three symbols are different it has to be the same cube, and also one face needs to have visible orientation
 			change = Random.Range (0, 3);
 		}
 		//int frontface = 0;
@@ -380,7 +404,7 @@ public class Cube : MonoBehaviour {
 			//frontface = position [rand];
 			SideWithChange = FrontSidesChange [rand];
 			}
-		string expChange="";
+		string expChange="";*/
 
 		switch (change){
 		case 0:
@@ -533,18 +557,18 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 
 		// Bottom del cubo que hace de cara (plane) //Estan al reves para hacer mirror de la textura
-		UVs[14] = new Vector2(0.0f, 1.0f); //top right
-		UVs[15] = new Vector2(0.3f,1.0f);//btm right
-		UVs[13] = new Vector2(0.0f, 0.0f);	//btm left
-		UVs[12] = new Vector2(1.0f, 0.0f);//top left
+		UVs[15] = new Vector2(0.0f, 0.0f); //top right
+		UVs[14] = new Vector2(0.0f,1.0f);//btm right
+		UVs[12] = new Vector2(1.0f, 0.0f);	//btm left
+		UVs[13] = new Vector2(1.0f, 1.0f);//top left
 
 
 		// Top del cubo que hace de cara (plane) 
-		UVs[9] = new Vector2(0.0f, 1.0f); //top l
+		UVs[5] = new Vector2(0.0f, 0.0f); //top l
 		//UVs[4] = new Vector2(1.0f, 1.0f);//top r
-		UVs[8] = new Vector2(1.0f, 1.0f);//top r
-		UVs[5] = new Vector2(0.0f, 0.0f);//btm l
-		UVs[4] = new Vector2(1.0f,0.0f);//btm r
+		UVs[9] = new Vector2(0.0f, 1.0f);//top r
+		UVs[4] = new Vector2(1.0f, 0.0f);//btm l
+		UVs[8] = new Vector2(1.0f,1.0f);//btm r
 
 		mesh.uv = UVs;
 	}
@@ -596,22 +620,46 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		}
 		SameDiff.gameObject.SetActive (true);
 		GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", false);
-		OrigBox =new Box(new Face ("Hook", 0,0), new Face ("Skull", 0,1), new Face ("Lifesv", 4,2),
-			new Face ("Spy", 0,3), new Face ("Rum", 0,4), new Face ("Bomb", 0,5));
 
-		FinalBox = new Box(new Face ("Hook", 0,0), new Face ("Skull", 0,1), new Face ("Lifesv", 4,2),
-			new Face ("Spy", 0,3), new Face ("Rum", 0,4), new Face ("Bomb", 0,5));
+		Box Refbox = QuestionsCube [Test].b;
+		OrigBox =new Box(new Face (Refbox.Sides[0].symbol,Refbox.Sides[0].orientation,Refbox.Sides[0].localization),new Face (Refbox.Sides[1].symbol,Refbox.Sides[1].orientation,Refbox.Sides[1].localization),
+			new Face (Refbox.Sides[2].symbol,Refbox.Sides[2].orientation,Refbox.Sides[2].localization), new Face (Refbox.Sides[3].symbol,Refbox.Sides[3].orientation,Refbox.Sides[3].localization),
+			new Face (Refbox.Sides[4].symbol,Refbox.Sides[4].orientation,Refbox.Sides[4].localization),new Face (Refbox.Sides[5].symbol,Refbox.Sides[5].orientation,Refbox.Sides[5].localization));
+
+		//OrigBox = QuestionsCube [Test].b;
+
+		FinalBox = QuestionsCube [Test].b;
 		startingRotation = this.gameObject.transform.localRotation;
 		help = false;
 		BReset.gameObject.SetActive (false);
 		BUnfold.gameObject.SetActive (false);
 		for (int i = 0; i < GBox.Length; i++) {
 			//Box [i].image.TextureWrapMode.Mirror;
-			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
-			OGbox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
+			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[ TradSymbol( FinalBox.Sides[i].symbol)] ;
+			OGbox [i].GetComponent<Renderer> ().material.mainTexture = Faces[ TradSymbol( FinalBox.Sides[i].symbol)];
 			GBox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
 			OGbox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
-			Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
+			switch (FinalBox.Sides [i].orientation) {
+			case 0:
+			case 4:
+				Paint (GBox [i].GetComponent<MeshFilter> ().mesh);
+				Paint (OGbox [i].GetComponent<MeshFilter> ().mesh);
+				break;
+			case 1:
+				PaintRotate1Q (GBox [i].GetComponent<MeshFilter> ().mesh);
+				PaintRotate1Q (OGbox [i].GetComponent<MeshFilter> ().mesh);
+				break;
+			case 2:
+				PaintRotate2Q (GBox [i].GetComponent<MeshFilter> ().mesh);
+				PaintRotate2Q (OGbox [i].GetComponent<MeshFilter> ().mesh);
+				break;
+			case 3:
+				PaintRotate3Q (GBox [i].GetComponent<MeshFilter> ().mesh);
+				PaintRotate3Q (OGbox [i].GetComponent<MeshFilter> ().mesh);
+				break;
+			default:
+				break;
+			}
 		}
 		RandomCube ();
 		CubePL.GetComponent<Unfold> ().finalRotation = startingRotation;
@@ -632,41 +680,34 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		switch (s) {
 		case "Hook":
 			return 0;
-			break;
 		case "Skull":
 			return 1;
-			break;
 		case "Lifesv":
 			return 2;
-			break;
 		case "Spy":
 			return 3;
-			break;
 		case "Rum":
 			return 4;
-			break;
 		case "Bomb":
 			return 5;
-			break;
 		case "Sword":
 			return 6;
-			break;
 		case "Fish":
 			return 7;
-			break;
 		case "Rose":
 			return 8;
-			break;
 		case "Parrot":
 			return 9;
-			break;
 		case "Barrel":
 			return 10;
-			break;
+		case "Bones":
+			return 11;
+		case "Lock":
+			return 12;
 		 default:
 			return 10;
-			break;
 		}
 	}
 
 }
+

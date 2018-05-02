@@ -24,6 +24,7 @@ public class Questionnarie : MonoBehaviour {
 		Question2.text=LangTest.LMan.getString ("Question2");
 		Question3.text=LangTest.LMan.getString ("Question3");
 		RateGameText.text=LangTest.LMan.getString ("RateGame");
+		Send.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Send");
 		//Poner a los botones el texto de Lang
 		for (int i = 0; i < StringsQ2.Length; i++) {
 			Q2Answ[i].GetComponentInChildren<Text>().text= LangTest.LMan.getString (StringsQ2[i]);
@@ -99,7 +100,7 @@ public class Questionnarie : MonoBehaviour {
 	{
 		String temp = LangTest.currentLang;
 		LangTest.currentLang = "English";
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA1));
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangA1);
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA2));
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA3));
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (Math.Ceiling (RateSGamelider.value).ToString());

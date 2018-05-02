@@ -69,8 +69,8 @@ public class LockCube : MonoBehaviour {
 			break;
 		case TouchPhase.Moved:
 			if (help) {
-				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X") * Mathf.Deg2Rad;
-				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y") * Mathf.Deg2Rad;
+				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X");
+				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y");
 				CubePL.transform.RotateAround (Vector3.up, -h2);
 				CubePL.transform.RotateAround (Vector3.right, +v2);
 			}

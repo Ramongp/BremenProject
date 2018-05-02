@@ -19,6 +19,7 @@ public class Timer : MonoBehaviour {
 	public Image[] MArrows,Arrows;
 	public Color StarOn, StarOff;
 	public Sprite[] ArrowsSp;
+	public float TotalTime;
 	void Start () {
 		
 		Bag.gameObject.SetActive (false);
@@ -32,6 +33,7 @@ public class Timer : MonoBehaviour {
 			start = false;
 		}
 		if (!end) {
+			TotalTime += Time.deltaTime;
 			TimeLeft -= Time.deltaTime;
 			TimeSlider.value = TimeLeft;
 			if (TimeLeft < 40) {
@@ -143,13 +145,14 @@ public class Timer : MonoBehaviour {
 	public void PostReward()
 	{
 		
-		if (Cube.Test < 5) { //In final version probably 10, for testing 5
+		if (Cube.Test < 10) { //In final version probably 10, for testing 5
 			//if (!Points.exchange) { // If animation is over
 			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
 			//}
 		} else {
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
+			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
 			Application.LoadLevel ("Questionnaire");
 		}
 	}

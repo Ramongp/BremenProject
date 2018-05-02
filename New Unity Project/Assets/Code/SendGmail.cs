@@ -116,7 +116,17 @@ public class SendGmail : MonoBehaviour {
 		void StartInfo()
 	{
 		if (!File.Exists (getPath ())) {
-		WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Question");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");WriteCell ("Total Time");
+		WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+			WriteCell ("Total Time");WriteCell ("Age");WriteCell ("Level of Study");
 		}
 		WriteTest(SystemInfo.deviceUniqueIdentifier);
 		WriteCell (System.DateTime.Now.ToString("dd/MM/yyyy")); 

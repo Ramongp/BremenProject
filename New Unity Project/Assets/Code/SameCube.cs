@@ -21,7 +21,7 @@ public class SameCube : MonoBehaviour {
 		Uorient= new string[4,4] {{" ","Left,","Left,Left,","Right,"},{"Right,"," ","Left,","Left,Left,"},{"Right,Right,","Right,"," ","Left,"},{"Left,","Right,Right,","Right,"," "}};
 		Rorient= new string[4,4] {{" ","Up,","Up,Up,","Down,"},{"Down,"," ","Up,","Up,Up,"},{"Down,Down,","Down,"," ","Up,"},{"Up,","Down,Down,","Down,"," "}};
 		Rot = new string[3,3]{ { " ","Up,","Right," },{ "Down,"," ","Toward-up-right," },{ "Left,","Toward-up-left,"," " } };
-		NoOrientR3 = new string[3,3] { {"","Toward-up-right,Up,","Toward-up-left,Right,"},{"Right,Down,","","Left,Toward-up-right,"},{"Up,Righ","Right,Down",""}}; //Table with movements for R=3
+		NoOrientR3 = new string[3,3] { {"","Toward-up-right,Up,","Toward-up-left,Right,"},{"Right,Down,","","Left,Toward-up-right,"},{"Up,Left","Right,Down",""}}; //Table with movements for R=3
 		NoOrientR1 = new string[3,3] { {"Toward-up-right,Toward-up-right,","Left,","Down,"},{"Toward-up-left,","Left,Left,","Up,"},{"Toward-up-right,","Right,","Up,Up,"}}; //Table with movements for R=3
 
 		OrientconRot = new int[3,3]{ {0,0,0 },{ 0,0,-1 },{0,1,0 } };// Está al
@@ -164,11 +164,19 @@ public class SameCube : MonoBehaviour {
 			}
 				if((S1.orientation.Equals(4))&&(S2.orientation.Equals(4)))
 					{
-					Way = S1mov;
+				S1mov = S2mov+S1mov;
+				if (NoVisible (new Face (T1.symbol,T1.orientation,T1.localization))) {
 					Debug.Log ("Mismo cubo");
 					Fx.symbol = "FollowPath";
 					IsSameCube = true;
 					break;
+				} else {
+					Fx = T1;
+					Debug.Log ("Cubo diferente");
+					IsSameCube = false;
+					break;
+				}
+					
 				}
 				if (S2.orientation.Equals (4)) {
 					string tempmovS2 = S1mov;
@@ -216,9 +224,9 @@ public class SameCube : MonoBehaviour {
 		case 3:
 			Debug.Log ("Se repiten tres simbolos");
 			if (
-				((S1.orientation.Equals(4))&&
+				/*((S1.orientation.Equals(4))&&
 				(S2.orientation.Equals(4))&&
-				(S3.orientation.Equals(4)))||
+				(S3.orientation.Equals(4)))||*/
 				
 				((!string.IsNullOrEmpty(S1mov))&&
 				(!string.IsNullOrEmpty(S2mov))&&
@@ -454,15 +462,15 @@ public class SameCube : MonoBehaviour {
 	public bool Compare3Sides () // Miramos si ambas caras han hacho caminos equivalentes
 	{
 		if (S1.orientation.Equals (4)) {
-			S1mov = NoOrientR3 [listpos( S1.localization),listpos( So1.localization)];
+			S1mov = NoOrientR3 [listpos( So1.localization),listpos( S1.localization)];
 		}
 		if (S2.orientation.Equals (4)) {
-			S2mov = NoOrientR3 [listpos(S2.localization),listpos( So2.localization)];
+			S2mov = NoOrientR3 [listpos(So2.localization),listpos( S2.localization)];
 		}
 		if (S3.orientation.Equals (4)) {
-			S3mov = NoOrientR3 [listpos(S3.localization),listpos(So3.localization)];
+			S3mov = NoOrientR3 [listpos(So3.localization),listpos(S3.localization)];
 		}
-
+		Debug.Log ("R=3 all ori=4 " + S1mov + " " + S2mov + " " + S3mov);
 		Face F1 = new Face(So1.symbol,So1.orientation,So1.localization), F2 = new Face(So2.symbol,So2.orientation,So2.localization), F3 =new Face(So3.symbol,So3.orientation,So3.localization);
 		F1= MoveFace (S2mov, F1);
 		F2= MoveFace (S3mov, F2);
@@ -470,6 +478,7 @@ public class SameCube : MonoBehaviour {
 
 		if (((F1.localization.Equals (S1.localization)))&&((F2.localization.Equals (S2.localization)) )
 			&&((F3.localization.Equals (S3.localization)))) {
+			Way = S1mov;
 			return true;
 		} 
 		else {

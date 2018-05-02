@@ -85,6 +85,8 @@
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
            	        <string name="RateGame"> Rate the game</string>
+           	          <string name="Send"> Send</string>
+
 
 
 
@@ -179,6 +181,7 @@
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
            	         <string name="RateGame"> Puntua el juego</string>
+           	          <string name="Send"> Enviar</string>
 
         </Spanish>
          <German>
@@ -267,6 +270,7 @@
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
            	          <string name="RateGame">Bewerte das Spiel</string>
+           	           <string name="Send"> Senden</string>
 
 
 
