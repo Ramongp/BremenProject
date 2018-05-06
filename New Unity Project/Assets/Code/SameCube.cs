@@ -64,8 +64,9 @@ public class SameCube : MonoBehaviour {
 		Debug.Log ("Slock " + Slock.ToString ()+ " movs length " + movs.Length.ToString());
 		CreateMov (Slock, 0, 0);
 	
-
+		Way = S1mov;
 			return S1mov;
+
 	}
 	 void FindSides()
 	{

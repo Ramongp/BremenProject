@@ -32,7 +32,7 @@ public class Timer : MonoBehaviour {
 			SetTimer ();
 			start = false;
 		}
-		if (!end) {
+		if ((!end)&& (TimeLeft>0)) {
 			TotalTime += Time.deltaTime;
 			TimeLeft -= Time.deltaTime;
 			TimeSlider.value = TimeLeft;
@@ -145,7 +145,7 @@ public class Timer : MonoBehaviour {
 	public void PostReward()
 	{
 		
-		if (Cube.Test < 10) { //In final version probably 10, for testing 5
+		if (Cube.Test < 1) { //In final version probably 10, for testing 5
 			//if (!Points.exchange) { // If animation is over
 			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
 			//}
@@ -169,29 +169,34 @@ public class Timer : MonoBehaviour {
 			Solution.GetComponent<Animator> ().SetBool ("Correct", false);
 		} else {
 			Solution.GetComponent<Animator> ().SetBool ("Wrong", false);
-		}
-		if ((answer.Equals (0))|| (answer.Equals (3))){ //Explanation Same cube
-			Solution.text =LangTest.LMan.getString ("NoFaceSame");
+		
+			if ((answer.Equals (0)) || (answer.Equals (3))) { //Explanation Same cube
+				Solution.text = LangTest.LMan.getString ("NoFaceSame");
 
-			if (!SameCube.Fx.symbol.Equals("NoFaceSame")) {
+				if (!SameCube.Fx.symbol.Equals ("NoFaceSame")) {
 
-				if (Unfold.Fold.Equals (1)) {
+					if (Unfold.Fold.Equals (1)) {
+						GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
+					}
+
+					Cube.help = false;
+					Solution.text = LangTest.LMan.getString (SameCube.Fx.symbol);
+					GameObject.Find ("CubePl").GetComponent<Unfold> ().CreateWay (true);
+					CreateArrows ();
+				}
+			} else {
+				if (Cube.change.Equals (0)) {
+					Solution.text = LangTest.LMan.getString ("DiffBecause") + LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) + LangTest.LMan.getString ("DontMatchSym");
+				} else {
+					Solution.text = LangTest.LMan.getString ("DiffBecause") + LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) + LangTest.LMan.getString ("DontMatchOri");
+				}
+				GameObject.Find ("Camera").GetComponent<Cube> ().GBox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
+				GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
+				if (Unfold.Fold.Equals (0)) {
 					GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
 				}
-
-				Cube.help = false;
-				Solution.text = LangTest.LMan.getString (SameCube.Fx.symbol);
-				GameObject.Find ("CubePl").GetComponent<Unfold> ().CreateWay ();
-				CreateArrows ();
+				GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", true);
 			}
-		} else {
-			Solution.text = LangTest.LMan.getString ("DiffBecause")+ LangTest.LMan.getString (TradLocaton(SameCube.Fx.localization))+LangTest.LMan.getString ("DontMatch");
-			GameObject.Find("Camera").GetComponent<Cube>().GBox[SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
-			GameObject.Find("Camera").GetComponent<Cube>().OGbox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
-			if (Unfold.Fold.Equals (0)) {
-				GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
-			}
-			GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", true);
 		}
 
 		/*switch (answer) {

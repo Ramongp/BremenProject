@@ -74,7 +74,7 @@ public class TrainingCube : MonoBehaviour {
 		case TouchPhase.Moved:
 			if (help) {
 				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X");
-				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y") ;
+				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y");
 				//CubePL.transform.RotateAround (Vector3.up, -h2);
 				CubePL.transform.Rotate (Vector3.up, -h2, Space.World);
 				CubePL.transform.Rotate (Vector3.right, +v2, Space.World);

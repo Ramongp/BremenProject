@@ -40,8 +40,9 @@
              <string name="Training13">The last one</string>
             <string name="ErrorTraining">Sorry, but that was not the movement that we need.</string>
              <string name="ErrorTrainingB">Try Again</string>
-           	
-           	  	
+
+
+           	  <string name="GiveUp">The next time you'll get it right! On the right you can one of the solutions for this test.</string>
            	  <string name="PassedLockTest">Well Done!</string>
            	  <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
 
@@ -53,7 +54,8 @@
            	  <string name="DiffB">Different</string>
            	  <string name="NoFaceSame">These are the hidden sides from the previous position.</string>
            	  <string name="DiffBecause">They are different because of the symbol of the </string>
-           	  <string name="DontMatch"> side does not match.</string>
+           	  <string name="DontMatchSym"> side does not match.</string>
+           	   <string name="DontMatchOri"> side does not match the orientation.</string>
            	    <string name="Front"> front</string>
            	    <string name="Back"> back</string>
            	    <string name="Up"> up</string>
@@ -112,17 +114,17 @@
 	
 
            
-            <string name="StartTraining">Hola! Necesito abrir este tesoro pero no ecnuentro la cerradura ¿Puedes ayudarme?</string>
+            <string name="StartTraining">¡Hola! Necesito abrir este tesoro pero no ecnuentro la cerradura ¿Puedes ayudarme?</string>
                 <string name="MSign">Movimiento</string>
              <string name="TrainingB0">Claro que sí</string>
              <string name="TrainingB1">Perfecto</string>
-              <string name="TrainingB2">Sí!</string>
+              <string name="TrainingB2">¡Sí!</string>
             <string name="Training0">Para ver la cerradura necesitamos rotar el cubo, te voy a decir como.</string>
             <string name="Training1">Para el primer movimiento, desliza tu dedo de arriba hacia abajo de la pantalla.</string>
-            <string name="Training2">Genial! Una vez más.</string>
+            <string name="Training2">¡Genial! Una vez más.</string>
             <string name="Training3">Ahora ya veo la cerradura, sigue con el mismo movimiento</string>
             <string name="Training4">Ahora, desliza el dedo de izquierda a derecha de la pantalla.</string>
-            <string name="Training5">Genial! Una vez más.</string>
+            <string name="Training5">¡Genial! Una vez más.</string>
             <string name="Training6">Ahora repite el primer movimiento ¿Te acuerdas?</string>
             <string name="Training7">Desliza tu dedo de arriba hacia abajo de la pantalla.</string>
              <string name="Training8">Ya falta poco.Quieres aprender el último movimiento?</string>
@@ -134,7 +136,8 @@
             <string name="ErrorTraining">Lo siento, pero ese no es el movimientos que estamos buscando.</string>
              <string name="ErrorTrainingB">Intentarlo de nuevo</string>
            
-            
+
+			  <string name="GiveUp">¡La próxima seguro que la aciertas! A la derecha puedes una de las soluciones para esta prueba.  </string>
            	  <string name="PassedLockTest">¡Conseguido!</string>
            	  <string name="PassedLockTestLevel">Has abierto todos los tesoros!</string>
 
@@ -142,11 +145,12 @@
            	    <string name="NextBox">Siguiente</string>
            	   <string name="UnfoldB">Desplegar</string>
            	    <string name="HelpB">Ayuda</string>
-           	  <string name="SameB">Mismo</string>
+           	  <string name="SameB">Iguales</string>
            	  <string name="DiffB">Diferente</string>
            	  <string name="NoFaceSame">Estos son los lados que no se podían ver con la anterior posición.</string>
            	    <string name="DiffBecause">Son diferentes debido a que el símbolo de la cara</string>
-           	    <string name="DontMatch"> no es igual.</string>
+           	    <string name="DontMatchSym"> no es igual.</string>
+           	      <string name="DontMatchOri"> No tienen al misma orientación</string>
            	    <string name="Front"> frontal</string>
            	    <string name="Back"> trasera</string>
            	    <string name="Up"> superior</string>
@@ -210,22 +214,22 @@
                <string name="TrainingB2">Ja!</string>
             <string name="Training0">Um die Sperre zu sehen, müssen wir den Würfel drehen, ich zeige dir, wie das geht.</string>
             <string name="Training1">Schieben Sie zuerst Ihren Finger von oben nach unten auf dem Bildschirm.</string>
-            <string name="Training2">Nice, one more time</string>
+            <string name="Training2">Nett, noch einmal</string>
             <string name="Training3">Jetzt kann ich das Schloss sehen, mache die gleiche Bewegung.</string>
             <string name="Training4">Now, Slide your finger from Left to the Right of the screen</string>
-            <string name="Training5">Great, another one</string>
+            <string name="Training5">Großartig, noch einer</string>
             <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
             <string name="Training7">slide your finger from Up to Down the screen</string>
              <string name="Training8">Almost there, are you ready for the last movement?</string>
             <string name="Training9">Dieser ist ein wenig schwierig, legen Sie zwei Finger auf den Bildschirm und drehen Sie sich in die Richtung der Bewegung</string>
-            <string name="Training10">Ups, too many movements, Luckily you can do the opposite of the movement</string>
-            <string name="Training11">So every movement has their own opposite</string>
-            <string name="Training12">Now I can open it, Let's try the next level</string>
-             <string name="Training13">"The last one</string>
-            <string name="ErrorTraining">Sorry, but that was not the movement that we need</string>
-             <string name="ErrorTrainingB">Try Again</string>
+            <string name="Training10">Ups, zu viele Bewegungen, zum Glück kann man das Gegenteil der Bewegung machen</string>
+            <string name="Training11">Jede Bewegung hat also ihr eigenes Gegenteil</string>
+            <string name="Training12">Jetzt kann ich es öffnen, Lass uns das nächste Level versuchen</string>
+             <string name="Training13">"Der Letzte</string>
+            <string name="ErrorTraining">Entschuldigung, aber das war nicht die Bewegung, die wir brauchen</string>
+             <string name="ErrorTrainingB">Versuchen Sie es erneut</string>
 
-            	
+              <string name="GiveUp">Das nächste Mal wirst du es richtig machen! Auf der rechten Seite können Sie eine der Lösungen für diesen Test finden</string>
            	  <string name="PassedLockTest">Gut gemacht!</string>
            	  <string name="PassedLockTestLevel">Du hast alle Schätze geöffnet!</string>
 
@@ -236,20 +240,21 @@
            	    <string name="HelpB">Hilfe</string>
            	  <string name="SameB">Gleich</string>
            	  <string name="DiffB">Anders</string>
-           	<string name="NoFaceSame">Dies sind die Seiten, die mit der vorherigen Position nicht gesehen werden konnten</string>
+           	<string name="NoFaceSame">Dies sind die Seiten, die mit der vorherigen Position nicht gesehen werden konnten.</string>
            	<string name="DiffBecause">Sie sind anders, weil das Symbol auf der </string>
-           	<string name="DontMatch"> nicht das gleiche ist</string>
+           	<string name="DontMatchSym"> nicht das gleiche ist.</string>
+           	  <string name="DontMatchOri">Sie haben nicht die gleiche Ausrichtung.</string>
            	   <string name="Front"> frontal</string>
            	    <string name="Back"> hinten</string>
            	    <string name="Up"> oben</string>
            	    <string name="Down"> unten</string>
            	    <string name="Right"> rechts</string>
            	    <string name="Left"> links</string>
-           	    <string name="FollowPath"> Mit diesen Bewegungen können Sie es überprüfen</string>
-          		 <string name="YesSame"> Ja, sie sind gleich</string>
-           	     <string name="NoSame">Nein, sie sind gleich</string>
-           	     <string name="YesDiff"> Ja, sie sind anders</string>
-           	     <string name="NoDiff"> Nein, sie sind anders</string>
+           	    <string name="FollowPath"> Mit diesen Bewegungen können Sie es überprüfen.</string>
+          		 <string name="YesSame"> Ja, sie sind gleich.</string>
+           	     <string name="NoSame">Nein, sie sind gleich.</string>
+           	     <string name="YesDiff"> Ja, sie sind anders.</string>
+           	     <string name="NoDiff"> Nein, sie sind anders.</string>
            	     <string name="Points"> Punkte</string>
            	     <string name="Time"> verbleibende Zeit</string>
            	       <string name="Money"> Gold</string>

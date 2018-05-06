@@ -7,7 +7,7 @@ public class Unfold : MonoBehaviour {
 
 	// Use this for initialization
 	public static string Info;
-	public bool end;
+	public bool end, inverse;
 	public static int Fold;
 	public int speedRotation, seedMove;
 	public Quaternion startingRotation,finalRotation;
@@ -97,7 +97,11 @@ public class Unfold : MonoBehaviour {
 				startingRotation = finalRotation;
 				button = false;
 				if (ShowExpl) {
-					ShowWay ();
+					if (inverse) {
+						ShowWay ();
+					} else {
+						ShowWayL ();
+					}
 				}
 
 			} else {
@@ -221,13 +225,18 @@ public class Unfold : MonoBehaviour {
 		AfterRandom = finalRotation;
 		}
 
-		public void CreateWay()
+	public void CreateWay(bool inverse)
 		{
+		this.inverse = inverse;
 		string expl = "Restart,";
 		expl += SameCube.Way;
 		way = expl.Split (',');
 		contWay = 0;
-		ShowWay ();
+		if (inverse) {
+			ShowWay ();
+		} else {
+			ShowWayL ();
+		}
 		ShowExpl = true;
 		Debug.Log ("Camino a seguir " + expl);
 		speedRotation = 4;
@@ -268,4 +277,40 @@ public class Unfold : MonoBehaviour {
 		contWay++;
 
 		}
+		
+	public void ShowWayL()
+	{
+		if(contWay.Equals(way.Length))
+		{
+			contWay = 0;
+		}
+		string Move = way [contWay];
+		button = true;
+		switch (Move) { //Do the Move
+		case "Up":
+			RotateSmooth(90,0,0);
+			break;
+		case "Down":
+			RotateSmooth(-90,0,0);
+			break;
+		case "Left":
+			RotateSmooth(0,90,0);
+			break;
+		case "Right":
+			RotateSmooth(0,-90,0);
+			break;
+		case "Toward-up-right":
+			RotateSmooth(0,0,-90);
+			break;
+		case "Toward-up-left":
+			RotateSmooth(0,0,90);
+			break;
+		case "Restart":
+			finalRotation = AfterRandom;
+			moving = true;
+			break;
+		}
+		contWay++;
+
+	}
 }

@@ -7,7 +7,7 @@ public class Cube : MonoBehaviour {
 	// Use this for initialization
 	public Material Map;
 	public Vector3 startPosition, endPosition;
-	public float horizontalSpeed = 10F,verticalSpeed = 10F,RotMargin =1F;
+	public float horizontalSpeed = 10F,verticalSpeed = 5F,RotMargin =1F;
 	public float angle, restAngle, prevAngle, RefAngle, OrigAngle;
 	public int Quadrant;
 	public bool Assigned;
@@ -82,15 +82,17 @@ public class Cube : MonoBehaviour {
 			// Simulate touch events from mouse events
 			if (Input.touchCount == 0) {
 				if (Input.GetMouseButtonDown (0)) {
-					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
 					HandleTouch (10, cam, TouchPhase.Began);
 				}
 				if (Input.GetMouseButton (0)) {
-					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
 					HandleTouch (10, cam, TouchPhase.Moved);
 				}
 				if (Input.GetMouseButtonUp (0)) {
-					Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
 					HandleTouch (10, cam, TouchPhase.Ended);
 				}
 			}
@@ -98,10 +100,11 @@ public class Cube : MonoBehaviour {
 	}
 
 		private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase) {
-
+		//BReset.GetComponentInChildren<Text>().text= touchPosition.x+" x "+touchPosition.y+ " y ";
 			switch (touchPhase) {
-			case TouchPhase.Began:
-				startPosition = touchPosition;
+		case TouchPhase.Began:
+			startPosition = touchPosition;
+			endPosition = startPosition;
 		//	Debug.Log ("Sart"+touchPosition.ToString ());
 				break;
 		case TouchPhase.Moved:
@@ -111,6 +114,17 @@ public class Cube : MonoBehaviour {
 				CubePL.transform.Rotate (Vector3.up, -h2, Space.World);
 				CubePL.transform.Rotate (Vector3.right, +v2, Space.World);
 			}
+				
+				/*if (Unfold.Fold.Equals (0) && Unfold.moving.Equals (false) && (help)) {
+				if (Mathf.Abs (endPosition.y - touchPosition.y) < Mathf.Abs (endPosition.x - touchPosition.x)) {
+							//BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.currentResolution +" "+(startPosition.x - endPosition.x).ToString();
+					CubePL.transform.Rotate (Vector3.up, (endPosition.x - touchPosition.x), Space.World);
+						} else {
+							//	BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.height.ToString()+" "+(startPosition.y - endPosition.y).ToString();
+					CubePL.transform.Rotate (Vector3.right, -(endPosition.y - touchPosition.y), Space.World);
+								}
+							}
+			endPosition = touchPosition;*/
 				break;
 			case TouchPhase.Ended:
 				endPosition = touchPosition;
@@ -237,7 +251,9 @@ public class Cube : MonoBehaviour {
 		public void Compare()
 		{
 		if ((Mathf.Abs (startPosition.y - endPosition.y) > CanvasMargin) || (Mathf.Abs (startPosition.x - endPosition.x) > CanvasMargin)) {
-			if (Mathf.Abs (startPosition.y - endPosition.y) < CanvasMargin) {
+			if	(Mathf.Abs (startPosition.y - endPosition.y) < Mathf.Abs (startPosition.x - endPosition.x)){
+		//if (Mathf.Abs (startPosition.y - endPosition.y) < CanvasMargin) {
+				//BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.currentResolution +" "+(startPosition.x - endPosition.x).ToString();
 				if (startPosition.x > endPosition.x) {
 					CubePL.GetComponent<Unfold> ().MoveLeft ();
 					//Debug.Log ("Izquierda");
@@ -246,15 +262,23 @@ public class Cube : MonoBehaviour {
 					//Debug.Log ("Derecha");
 				}
 			} else {
-				if (Mathf.Abs (startPosition.x - endPosition.x) < CanvasMargin) {
+			//	BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.height.ToString()+" "+(startPosition.y - endPosition.y).ToString();
+			//	if (Mathf.Abs (startPosition.x - endPosition.x) < CanvasMargin) {
 					if (startPosition.y > endPosition.y) {
 						CubePL.GetComponent<Unfold> ().MoveDown ();
+						/*if (startPosition.y - endPosition.y > Screen.height / 2) {
+							CubePL.GetComponent<Unfold> ().MoveDown ();
+						}*/
 						//Debug.Log ("Abajo");
 					} else {
 						CubePL.GetComponent<Unfold> ().MoveUp ();
+					/*	if (endPosition.y - startPosition.y > Screen.height / 2) {
+							CubePL.GetComponent<Unfold> ().MoveUp ();
+						}*/
 						//Debug.Log ("Arriba");
 					}
-				} else { //Para testear
+			//	}
+				/*else { //Para testear
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 						//	Debug.Log ("Towards-up-left");
@@ -272,7 +296,7 @@ public class Cube : MonoBehaviour {
 							CubePL.GetComponent<Unfold> ().MoveUpRight ();
 						}
 					}
-				}  //*/
+				}  */
 			}
 		} 
 		else {

@@ -71,8 +71,8 @@ public class LockCube : MonoBehaviour {
 			if (help) {
 				float h2 = horizontalSpeed * Input.GetAxis ("Mouse X");
 				float v2 = verticalSpeed * Input.GetAxis ("Mouse Y");
-				CubePL.transform.RotateAround (Vector3.up, -h2);
-				CubePL.transform.RotateAround (Vector3.right, +v2);
+				CubePL.transform.Rotate (Vector3.up, -h2, Space.World);
+				CubePL.transform.Rotate (Vector3.right, +v2, Space.World);
 			}
 			break;
 		case TouchPhase.Ended:
@@ -415,6 +415,8 @@ public class LockCube : MonoBehaviour {
 
 	public void ShowWay ()
 	{
+		LockCube.help = false;
+		CubePL.GetComponent<Unfold> ().CreateWay (false);
 		string tempmov = move;
 		string[] listmov = tempmov.Split (',');
 		for (int i = 0; i < listmov.Length-1; i++) {
@@ -422,6 +424,7 @@ public class LockCube : MonoBehaviour {
 			Arrows [i].gameObject.SetActive (true);
 			Arrows [i].sprite = Movs [MovetoInt (listmov [i])];
 		}
+		GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().GiveUp ();
 	}
 	public int  MovetoInt(string move)
 	{

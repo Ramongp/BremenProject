@@ -41,8 +41,8 @@ public class MouseToInput : MonoBehaviour {
 			float h2 = horizontalSpeed  * Input.GetAxis("Mouse X")*Mathf.Deg2Rad;
 			float v2 = verticalSpeed* Input.GetAxis("Mouse Y")*Mathf.Deg2Rad;
 			//cube.transform.Rotate(v, h, 0);
-			Cube.transform.RotateAround(Vector3.up,-h2);
-			Cube.transform.RotateAround(Vector3.right,+v2);
+			Cube.transform.Rotate (Vector3.up, -h2, Space.World);
+			Cube.transform.Rotate (Vector3.right, +v2, Space.World);
 			break;
 		case TouchPhase.Ended:
 			// TODO
