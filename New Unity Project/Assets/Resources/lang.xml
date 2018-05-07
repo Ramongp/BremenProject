@@ -42,7 +42,7 @@
              <string name="ErrorTrainingB">Try Again</string>
 
 
-           	  <string name="GiveUp">The next time you'll get it right! On the right you can one of the solutions for this test.</string>
+           	  <string name="GiveUp">On the right you can see one of the solutions for this test. Keep practicing!</string>
            	  <string name="PassedLockTest">Well Done!</string>
            	  <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
 
@@ -70,6 +70,10 @@
            	     <string name="Points"> Points</string>
            	      <string name="Time"> Time left</string>
            	       <string name="Money"> Gold</string>
+
+           	            <string name="ExplQuest">Would you like to help with our research by completing the following questionnaire?</string>
+           	       <string name="YesQuest"> Yes</string>
+           	       <string name="NoQuest"> No, thanks.</string>
 
            	        <string name="Question1"> How old are you?</string>
            	        <string name="Question2"> What level of education do you have?</string>
@@ -137,7 +141,7 @@
              <string name="ErrorTrainingB">Intentarlo de nuevo</string>
            
 
-			  <string name="GiveUp">¡La próxima seguro que la aciertas! A la derecha puedes una de las soluciones para esta prueba.  </string>
+			  <string name="GiveUp">A la derecha puedes ver una de las soluciones para esta prueba¡ Sigue practicando!  </string>
            	  <string name="PassedLockTest">¡Conseguido!</string>
            	  <string name="PassedLockTestLevel">Has abierto todos los tesoros!</string>
 
@@ -166,7 +170,9 @@
            	     <string name="Time"> Tiempo restante</string>
            	       <string name="Money"> Oro</string>
 
-
+           	            <string name="ExplQuest">¿Le gustaría ayudar en nuestra investigación rellenando el siguiente cuestionario?</string>
+           	       <string name="YesQuest"> Sí</string>
+           	       <string name="NoQuest"> No, gracias.</string>
 
 
            	        <string name="Question1"> ¿Qué edad tienes?</string>
@@ -229,7 +235,7 @@
             <string name="ErrorTraining">Entschuldigung, aber das war nicht die Bewegung, die wir brauchen</string>
              <string name="ErrorTrainingB">Versuchen Sie es erneut</string>
 
-              <string name="GiveUp">Das nächste Mal wirst du es richtig machen! Auf der rechten Seite können Sie eine der Lösungen für diesen Test finden</string>
+              <string name="GiveUp">Auf der rechten Seite sehen Sie eine der Lösungen für diesen Test.Übe weiter!</string>
            	  <string name="PassedLockTest">Gut gemacht!</string>
            	  <string name="PassedLockTestLevel">Du hast alle Schätze geöffnet!</string>
 
@@ -258,6 +264,10 @@
            	     <string name="Points"> Punkte</string>
            	     <string name="Time"> verbleibende Zeit</string>
            	       <string name="Money"> Gold</string>
+
+           	       <string name="ExplQuest">Möchten Sie mit unserer Recherche helfen, indem Sie den folgenden Fragebogen ausfüllen?</string>
+           	       <string name="YesQuest">Ja</string>
+           	       <string name="NoQuest">Nein, danke.</string>
 
            	       <string name="Question1"> Wie alt bist du?</string>
            	        <string name="Question2"> Welches Bildungsniveau hast du?</string>

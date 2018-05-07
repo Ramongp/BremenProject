@@ -165,10 +165,49 @@ public class SameCube : MonoBehaviour {
 			}
 				if((S1.orientation.Equals(4))&&(S2.orientation.Equals(4)))
 					{
-				S1mov = S2mov+S1mov;
+
+				if (S2.localization.Equals (So1.localization)) {
+					switch (So1.localization) {
+					case 0: 
+						S1mov = Forient [0, 2] + S1mov;
+						break;
+					case 2:
+						S1mov = Uorient [0, 2] + S1mov;
+						break;
+					default:
+						S1mov = Rorient [0, 2] + S1mov;
+						break;
+					}
+				}
+				else{
+				bool BeforeTranslation = false;
+				string[,] Table;
+				switch (So1.localization) {
+				case 0: 
+					Table = Forient;
+					break;
+				case 2:
+					Table = Uorient;
+					break;
+				default:
+					Table = Rorient;
+					break;
+				}
+					for (int i = 0; i < Table.GetLength(1); i++) {
+					if (Table [listpos (S1.localization), i].Equals (S2mov)) {
+						BeforeTranslation = true;
+					}
+				}
+				if (BeforeTranslation) {
+					S1mov = S2mov + S1mov;
+				} else {
+					S1mov = S1mov+S2mov;
+				}
+				}
 				if (NoVisible (new Face (T1.symbol,T1.orientation,T1.localization))) {
 					Debug.Log ("Mismo cubo");
 					Fx.symbol = "FollowPath";
+					Way = S1mov;
 					IsSameCube = true;
 					break;
 				} else {

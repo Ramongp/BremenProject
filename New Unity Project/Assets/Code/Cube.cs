@@ -48,6 +48,12 @@ public class Cube : MonoBehaviour {
 									new Face (Symbols[1], 0, 3), new Face (Symbols[8], 4, 4), new Face (Symbols[6], 0, 5)),new int[] {5,2},new int[] {2,0})};
 		
 		
+		/*new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[2], 4, 2),
+			new Face (Symbols[1], 0, 3), new Face (Symbols[7], 0, 4), new Face (Symbols[6], 0, 5)),new int[] {4,4,0},new int[] {0,1}),//Testeo
+		new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[7], 1, 2),
+			new Face (Symbols[1], 0, 3), new Face (Symbols[8], 4, 4), new Face (Symbols[6], 0, 5)),new int[] {5,2},new int[] {0,1}), //Testeo
+		new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[2], 4, 2),
+			new Face (Symbols[1], 0, 3), new Face (Symbols[7], 0, 4), new Face (Symbols[6], 0, 5)),new int[] {2,1},new int[] {0,1}),//Testeo*/
 		
 		
 		BUnfold.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("UnfoldB");

@@ -12,14 +12,15 @@ public class Timer : MonoBehaviour {
 	public static int pointsLevel, points;
 	public int currentValue, answer;
 	public int moneySpeed; 
-	public Text Solution, PointText;
+	public Text Solution, PointText, ExplQuest;
 	public Image TimeFill,Bag;
-	public Button TaparN, TaparE, NextBoxB;
+	public Button TaparN, TaparE, NextBoxB, YesQuest, NoQuest;
 	public Image Message, StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3;
 	public Image[] MArrows,Arrows;
 	public Color StarOn, StarOff;
 	public Sprite[] ArrowsSp;
 	public float TotalTime;
+	public GameObject PregQuest;
 	void Start () {
 		
 		Bag.gameObject.SetActive (false);
@@ -51,6 +52,7 @@ public class Timer : MonoBehaviour {
 
 	void SetTimer()
 	{
+		PregQuest.SetActive (false);
 		Bag.gameObject.SetActive (false);
 		TimeSlider.gameObject.SetActive (true);
 		//GameObject.Find ("Reward 1").GetComponent<Points> ().Set ();
@@ -145,15 +147,21 @@ public class Timer : MonoBehaviour {
 	public void PostReward()
 	{
 		
-		if (Cube.Test < 1) { //In final version probably 10, for testing 5
+		if (Cube.Test < 10) { //In final version probably 10, for testing 5
 			//if (!Points.exchange) { // If animation is over
 			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
 			//}
 		} else {
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
-			GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
-			Application.LoadLevel ("Questionnaire");
+
+			PregQuest.SetActive (true);
+			ExplQuest.text = LangTest.LMan.getString ("ExplQuest");
+			YesQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("YesQuest");
+			NoQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NoQuest");
+			Cube.help = false;
+			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
+			//Application.LoadLevel ("Questionnaire");
 		}
 	}
 
@@ -272,6 +280,16 @@ public class Timer : MonoBehaviour {
 				break;
 			}
 		}
+	}
+
+	public void NoQuestMethod()
+	{
+		Application.LoadLevel ("Map Select Level");
+	}
+	public void YesQuestMethod()
+	{
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
+		Application.LoadLevel ("Questionnaire");
 	}
 		
 }
