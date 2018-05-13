@@ -306,7 +306,7 @@ public class LockCube : MonoBehaviour {
 						}
 						//Debug.Log ("Arriba");
 					}
-				} else { //Para testear
+				}/* else { //Para testear
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
@@ -418,7 +418,7 @@ public class LockCube : MonoBehaviour {
 		LockCube.help = false;
 		CubePL.GetComponent<Unfold> ().CreateWay (false);
 		string tempmov = move;
-		string[] listmov = tempmov.Split (',');
+		string[] listmov = tempmov.Split ('_');
 		for (int i = 0; i < listmov.Length-1; i++) {
 			Debug.Log (listmov.Length.ToString() + " " + i.ToString());
 			Arrows [i].gameObject.SetActive (true);

@@ -9,20 +9,30 @@ public class SameCube : MonoBehaviour {
 	Face Fo,Uo,Ro,Ff,Uf,Rf,S1,S2,S3,T1,T2,So1,So2,So3; //Caras originales, finales, repetidas (sides) y no repetidas (tapadas)
 	public string[] movs; //Conjunto de strings de movimientos de cada cara
 	string S1mov,S2mov,S3mov;
-	public static Face Fx;
-	int SameSymbols,DiffSymbols;
+	public static Face Fx, Tquest;
+	public static int SameSymbols,DiffSymbols;
 	public static bool IsSameCube;
 	int[,] OrientconRot;
 	public static string Way;
 	void Awake () { //Tablas con cambios de orientaciones
 
 		movs = new string[3];
-		Forient= new string[4,4] {{" ","Toward-up-right,","Toward-up-right,Toward-up-right,","Toward-up-left,"},{"Toward-up-left,"," ","Toward-up-right,","Toward-up-right,Toward-up-right,"},{"Toward-up-left,Toward-up-left,","Toward-up-left,"," ","Toward-up-right,"},{"Toward-up-right,","Toward-up-left,Toward-up-left","Toward-up-left,"," "}};
+		/*Forient= new string[4,4] {{" ","Toward-up-right,","Toward-up-right,Toward-up-right,","Toward-up-left,"},{"Toward-up-left,"," ","Toward-up-right,","Toward-up-right,Toward-up-right,"},{"Toward-up-left,Toward-up-left,","Toward-up-left,"," ","Toward-up-right,"},{"Toward-up-right,","Toward-up-left,Toward-up-left","Toward-up-left,"," "}};
 		Uorient= new string[4,4] {{" ","Left,","Left,Left,","Right,"},{"Right,"," ","Left,","Left,Left,"},{"Right,Right,","Right,"," ","Left,"},{"Left,","Right,Right,","Right,"," "}};
 		Rorient= new string[4,4] {{" ","Up,","Up,Up,","Down,"},{"Down,"," ","Up,","Up,Up,"},{"Down,Down,","Down,"," ","Up,"},{"Up,","Down,Down,","Down,"," "}};
 		Rot = new string[3,3]{ { " ","Up,","Right," },{ "Down,"," ","Toward-up-right," },{ "Left,","Toward-up-left,"," " } };
 		NoOrientR3 = new string[3,3] { {"","Toward-up-right,Up,","Toward-up-left,Right,"},{"Right,Down,","","Left,Toward-up-right,"},{"Up,Left","Right,Down",""}}; //Table with movements for R=3
-		NoOrientR1 = new string[3,3] { {"Toward-up-right,Toward-up-right,","Left,","Down,"},{"Toward-up-left,","Left,Left,","Up,"},{"Toward-up-right,","Right,","Up,Up,"}}; //Table with movements for R=3
+		NoOrientR1 = new string[3,3] { {"Toward-up-right,Toward-up-right,","Left,","Down,"},{"Toward-up-left,","Left,Left,","Up,"},{"Toward-up-right,","Right,","Up,Up,"}}; //Table with movements for R=3*/
+
+
+		//Separador _
+		Forient= new string[4,4] {{" ","Toward-up-right_","Toward-up-right_Toward-up-right_","Toward-up-left_"},{"Toward-up-left_"," ","Toward-up-right_","Toward-up-right_Toward-up-right_"},{"Toward-up-left_Toward-up-left_","Toward-up-left_"," ","Toward-up-right_"},{"Toward-up-right_","Toward-up-left_Toward-up-left","Toward-up-left_"," "}};
+		Uorient= new string[4,4] {{" ","Left_","Left_Left_","Right_"},{"Right_"," ","Left_","Left_Left_"},{"Right_Right_","Right_"," ","Left_"},{"Left_","Right_Right_","Right_"," "}};
+		Rorient= new string[4,4] {{" ","Up_","Up_Up_","Down_"},{"Down_"," ","Up_","Up_Up_"},{"Down_Down_","Down_"," ","Up_"},{"Up_","Down_Down_","Down_"," "}};
+		Rot = new string[3,3]{ { " ","Up_","Right_" },{ "Down_"," ","Toward-up-right_" },{ "Left_","Toward-up-left_"," " } };
+		NoOrientR3 = new string[3,3] { {"","Toward-up-right_Up_","Toward-up-left_Right_"},{"Right_Down_","","Left_Toward-up-right_"},{"Up_Left","Right_Down",""}}; //Table with movements for R=3
+		NoOrientR1 = new string[3,3] { {"Toward-up-right_Toward-up-right_","Left_","Down_"},{"Toward-up-left_","Left_Left_","Up_"},{"Toward-up-right_","Right_","Up_Up_"}}; //Table with movements for R=3
+
 
 		OrientconRot = new int[3,3]{ {0,0,0 },{ 0,0,-1 },{0,1,0 } };// Está al
 
@@ -116,11 +126,12 @@ public class SameCube : MonoBehaviour {
 		}
 		Way = S1mov;
 		Fx= new Face (" ",0,0);
+		Tquest= new Face (" ",0,0);
 		switch (SameSymbols) {
 		case 0:
 			Debug.Log ("Ninguna cara es la misma");
 			Debug.Log ("Mismo cubo");
-			Fx.symbol= "NoFaceSame";
+			Fx.symbol = "NoFaceSame";
 			IsSameCube = true;
 			break;
 		case 1:
@@ -130,14 +141,20 @@ public class SameCube : MonoBehaviour {
 				(NoVisible2 (T1f,T2f))
 				||(S1.orientation.Equals(4))) {
 
+				Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
+
 				if (S1.orientation.Equals (4)) {
 					string temp = NoOrientR1 [listpos(S1.localization),listpos( So1.localization)];
 					temp += S1mov;
 					Way = temp;
+					T1f = new Face (T1.symbol, T1.orientation, T1.localization);
+					MoveFace (Way, T1f);
+					Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
 				}
 
 				Debug.Log ("Mismo cubo");
 				Fx.symbol = "FollowPath";
+
 				IsSameCube = true;
 			} else {
 				if (string.IsNullOrEmpty (S1mov))
@@ -204,10 +221,12 @@ public class SameCube : MonoBehaviour {
 					S1mov = S1mov+S2mov;
 				}
 				}
-				if (NoVisible (new Face (T1.symbol,T1.orientation,T1.localization))) {
+				Face T1f2R =new Face (T1.symbol,T1.orientation,T1.localization);
+				if (NoVisible (T1f2R)) {
 					Debug.Log ("Mismo cubo");
 					Fx.symbol = "FollowPath";
 					Way = S1mov;
+					Tquest.orientation = T1.localization;Tquest.localization = T1f2R.localization; //Localization original and final of the T side
 					IsSameCube = true;
 					break;
 				} else {
@@ -220,22 +239,22 @@ public class SameCube : MonoBehaviour {
 				}
 				if (S2.orientation.Equals (4)) {
 					string tempmovS2 = S1mov;
-					string[] listmovS2 = tempmovS2.Split (',');
-					S2mov = ","; 																			// Para evitar error null revisar
+				string[] listmovS2 = tempmovS2.Split ('_');
+				S2mov = "_"; 																			// Para evitar error null revisar
 					if ((!(So1.orientation.Equals (S1.orientation))&&(listmovS2.Length>2)) ||(So1.orientation.Equals(S1.orientation))&&!(So1.localization.Equals(S1.localization))) {
 						string temp = listmovS2[listmovS2.Length-2];
-						temp += ","+S2mov;
+					temp += "_"+S2mov;
 						S2mov = temp;
 						Debug.Log ("Camino creado para S2 " + S2mov+ " A partir de "+S1mov);
 					}
 				}
 				if (S1.orientation.Equals (4)) { // Create rotation part for S1
 							string tempmovS1 = S2mov;
-					string[] listmovS1 = tempmovS1.Split (',');
-					S1mov = ","; 																			// Para evitar error null revisar
+				string[] listmovS1 = tempmovS1.Split ('_');
+				S1mov = "_"; 																			// Para evitar error null revisar
 					if ((!(So2.orientation.Equals (S2.orientation))&&(listmovS1.Length>2))||(So2.orientation.Equals(S2.orientation))&&!(So2.localization.Equals(S2.localization))) {
 						string temp = listmovS1 [listmovS1.Length-2];
-						temp += ","+ S1mov;
+					temp += "_"+ S1mov;
 						S1mov = temp;
 						Debug.Log ("Camino creado para S1 " + S1mov+ " A partir de "+S2mov);
 					}
@@ -348,7 +367,7 @@ public class SameCube : MonoBehaviour {
 		public Face MoveFace (string mov, Face f)
 	{
 		string tempmov = mov;
-		string[] listmov = tempmov.Split (',');
+		string[] listmov = tempmov.Split ('_');
 		for (int i = 0; i < listmov.Length; i++) {
 			switch (listmov [i]) {
 			case "Up":
@@ -460,6 +479,7 @@ public class SameCube : MonoBehaviour {
 			Face T1f = new Face(T1.symbol,T1.orientation, T1.localization);
 			if (NoVisible (T1f)) {
 				Way = S1mov;
+				Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
 				return true;
 
 			} 

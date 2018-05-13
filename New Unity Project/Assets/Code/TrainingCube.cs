@@ -139,7 +139,7 @@ public class TrainingCube : MonoBehaviour {
 				}	
 			} else {
 				if (RefAngle < OrigAngle-RotMargin) {
-				CubePL.GetComponent<Unfold> ().MoveUpRight();
+					CubePL.GetComponent<Unfold> ().MoveUpRight();
 					if (MoveNeeded.Equals ("TowardUpRight")) {
 						Training.currentOrder++;
 						Unfold.AfterRandom = CubePL.GetComponent<Unfold> ().finalRotation;
@@ -264,7 +264,7 @@ public class TrainingCube : MonoBehaviour {
 					Training.currentOrder--;
 						//Debug.Log ("Arriba");
 					}
-				} else { //Para testear
+				}/* else { //Para testear
 					if (startPosition.x > endPosition.x) {
 						if (startPosition.y > endPosition.y) {
 							CubePL.GetComponent<Unfold> ().MoveUpLeft ();

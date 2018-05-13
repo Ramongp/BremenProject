@@ -152,6 +152,7 @@ public class Unfold : MonoBehaviour {
 	{
 		RotateSmooth(45,0,0);
 		button = true;
+		Info+="Up_";
 		//SaveMove ("Up");
 	}
 
@@ -159,31 +160,31 @@ public class Unfold : MonoBehaviour {
 	{
 		RotateSmooth(-45,0,0);
 		button = true;
-		Info+="Down";
+		Info+="Down_";
 	}
 	public void MoveLeft()
 	{
 		RotateSmooth(0,45,0);
 		button = true;
-		Info+="Left";
+		Info+="Left_";
 	}
 	public void MoveRight()
 	{
 		RotateSmooth(0,-45,0);
 		button = true;
-		Info+="Right";
+		Info+="Right_";
 	}
 	public void MoveUpLeft()
 	{
 		RotateSmooth(0,0,45);
 		button = true;
-		Info+="UpLeft";
+		Info+="Toward-up-left_";
 	}
 	public void MoveUpRight()
 	{
 		RotateSmooth(0,0,-45);
 		button = true;
-		Info+="UpRight";
+		Info+="Toward-up-right_";
 	}
 
 	public void SetToStart()
@@ -206,14 +207,15 @@ public class Unfold : MonoBehaviour {
 		finalRotation = AfterRandom;
 			button = true;
 			Debug.Log (AfterRandom.ToString ());
-		Info+="SetToStart";
+		Info+="Reset_";
 		moving = true;
 		}
 	}
 
 		public void WriteHelp()
 	{
-		Info+="Help used,";
+		Cube.HelpPressed = true;
+		//Info+="Help used,";
 		startingRotation = AfterRandom;
 		finalRotation = startingRotation;
 		AfterRandom = finalRotation;
@@ -228,9 +230,9 @@ public class Unfold : MonoBehaviour {
 	public void CreateWay(bool inverse)
 		{
 		this.inverse = inverse;
-		string expl = "Restart,";
+		string expl = "Restart_";
 		expl += SameCube.Way;
-		way = expl.Split (',');
+		way = expl.Split ('_');
 		contWay = 0;
 		if (inverse) {
 			ShowWay ();

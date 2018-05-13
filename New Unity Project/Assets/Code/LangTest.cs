@@ -19,9 +19,9 @@ public class LangTest : MonoBehaviour {
 	public static Lang LMan;
 	public static string currentLang = "English";
 	public Text text, textB;
-	public Toggle Comment;
-	public static bool Comments;
-	string ToggleText;
+	public Toggle Comment, VFeedbacckToggle;
+	public static bool Help, VisualFeedback;
+	string ToggleText, ToggleTextVFeed;
 	int cont;
 	void Start()
 		{
@@ -56,9 +56,12 @@ public class LangTest : MonoBehaviour {
 		LMan = new Lang( "lang", currentLang, false);
 		text.text = LMan.getString ("select");
 		textB.text = LMan.getString ("NextButton");
-		Comments = true;
+		VisualFeedback = true;
+		Help = true;
 		ToggleText = LMan.getString ("Comment");
 		Comment.GetComponentInChildren<Text>().text=ToggleText;
+		ToggleTextVFeed="VFeedBack";
+		VFeedbacckToggle.GetComponentInChildren<Text>().text=LMan.getString (ToggleTextVFeed);
 	}
 
 
@@ -82,6 +85,7 @@ public class LangTest : MonoBehaviour {
 
 	public void NextScene()
 	{
+		SendGmail.TestString += "," + Help + "," + VisualFeedback;
 		//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Comments"+ Comments.ToString());
 		Application.LoadLevel ("Map Select Level");
 
@@ -98,24 +102,37 @@ public class LangTest : MonoBehaviour {
 			ToggleText = LMan.getString ("Comment");
 		}
 		Comment.GetComponentInChildren<Text>().text=ToggleText;
+		VFeedbacckToggle.GetComponentInChildren<Text> ().text =  LMan.getString(ToggleTextVFeed);
 	}
 
 	public void ChangeToggle()
 	{
 		
 		if (cont.Equals(0)) {
-			Comments = false;
+			Help = false;
 			ToggleText = LMan.getString ("NoComment");
 			Comment.GetComponentInChildren<Text>().text=ToggleText;
 			cont++;
 		} 
 		else {
-			Comments = true;
+			Help = true;
 			ToggleText = LMan.getString ("Comment");
 			Comment.GetComponentInChildren<Text> ().text = ToggleText;
 			cont = 0;
 		}
 	}
 
+
+	public void ChangeVisualToggle( bool VFeedback)
+	{
+		VisualFeedback = VFeedback;
+		if (VFeedback) {
+			ToggleTextVFeed = "VFeedBack";
+		} 
+		else {
+			ToggleTextVFeed = "NoVfeedBack";
+		}
+		VFeedbacckToggle.GetComponentInChildren<Text> ().text = LMan.getString(ToggleTextVFeed);
+	}
 
 }

@@ -1,19 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Timer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Resources/lang.xml">
     <Files>
-      <File FileName="Assets/Code/SameCube.cs" Line="196" Column="44" />
-      <File FileName="Assets/Code/Cube.cs" Line="29" Column="3" />
-      <File FileName="Assets/Code/Timer.cs" Line="150" Column="21" />
-      <File FileName="Assets/Code/MapSelect.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/LockCube.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/RandomBox.cs" Line="1" Column="1" />
-      <File FileName="Assets/Resources/lang.xml" Line="76" Column="49" />
-      <File FileName="Assets/Code/Unfold.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Lang.cs" Line="62" Column="1" />
-      <File FileName="Assets/Code/Questionnarie.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Face.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/LangTest.cs" Line="86" Column="43" />
+      <File FileName="Assets/Code/Cube.cs" Line="141" Column="27" />
+      <File FileName="Assets/Resources/lang.xml" Line="256" Column="95" />
+      <File FileName="Assets/Code/SendGmail.cs" Line="152" Column="7" />
+      <File FileName="Assets/Code/CubeRotation.cs" Line="12" Column="28" />
+      <File FileName="Assets/Code/Unfold.cs" Line="13" Column="14" />
+      <File FileName="Assets/Code/TrainingCube.cs" Line="142" Column="49" />
+      <File FileName="Assets/Code/Timer.cs" Line="251" Column="23" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

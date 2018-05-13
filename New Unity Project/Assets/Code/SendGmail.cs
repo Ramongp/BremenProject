@@ -13,7 +13,7 @@ using UnityEditor;
 #endif
 
 public class SendGmail : MonoBehaviour {
-
+	public static String TestString;
 	void Start()
 	{
 		#if UNITY_EDITOR
@@ -22,14 +22,14 @@ public class SendGmail : MonoBehaviour {
 		StartInfo ();
 	}
 
-	public void Send ()
+	public void SendLock ()
 	{
 		MailMessage mail = new MailMessage();
 
 		mail.From = new MailAddress("CubeReasoning@gmail.com");
 		mail.To.Add("CubeReasoning@gmail.com");
-		mail.Subject = "Test Mail";
-		mail.Body = "This is for testing SMTP mail from GMAIL";
+		mail.Subject = "Data from the Training";
+		mail.Body = "Attached to this message is the information collected during the training.";
 
 	//	string path = Application.dataPath + "/Moves.csv";
 		//Directory.GetFiles(System.Environment.CurrentDirectory+"/Resources","Moves");
@@ -46,6 +46,33 @@ public class SendGmail : MonoBehaviour {
 		{ return true; };
 		smtpServer.Send(mail);
 	//	Debug.Log("success");
+
+	}
+
+	public void SendTest ()
+	{
+		MailMessage mail = new MailMessage();
+
+		mail.From = new MailAddress("CubeReasoning@gmail.com");
+		mail.To.Add("CubeReasoning@gmail.com");
+		mail.Subject = "Data from the interactive version of the Cube Comparison Test";
+		mail.Body = "Attached to this message is the information collected during the test.";
+
+		//	string path = Application.dataPath + "/Moves.csv";
+		//Directory.GetFiles(System.Environment.CurrentDirectory+"/Resources","Moves");
+
+		mail.Attachments.Add(new Attachment( getPath()));
+		//mail.Attachments.Add(new Attachment("/CSV/Moves.csv"));
+
+		SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
+		smtpServer.Port = 587;
+		smtpServer.Credentials = new System.Net.NetworkCredential("CubeReasoning@gmail.com", "cubereasoning2018") as ICredentialsByHost;
+		smtpServer.EnableSsl = true;
+		ServicePointManager.ServerCertificateValidationCallback = 
+			delegate(object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) 
+		{ return true; };
+		smtpServer.Send(mail);
+		//	Debug.Log("success");
 
 	}
 
@@ -94,29 +121,12 @@ public class SendGmail : MonoBehaviour {
 		//	writer.Close ();
 		}
 		}
-		public void WriteTest (string Test)
-		{
-		string filePath = getPath ();
-		//string delimiter = ",";  
-		string test =  Environment.NewLine+Test;
-		File.AppendAllText (filePath, test);
-		}
-		public void WriteCell (string info)
-		{
-		string filePath = getPath ();
-		string delimiter = ",";  
-		File.AppendAllText (filePath, delimiter+info);
-		}
-		public void WriteFirstCell (string info)
-		{
-		string filePath = getPath ();
-		File.AppendAllText (filePath, info);
-		}
+
 
 		void StartInfo()
 	{
 		if (!File.Exists (getPath ())) {
-		WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
+		/*WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
@@ -125,12 +135,44 @@ public class SendGmail : MonoBehaviour {
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
 																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-			WriteCell ("Total Time");WriteCell ("Age");WriteCell ("Level of Study");
+																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");*/
+			string Message = "ID_Machine,Date,Time,Test with Help,Test with VisualFeedback," +	
+							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
+			                "Total Time Test,Gender,Age,Nationality,Lenguage of the Test,Native Lenguage,Level of Study, Field of Study, Rate Game, Rate Help, Rate visual FeedBack,";
+		WriteFirstString (Message);
 		}
-		WriteTest(SystemInfo.deviceUniqueIdentifier);
-		WriteCell (System.DateTime.Now.ToString("dd/MM/yyyy")); 
-		WriteCell (System.DateTime.Now.ToString("hh:mm:ss"));
-		//Send ();
+		TestString= SystemInfo.deviceUniqueIdentifier+","+System.DateTime.Now.ToString("dd/MM/yyyy")+","+System.DateTime.Now.ToString("hh:mm:ss");
+
+		//SendTest ();				//Testeo
 	}
+
+		public void WriteString (string info)
+	{
+		string filePath = getPath ();
+
+		File.AppendAllText (filePath, Environment.NewLine + info);
+
+	}
+
+		public void WriteFirstString (string info)
+		{
+		string filePath = getPath ();
+
+		File.AppendAllText (filePath,info);
+
+		}
 }

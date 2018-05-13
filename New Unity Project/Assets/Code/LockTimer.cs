@@ -75,7 +75,7 @@ public class LockTimer : MonoBehaviour {
 		Unfold.ShowExpl = false;
 		Tapar.interactable = false; 
 		//	GameObject.Find ("Reward").GetComponent<Points> ().RewardAnimation (TimeLeft);
-		PointText.text="+ "+((int)(TimeLeft*10*correctLock)).ToString () + LangTest.LMan.getString ("Points");
+		PointText.text="+"+((int)(TimeLeft*10*correctLock)).ToString () + LangTest.LMan.getString ("Points");
 		if (TimeLeft*correctLock < 40) {
 			StarP3.color= StarOff;
 		}

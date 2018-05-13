@@ -3,10 +3,12 @@
         <English>
             <string name="app_name">Unity Multiple Language Support</string>
             <string name="description">This script provides convenient multiple language support.</string>
-            <string name="select">Select the lenguage of the game</string>
+            <string name="select">Select the language of the game</string>
             <string name="NextButton">Next</string> 
-            <string name="Comment">Comments activated</string>		
-              <string name="NoComment">Comments Off</string>
+            <string name="Comment">Help activated</string>        
+              <string name="NoComment">Help off</string>
+                 <string name="VFeedBack">Visual feedback activated.</string>        
+              <string name="NoVfeedBack">Visual feedback off.</string>    
 
 
               <string name="Play">Play Level</string>
@@ -15,11 +17,11 @@
               <string name="LockTest">Cave of treasure</string>
               <string name="FinalTest">Trade with treasures</string>
               <string name="ExplTraining">I have a treasure at home but I need your help to open it, with the right movements it should be easy.</string>
-              <string name="ExplLock">A couple of treasures that i have, Can you find the right path to open them? Rotate the chest using the movement from the tutorial to put the lock in front of the pirate, the more time you spend the less points you get.</string>
-              <string name="ExplTest">I am not sure if these treasures are mine. There will be two chests, the one on the left is how i remember the chest, if the one on the right is the same maybe with some movements, press Same, if the two chests can not be the same one, pressed Difeferent, No symbol will be in more than one side and the more time you spend the less points you get.</string>
+              <string name="ExplLock">A couple of treasures that I have. Can you find the right path to open them? Rotate the chest using the movement from the tutorial to put the lock in front of the pirate, the more time you spend the less points you get.</string>
+              <string name="ExplTest">I am not sure if these treasures are mine. There will be two chests, the one on the left is how I remember the chest, if the one on the right is the same maybe with some movements, press Same, if the two chests can not be the same one, pressed Different, No symbol will be in more than one side and the more time you spend the less points you get.</string>
 
 
-            <string name="StartTraining">Hi, I need to open this treasue but I can't find the lock. Can you help me?</string>
+            <string name="StartTraining">Hi, I need to open this treasure but I can't find the lock. Can you help me?</string>
             <string name="MSign">Movement</string>
              <string name="TrainingB0">Yes, let's do this.</string>
              <string name="TrainingB1">Nice</string>
@@ -30,11 +32,11 @@
             <string name="Training3">Now I can see the lock, keep doing the same movement.</string>
             <string name="Training4">Now, Slide your finger from Left to the Right of the screen.</string>  
             <string name="Training5">Great, another one.</string>
-            <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
+            <string name="Training6">Now lets try the first movement again. Do you remember it?</string>
             <string name="Training7">Slide your finger from Up to Down the screen.</string>
-            <string name="Training8">Almost there, are you ready for the last movement?.</string>
-            <string name="Training9">This one is a little tricky, Put two fingers on the screen and rotate to the direction of the movement.</string>
-            <string name="Training10">Ups, too many movements, Luckily you can do the opposite of the movement.</string>
+            <string name="Training8">Almost there. Are you ready for the last movement?</string>
+            <string name="Training9">This one is a little tricky, put two fingers on the screen and rotate to the direction of the movement.</string>
+            <string name="Training10">Ups, too many movements, luckily you can do the opposite of the movement.</string>
             <string name="Training11">So every movement has their own opposite.</string>
             <string name="Training12">Now I can open it, Let's try the next level.</string>
              <string name="Training13">The last one</string>
@@ -42,56 +44,75 @@
              <string name="ErrorTrainingB">Try Again</string>
 
 
-           	  <string name="GiveUp">On the right you can see one of the solutions for this test. Keep practicing!</string>
-           	  <string name="PassedLockTest">Well Done!</string>
-           	  <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
+                 <string name="GiveUp">On the right you can see one of the solutions for this test. Keep practicing!</string>
+                 <string name="PassedLockTest">Well Done!</string>
+                 <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
 
-           	   <string name="ResetB">Reset</string> 
-           	   <string name="NextBox">Next</string>
-           	   <string name="UnfoldB">Unfold</string>
-           	  <string name="HelpB">Help</string>
-           	  <string name="SameB">Same</string>
-           	  <string name="DiffB">Different</string>
-           	  <string name="NoFaceSame">These are the hidden sides from the previous position.</string>
-           	  <string name="DiffBecause">They are different because of the symbol of the </string>
-           	  <string name="DontMatchSym"> side does not match.</string>
-           	   <string name="DontMatchOri"> side does not match the orientation.</string>
-           	    <string name="Front"> front</string>
-           	    <string name="Back"> back</string>
-           	    <string name="Up"> up</string>
-           	    <string name="Down"> down</string>
-           	    <string name="Right"> right</string>
-           	    <string name="Left"> left</string>
-           	    <string name="FollowPath"> Using these movements you can see it.</string>
-           	        <string name="YesSame"> Yes, it is the same.</string>
-           	     <string name="NoSame">No, it is the same.</string>
-           	     <string name="YesDiff"> Yes, They are different.</string>
-           	     <string name="NoDiff"> No, They are different.</string>
-           	     <string name="Points"> Points</string>
-           	      <string name="Time"> Time left</string>
-           	       <string name="Money"> Gold</string>
 
-           	            <string name="ExplQuest">Would you like to help with our research by completing the following questionnaire?</string>
-           	       <string name="YesQuest"> Yes</string>
-           	       <string name="NoQuest"> No, thanks.</string>
+                 <string name="Understood">Understood</string>
+                 <string name="ExplHelp">On the right you have the help button, when you press it you can apply the movements to the chest on the right, the "Reset" button will leave the chest in the original position and "Unfold" allows you to see all the sides of the chest.</string>
+                  <string name="NoExplHelp">Press "Same" if they can be the same chest and "Different" if they are different chests.</string> 
+                  <string name="ResetB">Reset</string> 
+                  <string name="NextBox">Next</string>
+                  <string name="UnfoldB">Unfold</string>
+                 <string name="HelpB">Help</string>
+                 <string name="SameB">Same</string>
+                 <string name="DiffB">Different</string>
+                 <string name="NoFaceSame">These are the hidden sides from the previous position.</string>
+                 <string name="DiffBecause">They are different chests because the symbol </string>
+                 <string name="DiffBecause2">on the side located </string>
+                 <string name="DontMatchSym"> has been replaced by the simbol </string>
+                  <string name="DontMatchOri"> is oriented differently.</string>
+                   <string name="Front"> front</string>
+                   <string name="Back"> back</string>
+                   <string name="Up"> up</string>
+                   <string name="Down"> down</string>
+                   <string name="Right"> right</string>
+                   <string name="Left"> left</string>
+                   <string name="FollowPath"> Using these movements you can see how the chest rotates until it looks like the chest on the left.</string>
+                       <string name="YesSame"> Right! they can be the same chest but rotated.</string>
+                    <string name="NoSame">No, they can be the same chest but rotated.</string>
+                    <string name="YesDiff">Right! they are different chests.</string>
+                    <string name="NoDiff">No, they are different chests.</string>
+                    <string name="Points"> Points</string>
+                     <string name="Time"> Time left</string>
+                      <string name="Money"> Gold</string>
 
-           	        <string name="Question1"> How old are you?</string>
-           	        <string name="Question2"> What level of education do you have?</string>
-           	        <string name="Question3"> From what branch are your studies?</string>
-           	              <string name="Estudios0"> Educación Básica</string>
-           	          <string name="Estudios1"> Secundaria</string>
-           	          <string name="Estudios2"> Bachillerato</string>
-           	          <string name="Estudios3"> Formación profesional</string>
-           	          <string name="Estudios4"> Carrera Universitaria</string>
-           	          <string name="Estudios5"> Doctorado</string>
-           	        <string name="Rama0"> Artes</string>
-           	        <string name="Rama1"> Biologia</string>
-           	        <string name="Rama2"> Letras</string>
-           	        <string name="Rama3"> Ingenieria</string>
-           	        <string name="Rama4"> Ciencias Sociales</string>
-           	        <string name="Rama5"> Música</string>
-           	        <string name="RateGame"> Rate the game</string>
-           	          <string name="Send"> Send</string>
+                       <string name="PregCorrect"> In which side of the box on the right is the sparkling side of the left box with the symbol </string>
+                        <string name="Bonus">Correct! Now rotate the chest to check that is on that side.</string>
+                         <string name="NoBonus">That is not correct, Now rotate the chest to see in which side is.</string>
+
+                           <string name="ExplQuest">Can you please help scientists in their research by filling in a questionnaire?</string>
+                      <string name="YesQuest"> Yes</string>
+                      <string name="NoQuest"> No, thanks.</string>
+
+                       <string name="Question0"> Which gender do you identify with?</string>
+                       <string name="Question1"> How old are you?</string>
+                        <string name="Question2"> what is your nationality?</string>
+                         <string name="Question3"> What is your native language?</string>
+                       <string name="Question4"> What level of education do you have?</string>
+                       <string name="Question5"> From what branch are your studies?</string>
+                       <string name="RateGame">Rate how much fun the game is.</string>
+                        <string name="RateHelpText">Rate the test help (rotate the cube).</string>
+                     <string name="RateFeedbackText">Rate the visual feedback displayed during the test.</string>
+
+
+                     <string name="Male"> Male</string>
+                     <string name="Female">Female</string>
+                     <string name="NoGender">Other</string>
+                         <string name="Estudios0"> Educación Básica</string>
+                         <string name="Estudios1"> Secundaria</string>
+                         <string name="Estudios2"> Bachillerato</string>
+                         <string name="Estudios3"> Formación profesional</string>
+                         <string name="Estudios4"> Carrera Universitaria</string>
+                         <string name="Estudios5"> Doctorado</string>
+                       <string name="Rama0"> Artes</string>
+                       <string name="Rama1"> Biologia</string>
+                       <string name="Rama2"> Letras</string>
+                       <string name="Rama3"> Ingenieria</string>
+                       <string name="Rama4"> Ciencias Sociales</string>
+                       <string name="Rama5"> Música</string>
+                         <string name="Send"> Send</string>  
 
 
 
@@ -102,8 +123,10 @@
             <string name="description">Este script aporta diferentes lenguajes.</string>
             <string name="select">Selecciona el idioma del juego</string>
             <string name="NextButton">Siguiente</string>
-             <string name="Comment">Comentarios activados</string>		
-              <string name="NoComment">Comentarios desactivados</string>	
+             <string name="Comment">Ayuda activada.</string>		
+              <string name="NoComment">Ayuda desactivada.</string>	
+               <string name="VFeedBack">Feedback visual activado.</string>		
+              <string name="NoVfeedBack">Feedback visual desactivado.</string>	
 
 
               <string name="Play">Jugar Nivel</string>
@@ -112,8 +135,8 @@
               <string name="LockTest">Cueva del tesoro</string>
               <string name="FinalTest">Comerciar con tesoros</string>
               <string name="ExplTraining">Tengo un cofre en casa, pero necesito tu ayuda para abrirlo, con los movimientos adecuados será muy fácil.</string>
-              <string name="ExplLock">Tengo unos cuantos cofres guardados aquí, Puedes encontrar la secuencia de movimientos para abrirlos? Usa los movimientos del tutorial para rotar el cofre y colocar la cerradura en frente dle pirata, cuanto más tardes peor será tu puntuación.</string>
-              <string name="ExplTest">No tengo muy claro si estos tesoros son míos. En este caso hay dos cofres, el de la izquierda es como recuerdo el cofre, si el de la derecha es el mismo, tal vez con alguna rotación, Dale al botón "Mismo", Si los dos cofres no son el mismo, aprieta "Diferente", ningún símbolo aparece en más de una cara, y cuidado cuanto más tiempo uses, peor es tu puntuación.</string>
+              <string name="ExplLock">Tengo unos cuantos cofres guardados aquí ¿Puedes encontrar la secuencia de movimientos para abrirlos? Usa los movimientos del tutorial para rotar el cofre y colocar la cerradura en frente dle pirata, cuanto más tardes peor será tu puntuación.</string>
+              <string name="ExplTest">No tengo muy claro si estos tesoros son míos. En este caso hay dos cofres, el de la izquierda es como recuerdo el cofre, si el de la derecha es el mismo, tal vez con alguna rotación, dale al botón "Mismo", Si los dos cofres no son el mismo, aprieta "Diferente", ningún símbolo aparece en más de una cara, y cuidado cuanto más tiempo uses, peor es tu puntuación.</string>
 
 	
 
@@ -123,7 +146,7 @@
              <string name="TrainingB0">Claro que sí</string>
              <string name="TrainingB1">Perfecto</string>
               <string name="TrainingB2">¡Sí!</string>
-            <string name="Training0">Para ver la cerradura necesitamos rotar el cubo, te voy a decir como.</string>
+            <string name="Training0">Para ver la cerradura necesitamos rotar el cubo, te voy a decir cómo.</string>
             <string name="Training1">Para el primer movimiento, desliza tu dedo de arriba hacia abajo de la pantalla.</string>
             <string name="Training2">¡Genial! Una vez más.</string>
             <string name="Training3">Ahora ya veo la cerradura, sigue con el mismo movimiento</string>
@@ -131,25 +154,29 @@
             <string name="Training5">¡Genial! Una vez más.</string>
             <string name="Training6">Ahora repite el primer movimiento ¿Te acuerdas?</string>
             <string name="Training7">Desliza tu dedo de arriba hacia abajo de la pantalla.</string>
-             <string name="Training8">Ya falta poco.Quieres aprender el último movimiento?</string>
+             <string name="Training8">Ya falta poco ¿Quieres aprender el último movimiento?</string>
             <string name="Training9">Este es un poco complicado, pon dos dedos en la pantalla y rota tu mano en el sentido del movimiento.</string>
-            <string name="Training10">Ups , demasiados movimientos, por surte pueder realizar el movimiento contrario.</string>
+            <string name="Training10">Ups, demasiados movimientos, por suerte pueder realizar el movimiento contrario.</string>
             <string name="Training11">Todos los movimientos tiene su contrario.</string>
             <string name="Training12">Ahora ya puedo abrir el cofre, vamos a probar otro nivel.</string>
              <string name="Training13">El último.</string>
-            <string name="ErrorTraining">Lo siento, pero ese no es el movimientos que estamos buscando.</string>
+            <string name="ErrorTraining">Lo siento, pero ese no es el movimiento que estamos buscando.</string>
              <string name="ErrorTrainingB">Intentarlo de nuevo</string>
            
 
 			  <string name="GiveUp">A la derecha puedes ver una de las soluciones para esta prueba¡ Sigue practicando!  </string>
            	  <string name="PassedLockTest">¡Conseguido!</string>
-           	  <string name="PassedLockTestLevel">Has abierto todos los tesoros!</string>
+           	  <string name="PassedLockTestLevel">¡Has abierto todos los tesoros!</string>
 
+
+           	   <string name="Understood">Entendido.</string>
+           	  <string name="ExplHelp">A la derecha tienes el botón de ayuda, al apretarlo podrás aplicar movimientos al cofre de la derecha, el botón "Desacher" dejará el cofre en la posición original y "Desplegar" te permite ver todas las caras del cofre.</string>
+           	   <string name="NoExplHelp">Pulsa "Igual" si pueden ser el mismo cofre y "Diferente" si son cofres distintos.</string> 
            	    <string name="ResetB">Deshacer</string> 
            	    <string name="NextBox">Siguiente</string>
            	   <string name="UnfoldB">Desplegar</string>
            	    <string name="HelpB">Ayuda</string>
-           	  <string name="SameB">Iguales</string>
+           	  <string name="SameB">Igual</string>
            	  <string name="DiffB">Diferente</string>
            	  <string name="NoFaceSame">Estos son los lados que no se podían ver con la anterior posición.</string>
            	    <string name="DiffBecause">Son diferentes debido a que el símbolo de la cara</string>
@@ -162,22 +189,37 @@
            	    <string name="Right"> derecha</string>
            	    <string name="Left"> izquierda</string>
            	     <string name="FollowPath"> Con estos movimientos puedes comprobarlo.</string>
-           	     <string name="YesSame"> Sí, son el mismo.</string>
-           	     <string name="NoSame">No, son el mismo.</string>
-           	     <string name="YesDiff"> sí, son diferentes.</string>
-           	     <string name="NoDiff"> No, son diferentes.</string>
+           	     <string name="YesSame">¡Correcto! Pueden ser el mismo cofre con alguna rotación.</string>
+           	     <string name="NoSame">No, pueden ser el mismo cofre con alguna rotación.</string>
+           	     <string name="YesDiff">¡Correcto! Son cofres diferentes.</string>
+           	     <string name="NoDiff"> No, son cofres diferentes.</string>
            	     <string name="Points"> Puntos</string>
            	     <string name="Time"> Tiempo restante</string>
            	       <string name="Money"> Oro</string>
 
-           	            <string name="ExplQuest">¿Le gustaría ayudar en nuestra investigación rellenando el siguiente cuestionario?</string>
+           	        <string name="PregCorrect"> Dime en qué lado del cofre derecho se encuentra la cara resaltada del cofre izquierdo con el símbolo</string>
+           	         <string name="Bonus">¡Correcto! Ahora rota el cofre para comprobar que está en ese lado.</string>
+           	          <string name="NoBonus"> Eso no es correcto, ahora rota el cofre para ver dónde está el lado resaltado.</string>
+
+           	            <string name="ExplQuest">¿Le gustaría ayudar a los científicos en su investigación rellenando un cuestionario?</string>
            	       <string name="YesQuest"> Sí</string>
            	       <string name="NoQuest"> No, gracias.</string>
 
 
-           	        <string name="Question1"> ¿Qué edad tienes?</string>
-           	        <string name="Question2"> ¿Qué nivel de estudios tienes?</string>
-           	        <string name="Question3"> ¿De qué rama son tus estudios?</string>
+           	         <string name="Question0">¿Con qué género te identificas?</string>
+           	        <string name="Question1">¿Qué edad tienes?</string>
+           	         <string name="Question2"> ¿Cuál es tu nacionalidad?</string>
+           	          <string name="Question3">¿Cuál es tu idioma nativo?</string>
+           	        <string name="Question4"> ¿Qué nivel de estudios tienes?</string>
+           	        <string name="Question5"> ¿De qué rama son tus estudios?</string>
+           	        <string name="RateGame">Puntúa lo divertido que te ha parecido el juego.</string>
+           	         <string name="RateHelpText">Puntúa la ayuda del test (rotar el cubo).</string>
+					 <string name="RateFeedbackText">Puntúa el Feedback visual mostrado durante el test.</string>
+
+
+					 <string name="Male"> Masculino</string>
+					 <string name="Female">Femenino</string>
+					 <string name="NoGender">Otro</string>
            	          <string name="Estudios0"> Educación Básica</string>
            	          <string name="Estudios1"> Secundaria</string>
            	          <string name="Estudios2"> Bachillerato</string>
@@ -190,7 +232,6 @@
            	        <string name="Rama3"> Ingenieria</string>
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
-           	         <string name="RateGame"> Puntua el juego</string>
            	          <string name="Send"> Enviar</string>
 
         </Spanish>
@@ -199,8 +240,10 @@
             <string name="description">Dieses Skript bietet eine komfortable Unterstützung mehrerer Sprachen.</string>
              <string name="select">Wähle die Spielsprache aus</string>
              <string name="NextButton">Folgendes</string>
-             <string name="Comment">Kommentare aktiviert</string>		
-              <string name="NoComment">Kommentare deaktiviert</string>				
+             <string name="Comment">Hilfe aktiviert</string>		
+              <string name="NoComment">Hilfe deaktiviert</string>	
+                 <string name="VFeedBack">Visuelle Rückmeldung aktiviert.</string>		
+              <string name="NoVfeedBack">Visuelle Rückmeldung deaktiviert.</string>				
 
 
                <string name="Play">Spielniveau</string>
@@ -226,7 +269,7 @@
             <string name="Training5">Großartig, noch einer</string>
             <string name="Training6">Now lets try the first movement again, Do you remember it?</string>
             <string name="Training7">slide your finger from Up to Down the screen</string>
-             <string name="Training8">Almost there, are you ready for the last movement?</string>
+             <string name="Training8">Almost there. Are you ready for the last movement?</string>
             <string name="Training9">Dieser ist ein wenig schwierig, legen Sie zwei Finger auf den Bildschirm und drehen Sie sich in die Richtung der Bewegung</string>
             <string name="Training10">Ups, zu viele Bewegungen, zum Glück kann man das Gegenteil der Bewegung machen</string>
             <string name="Training11">Jede Bewegung hat also ihr eigenes Gegenteil</string>
@@ -240,6 +283,9 @@
            	  <string name="PassedLockTestLevel">Du hast alle Schätze geöffnet!</string>
 
 
+           	   <string name="Understood">Verstanden</string>
+           	  <string name="ExplHelp">Auf der rechten Seite haben Sie die Hilfe-Taste, wenn Sie drücken, können Sie die Bewegungen auf die Brust auf der rechten Seite anwenden, die Schaltfläche "Zurücksetzen" wird die Brust in der ursprünglichen Position verlassen und "Entfalten" ermöglicht es Ihnen, alle Gesichter zu sehen die Brust.</string>
+           	   <string name="NoExplHelp">Drücken Sie "Gleich", wenn sie die gleiche Truhen und "Anders" sein können, wenn sie verschiedene Truhen sind.</string>
            	  <string name="ResetB">Zurücksetzen</string> 
            	  <string name="NextBox">Nächster</string>
            	   <string name="UnfoldB">Entfalten</string>
@@ -257,21 +303,36 @@
            	    <string name="Right"> rechts</string>
            	    <string name="Left"> links</string>
            	    <string name="FollowPath"> Mit diesen Bewegungen können Sie es überprüfen.</string>
-          		 <string name="YesSame"> Ja, sie sind gleich.</string>
-           	     <string name="NoSame">Nein, sie sind gleich.</string>
-           	     <string name="YesDiff"> Ja, sie sind anders.</string>
-           	     <string name="NoDiff"> Nein, sie sind anders.</string>
+          		 <string name="YesSame">Ja, es ist die gleiche Truhe.</string>
+           	     <string name="NoSame">Nein, es ist die gleiche Truhe.</string>
+           	     <string name="YesDiff">Ja, sie sind verschiedene Truhen.</string>
+           	     <string name="NoDiff"> Nein, sie sind verschiedene Truhen.</string>
            	     <string name="Points"> Punkte</string>
            	     <string name="Time"> verbleibende Zeit</string>
            	       <string name="Money"> Gold</string>
+
+           	         <string name="PregCorrect">In welcher Seite der Box rechts ist die glitzernde Seite der linken Box?</string>
+           	         <string name="Bonus">Richtig! Drehen Sie nun die Brust, um zu prüfen, ob sie sich auf dieser Seite befindet.</string>
+           	          <string name="NoBonus">Das ist nicht korrekt, jetzt dreh die Truhe um zu sehen in welcher Seite ist.</string>
 
            	       <string name="ExplQuest">Möchten Sie mit unserer Recherche helfen, indem Sie den folgenden Fragebogen ausfüllen?</string>
            	       <string name="YesQuest">Ja</string>
            	       <string name="NoQuest">Nein, danke.</string>
 
-           	       <string name="Question1"> Wie alt bist du?</string>
-           	        <string name="Question2"> Welches Bildungsniveau hast du?</string>
-           	        <string name="Question3"> Aus welchem Zweig stammen deine Studien?</string>
+
+           	        <string name="Question0">Mit welchem Geschlecht identifizieren Sie sich?</string>
+           	        <string name="Question1"> Wie alt bist du?</string>
+           	         <string name="Question2">Was ist deine Nationalität?</string>
+           	          <string name="Question3">Was ist deine Muttersprache?</string>
+           	        <string name="Question4"> Welches Bildungsniveau hast du?</string>
+           	        <string name="Question5"> Aus welchem Zweig stammen deine Studien?</string>
+					 <string name="RateGame">Bewerten Sie, wie viel Spaß das Spiel macht.</string>
+					 <string name="RateHelpText">Bewerten Sie die Testhilfe (drehen Sie den Würfel).</string>
+					 <string name="RateFeedbackText">Bewerten Sie die visuelle Rückmeldung, die während des Tests angezeigt wird.</string>
+
+					 <string name="Male"> Männlich</string>
+					 <string name="Female">Weiblich</string>
+					 <string name="NoGender">Andere</string>
            	             <string name="Estudios0"> Educación Básica</string>
            	          <string name="Estudios1"> Secundaria</string>
            	          <string name="Estudios2"> Bachillerato</string>
@@ -284,7 +345,6 @@
            	        <string name="Rama3"> Ingenieria</string>
            	        <string name="Rama4"> Ciencias Sociales</string>
            	        <string name="Rama5"> Música</string>
-           	          <string name="RateGame">Bewerte das Spiel</string>
            	           <string name="Send"> Senden</string>
 
 
