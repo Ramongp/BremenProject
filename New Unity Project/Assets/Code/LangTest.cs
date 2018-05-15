@@ -47,15 +47,18 @@ public class LangTest : MonoBehaviour {
     */
 		//Debug.Log (Path.Combine (Application.dataPath, "/XML/lang.xml").ToString ());
 		//LMan = new Lang(Path.Combine(Application.dataPath, "/XML/lang.xml"), currentLang, false);
+	//	GameObject.Find ("Message").transform.localScale = new Vector3 (1, 1, 1);
 		if (Application.systemLanguage == SystemLanguage.Spanish) {
+		//	GameObject.Find ("Message").transform.localScale = new Vector3 (0.8f, 0.8f, 1);
 			currentLang = "Spanish";
 		}
 		if (Application.systemLanguage == SystemLanguage.German) {
+		//	GameObject.Find ("Message").transform.localScale = new Vector3 (0.8f, 0.8f, 1);
 			currentLang = "German";
 		}
 		LMan = new Lang( "lang", currentLang, false);
 		text.text = LMan.getString ("select");
-		textB.text = LMan.getString ("NextButton");
+		textB.text = LMan.getString ("StartButton");
 		VisualFeedback = true;
 		Help = true;
 		ToggleText = LMan.getString ("Comment");
@@ -67,17 +70,20 @@ public class LangTest : MonoBehaviour {
 
 	public void Spanish()
 	{
+		//GameObject.Find ("Message").transform.localScale = new Vector3 (0.8f, 0.8f, 1);
 		currentLang = "Spanish";
 		ChangeCanvas ();
 	}
 	public void English()
 	{
+		//GameObject.Find ("Message").transform.localScale = new Vector3 (1, 1, 1);
 		currentLang = "English";
 		ChangeCanvas ();
 	}
 
 	public void German()
 	{
+	//	GameObject.Find ("Message").transform.localScale = new Vector3 (0.8f, 0.8f, 1);
 		currentLang = "German";
 		ChangeCanvas ();
 
@@ -93,9 +99,10 @@ public class LangTest : MonoBehaviour {
 
 	void ChangeCanvas()
 	{
+		
 		LMan.setLanguage("lang", currentLang);
 		text.text = LMan.getString ("select");
-		textB.text = LMan.getString ("NextButton");
+		textB.text = LMan.getString ("StartButton");
 		if (cont.Equals (1)) {
 			ToggleText = LMan.getString ("NoComment");
 		} else {
@@ -103,6 +110,7 @@ public class LangTest : MonoBehaviour {
 		}
 		Comment.GetComponentInChildren<Text>().text=ToggleText;
 		VFeedbacckToggle.GetComponentInChildren<Text> ().text =  LMan.getString(ToggleTextVFeed);
+		GameObject.Find ("PauseCanvas").GetComponent<ExitGame> ().Escribir ();
 	}
 
 	public void ChangeToggle()

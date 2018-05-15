@@ -67,6 +67,7 @@
     <Compile Include="Assets\Code\Arista.cs" />
     <Compile Include="Assets\Code\Box.cs" />
     <Compile Include="Assets\Code\Cube.cs" />
+    <Compile Include="Assets\Code\CubeRotation.cs" />
     <Compile Include="Assets\Code\Face.cs" />
     <Compile Include="Assets\Code\Grafo.cs" />
     <Compile Include="Assets\Code\InfoRotation.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Assets\Code\RandomBox.cs" />
     <Compile Include="Assets\Code\SameCube.cs" />
     <Compile Include="Assets\Code\SendGmail.cs" />
-    <Compile Include="Assets\Code\SendMailTest.cs" />
     <Compile Include="Assets\Code\Timer.cs" />
     <Compile Include="Assets\Code\Torque.cs" />
     <Compile Include="Assets\Code\Training.cs" />

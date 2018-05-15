@@ -413,7 +413,7 @@ public class LockCube : MonoBehaviour {
 	}
 
 
-	public void ShowWay ()
+	public void ShowWay (bool Pulsado)
 	{
 		LockCube.help = false;
 		CubePL.GetComponent<Unfold> ().CreateWay (false);
@@ -424,7 +424,9 @@ public class LockCube : MonoBehaviour {
 			Arrows [i].gameObject.SetActive (true);
 			Arrows [i].sprite = Movs [MovetoInt (listmov [i])];
 		}
-		GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().GiveUp ();
+		if (Pulsado) {
+			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().GiveUp ();
+		}
 	}
 	public int  MovetoInt(string move)
 	{

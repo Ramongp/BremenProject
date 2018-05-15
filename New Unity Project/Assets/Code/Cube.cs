@@ -7,7 +7,7 @@ public class Cube : MonoBehaviour {
 	// Use this for initialization
 	public Material Map;
 	public Vector3 startPosition, endPosition;
-	public float horizontalSpeed = 10F,verticalSpeed = 5F,RotMargin =1F;
+	public float horizontalSpeed = 5F,verticalSpeed = 5F,RotMargin =1F;
 	public float angle, restAngle, prevAngle, RefAngle, OrigAngle;
 	public int Quadrant;
 	public bool Assigned;
@@ -15,6 +15,7 @@ public class Cube : MonoBehaviour {
 	public GameObject CubePL, OrigCube;
 	public GameObject[] GBox, OGbox;
 	public Texture[] Faces;
+	public static Face SideWithChange;
 	public Box OrigBox, FinalBox;
 	public Quaternion startingRotation;
 	public RandomBox[] QuestionsCube;
@@ -47,14 +48,14 @@ public class Cube : MonoBehaviour {
 									new Face (Symbols[6], 0, 3), new Face (Symbols[4], 0, 4), new Face (Symbols[12], 0, 5)),new int[] {2,2},new int[] {2,3}),
 			new RandomBox (new Box (new Face (Symbols[0], 0, 0), new Face (Symbols[10], 0, 1), new Face (Symbols[6], 0, 2),
 									new Face (Symbols[9], 0, 3), new Face (Symbols[1], 0, 4), new Face (Symbols[7], 2, 5)),new int[] {1,4},new int[] {0,1}),
-			new RandomBox (new Box (new Face (Symbols[3], 0, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[4], 0, 2),
-									new Face (Symbols[12], 3, 3), new Face (Symbols[6], 0, 4), new Face (Symbols[9], 0, 5)),new int[] {2,0,0},new int[] {4,0,5,2}),
+			new RandomBox (new Box (new Face (Symbols[3], 0, 0), new Face (Symbols[1], 0, 1), new Face (Symbols[4], 0, 2),
+									new Face (Symbols[12], 3, 3), new Face (Symbols[6], 0, 4), new Face (Symbols[9], 0, 5)),new int[] {2,0,0},new int[] {4,0,5,2}), //Loalizacion,Cambio, Nuevo simb, Orient
 			new RandomBox (new Box (new Face (Symbols[7], 0, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[4], 0, 2),
 									new Face (Symbols[3], 1, 3), new Face (Symbols[10], 1, 4), new Face (Symbols[9], 0, 5)),new int[] {5},new int[] {0,1}),
 			new RandomBox (new Box (new Face (Symbols[4], 0, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[8], 4, 2),
 									new Face (Symbols[1], 0, 3), new Face (Symbols[12], 0, 4), new Face (Symbols[6], 0, 5)),new int[] {4,0},new int[] {0,3}),
 			new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[7], 1, 2),
-									new Face (Symbols[1], 0, 3), new Face (Symbols[8], 4, 4), new Face (Symbols[6], 0, 5)),new int[] {5,2},new int[] {2,0,1,0})};
+									new Face (Symbols[9], 0, 3), new Face (Symbols[8], 4, 4), new Face (Symbols[6], 0, 5)),new int[] {5,2},new int[] {2,0,1,0})};
 		
 		
 		/*new RandomBox (new Box (new Face (Symbols[11], 4, 0), new Face (Symbols[5], 0, 1), new Face (Symbols[2], 4, 2),
@@ -72,8 +73,7 @@ public class Cube : MonoBehaviour {
 		BDiff.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("DiffB");
 		Test = 0;
 		Unfold.Test = true;
-		CanvasMargin = (Screen.height
-			/Camera.main.orthographicSize)/40;
+		CanvasMargin = (Screen.height/20);
 		PreGame ();
 
 		//CubeFake.transform.rotation = Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
@@ -90,7 +90,7 @@ public class Cube : MonoBehaviour {
 			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
 		} else {
 			foreach (Touch touch in Input.touches) {
-				Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+				Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
 				HandleTouch (touch.fingerId, cam, touch.phase);
 			}
 
@@ -432,7 +432,7 @@ public class Cube : MonoBehaviour {
 			}
 		}*/
 
-		Face SideWithChange = FinalBox.Sides [QuestionsCube [Test].change [0]];
+		SideWithChange = FinalBox.Sides [QuestionsCube [Test].change [0]];
 		change = QuestionsCube [Test].change [1];
 		string expChange="";
 		/*if ((repeatFaces>1)&&(facesWithOri>1)) { // Only when there are two or more visibles sides from the original cube one symbol can be changed, otherwise if the three symbols are different it has to be the same cube, and also one face needs to have visible orientation
@@ -453,7 +453,8 @@ public class Cube : MonoBehaviour {
 			expChange = "Change " + Timer.TradLocaton (SideWithChange.localization) + " Symbol";
 			Debug.Log ("Change " + SideWithChange.symbol + " Symbol");
 			GBox [SideWithChange.localization].GetComponent<Renderer> ().material.mainTexture = Faces [QuestionsCube [Test].change [2]];
-			SideWithChange.symbol = "X";
+			SideWithChange.symbol = TradFromNumbToSymb(QuestionsCube [Test].change [2]);
+			//SideWithChange.symbol="X";
 			SideWithChange.orientation = QuestionsCube [Test].change [3];
 
 			switch (SideWithChange.orientation) {
@@ -767,6 +768,39 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		}
 	}
 
+	public string TradFromNumbToSymb(int s)
+	{
+		switch (s) {
+		case 0:
+			return "Hook";
+		case 1:
+			return "Skull";
+		case 2:
+			return "Lifesv";
+		case 3:
+			return "Spy";
+		case 4:
+			return "Rum";
+		case 5:
+			return "Bomb";
+		case 6:
+			return "Sword";
+		case 7:
+			return "Fish";
+		case 8:
+			return "Rose";
+		case 9:
+			return "Parrot";
+		case 10:
+			return "Barrel";
+		case 11:
+			return "Bones";
+		case 12:
+			return "Lock";
+		default:
+			return " ";
+		}
+	}
 
 
 	public void PreGame()

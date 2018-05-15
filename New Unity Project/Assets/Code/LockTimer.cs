@@ -8,7 +8,7 @@ public class LockTimer : MonoBehaviour {
 	public Slider TimeSlider;
 	public Button Tapar, TaparNextLevel, NextBoxB;
 	public GameObject Key;
-	public Text Text, PointText;
+	public Text Text, PointText, PathText;
 	public ParticleSystem Correct;
 	public Image StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3, Bag, Message;
 	public static bool testing;
@@ -17,6 +17,8 @@ public class LockTimer : MonoBehaviour {
 	public int correctLock;
 	// Use this for initialization
 	void Start () {
+		PathText.text = LangTest.LMan.getString ("Path");
+		Tapar.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("SeePoints");
 		Set ();
 	}
 	
@@ -33,6 +35,9 @@ public class LockTimer : MonoBehaviour {
 			}
 			if (TimeLeft<1) {
 				StarSlid3.color= StarOff;
+			}
+			if (TimeLeft < 0) {
+				TimeUp ();
 			}
 		}
 	}
@@ -68,6 +73,19 @@ public class LockTimer : MonoBehaviour {
 
 
 
+	}
+
+	public void TimeUp()
+	{
+		Message.gameObject.SetActive (true);
+		Message.GetComponentInChildren<Text>().text= LangTest.LMan.getString ("LockTimeUp")+" "+LangTest.LMan.getString ("GiveUp");
+		GameObject.Find ("Main Camera").GetComponent<LockCube> ().ShowWay (false);
+		correctLock = 0;
+		testing = false;
+		Tapar.interactable = true; 
+		Tapar.gameObject.SetActive (true);
+		Buttons.SetActive (false);
+		
 	}
 	public void Points()
 	{

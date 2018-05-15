@@ -14,7 +14,7 @@ public class Timer : MonoBehaviour {
 	public int moneySpeed; 
 	public Text Solution, PointText, ExplQuest;
 	public Image TimeFill,Bag, FondoQuest;
-	public Button TaparN, TaparE, NextBoxB, YesQuest, NoQuest, BackC,DownC,LeftC,StartTestButton;
+	public Button TaparN, TaparE, NextBoxB, YesQuest, NoQuest, BackC,DownC,LeftC,StartTestButton,TrasBonusPreg;
 	public Image Message, StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3;
 	public Image[] MArrows,Arrows;
 	public Color StarOn, StarOff;
@@ -23,14 +23,18 @@ public class Timer : MonoBehaviour {
 	public GameObject PregQuest, PregCorrectPanel;
 	void Start () {
 		
+		GameObject.Find("ButtonPath").GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Path");
+		TaparN.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("SeePoints");
+		TaparE.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
+		TrasBonusPreg.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
 		moneySpeed = 20;
 		ExplHelp ();
-
+		end = true;
 		StartTestButton.gameObject.SetActive (true);
 		StartTestButton.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Understood");
 		if (LangTest.Help) {
 			Solution.fontSize = 14;
-			Message.transform.localScale = new Vector3 (1.6f, 1.6f, 1f);
+
 			Solution.text = LangTest.LMan.getString ("NoExplHelp")+" "+LangTest.LMan.getString ("ExplHelp");
 		} else {
 			Solution.text = LangTest.LMan.getString ("NoExplHelp");
@@ -57,6 +61,10 @@ public class Timer : MonoBehaviour {
 				StarSlid3.color= StarOff;
 			}
 			} 
+		if ((TimeLeft < 0)&&(!end)) {
+			end = true;
+			TimeUp ();
+		}
 
 		}
 
@@ -76,18 +84,19 @@ public class Timer : MonoBehaviour {
 		StarP2.color= StarOn;
 		StarP3.color= StarOn;
 		TimeLevel = 60;
-		pointsLevel = 10;
-		points = pointsLevel;
+		//pointsLevel = 10;
+		//points = pointsLevel;
 		TimeLeft = TimeLevel;
 		TimeSlider.maxValue = TimeLeft;
 		TimeSlider.value = TimeSlider.maxValue;
 		TaparN.gameObject.SetActive (false);
+		TrasBonusPreg.gameObject.SetActive (false);
 		TaparE.gameObject.SetActive (false);
 		NextBoxB.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NextBox");
 		NextBoxB.gameObject.SetActive (false);
 		animation = false;
 		foreach (Image i in MArrows) {
-			i.gameObject.SetActive (false);
+			i.GetComponent<CanvasGroup>().alpha=0;
 		}
 	}
 
@@ -109,8 +118,8 @@ public class Timer : MonoBehaviour {
 		StarP3.color= StarOn;
 		Message.gameObject.SetActive (false);
 		TimeLevel = 60;
-		pointsLevel = 10;
-		points = pointsLevel;
+		//pointsLevel = 10;
+		//points = pointsLevel;
 		TimeLeft = TimeLevel;
 		TimeSlider.maxValue = TimeLeft;
 		TimeSlider.value = TimeSlider.maxValue;
@@ -120,11 +129,40 @@ public class Timer : MonoBehaviour {
 		NextBoxB.gameObject.SetActive (false);
 		animation = false;
 		end = false;
-		Solution.gameObject.SetActive (false);
+		//Solution.gameObject.SetActive (false);
 		foreach (Image i in MArrows) {
-			i.gameObject.SetActive (false);
+			i.GetComponent<CanvasGroup>().alpha=0;
 		}
-		points = pointsLevel;
+		//points = pointsLevel;
+	}
+
+	public void TimeUp()
+	{
+		TimeLeft = 0;
+		GameObject.Find ("Camera").GetComponent<Cube> ().Hide ();
+		Solution.fontSize = 20;
+		string resp;
+		if (Cube.change.Equals (1)) {
+			answer = 3;
+			resp = "SameTestTimeUp";
+		} else {
+			answer = 2;
+			resp = "DiffTestTimeUp";
+		}
+		Message.gameObject.SetActive (true);
+		TaparE.gameObject.SetActive (true);
+		Solution.GetComponent<Animator> ().SetBool ("Wrong", true);
+		if (LangTest.VisualFeedback) {
+			Solution.text = LangTest.LMan.getString (resp)+" "+LangTest.LMan.getString ("TryHelp");
+		} 
+		else {
+			Solution.text = LangTest.LMan.getString (resp);
+		}
+
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SaveMove (Unfold.Info);
+		Unfold.Info="";
+		SendGmail.TestString+=",TimeOut";
+		SendGmail.TestString+=","+ TimeLeft.ToString();
 	}
 
 	public void Animation(bool correct,int answer)
@@ -136,9 +174,10 @@ public class Timer : MonoBehaviour {
 		TaparE.gameObject.SetActive (true);
 		animation = true;
 		AnimationTime = 2;
-		Solution.fontSize = 40;
-		Message.transform.localScale = new Vector3 (0.8f, 0.8f, 1f);
+
+
 		if (correct) {
+			Solution.fontSize = 30;
 			SendGmail.TestString+=",Correct";
 			switch (answer) {
 			case 0:
@@ -150,9 +189,10 @@ public class Timer : MonoBehaviour {
 			}
 			Solution.gameObject.SetActive (true);
 			Solution.GetComponent<Animator> ().SetBool ("Correct", true);
-			currentValue += points;
+			//currentValue += points;
 		} 
 		else {
+			Solution.fontSize = 35;
 			SendGmail.TestString+=",Failed";
 			switch (answer) {
 			case 2:
@@ -173,10 +213,10 @@ public class Timer : MonoBehaviour {
 			Solution.color = Color.black;
 			TaparN.gameObject.SetActive (false);
 			Message.gameObject.SetActive (false);
-			Solution.gameObject.SetActive (false);
+			//Solution.gameObject.SetActive (false);
 			Unfold.ShowExpl = false;
 		TimeSlider.gameObject.SetActive (false);
-		PointText.text="+ "+((int)(TimeLeft*10)).ToString () + LangTest.LMan.getString ("Points");
+		PointText.text="+"+((int)(TimeLeft*10)).ToString () +" "+ LangTest.LMan.getString ("Points");
 		if (TimeLeft < 40) {
 			StarP3.color= StarOff;
 		}
@@ -214,7 +254,9 @@ public class Timer : MonoBehaviour {
 
 	public void Explicacion()
 	{
-		Message.transform.localScale = new Vector3 (1f, 1f, 1f);
+
+
+			
 		if (Cube.help) { //Set at the beggining of the test
 			Unfold.button=true;
 			GameObject.Find ("CubePl").GetComponent<Unfold> ().finalRotation= Unfold.AfterRandom;
@@ -223,10 +265,9 @@ public class Timer : MonoBehaviour {
 		
 		//animation = false;
 		TaparE.gameObject.SetActive (false);
-
 		Bag.gameObject.SetActive (false);
 		Solution.fontSize = 25;
-		if (answer < 2) {
+		if (answer.Equals(0)) {
 			Solution.GetComponent<Animator> ().SetBool ("Correct", false);
 			PregCorrect ();
 		} else {
@@ -236,26 +277,29 @@ public class Timer : MonoBehaviour {
 				if (answer.Equals (3)) { //Explanation Same cube
 					Solution.text = LangTest.LMan.getString ("NoFaceSame");
 
-					if (!SameCube.Fx.symbol.Equals ("NoFaceSame")) {
+					if (!SameCube.Fx.explicacion.Equals ("NoFaceSame")) {
 
 						if (Unfold.Fold.Equals (1)) {
 							GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
 						}
 
 						Cube.help = false;
-						Solution.text = LangTest.LMan.getString (SameCube.Fx.symbol);
+						Solution.text = LangTest.LMan.getString (SameCube.Fx.explicacion);
 						GameObject.Find ("CubePl").GetComponent<Unfold> ().CreateWay (true);
-						CreateArrows ();
+						CreateArrows (SameCube.Way);
 					}
 				} else {
+					if (answer.Equals (1)) {
+						Solution.GetComponent<Animator> ().SetBool ("Correct", false);
+					}
 					Cube.help = true;
 					if (Cube.change.Equals (0)) {
-						Solution.text = LangTest.LMan.getString ("DiffBecause") + LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) + LangTest.LMan.getString ("DontMatchSym");
+						Solution.text = LangTest.LMan.getString ("DiffBecause")+ LangTest.LMan.getString (SameCube.Fx.symbol) +" "+ LangTest.LMan.getString ("DiffBecause2")+" "+  LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) +" "+ LangTest.LMan.getString ("DontMatchSym")+" "+LangTest.LMan.getString (Cube.SideWithChange.symbol) +".";
 					} else {
-						Solution.text = LangTest.LMan.getString ("DiffBecause") + LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) + LangTest.LMan.getString ("DontMatchOri");
+						Solution.text = LangTest.LMan.getString ("DiffBecause")+ LangTest.LMan.getString (SameCube.Fx.symbol)+" "+ LangTest.LMan.getString ("DiffBecause2")+" "+ LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) +" "+ LangTest.LMan.getString ("DontMatchOri");
 					}
 					GameObject.Find ("Camera").GetComponent<Cube> ().GBox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
-					GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);
+					GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [SameCube.Fx.localization].GetComponent<Animator> ().SetBool ("Highlight", true);  
 					if (Unfold.Fold.Equals (0)) {
 						GameObject.Find ("CubePl").GetComponent<Unfold> ().UnfoldBox ();
 					}
@@ -288,6 +332,7 @@ public class Timer : MonoBehaviour {
 
 		
 	}
+		
 
 	public static string TradLocaton(int l)
 	{
@@ -309,15 +354,14 @@ public class Timer : MonoBehaviour {
 		return " ";
 	}
 
-	void CreateArrows()
+	void CreateArrows(string path)
 	{
-		string expl = SameCube.Way;
 		string[] way;
-		way = expl.Split ('_');
+		way = path.Split ('_');
 
 		for (int i = 0; i < way.Length-1; i++) {
 			string Move = way [way.Length-2-i];
-			MArrows [i].gameObject.SetActive (true);
+			MArrows [i].GetComponent<CanvasGroup>().alpha =1;
 			switch (Move) { //Do the opposite Move
 			case "Up":
 				Arrows [i].sprite = ArrowsSp [1];
@@ -355,7 +399,7 @@ public class Timer : MonoBehaviour {
 	{
 		Cube.help = false;
 		if ((SameCube.SameSymbols > 0) && (SameCube.SameSymbols < 3)&& (answer.Equals(0))) {
-			Solution.text = LangTest.LMan.getString ("PregCorrect");
+			Solution.text = LangTest.LMan.getString ("PregCorrect")+" "+LangTest.LMan.getString (SameCube.Tquest.symbol)+"?";
 			PregCorrectPanel.gameObject.SetActive (true);
 			BackC.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Back");
 			DownC.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Down");
@@ -365,22 +409,84 @@ public class Timer : MonoBehaviour {
 			Debug.Log ("Pregunta");
 		} 
 		else {
-			NextBox ();
+			answer = 3;
+			Explicacion();
 		}
 	}
 
 	public void BonusAnswer(int i)
 	{
-		Cube.help = true;
 		PregCorrectPanel.gameObject.SetActive (false);
 		if (i.Equals (SameCube.Tquest.localization)) {
 			SendGmail.TestString += ",Correct";
-			Solution.text = LangTest.LMan.getString ("Bonus");
+			Solution.text = LangTest.LMan.getString ("Bonus")+" "+LangTest.LMan.getString(TradLocaton(SameCube.Tquest.localization))+".";
 		} else {
 			SendGmail.TestString+=",Failed";
-			Solution.text = LangTest.LMan.getString ("NoBonus");
+			Solution.text = LangTest.LMan.getString ("NoBonus")+" "+LangTest.LMan.getString(TradLocaton(SameCube.Tquest.localization))+".";
 		}
-		TaparN.gameObject.SetActive (true);
+
+		string BonusPath=" ";
+		switch (SameCube.Tquest.localization) {
+
+		case 1:
+			BonusPath = "Left_Left_Restart";
+			break;
+		case 3:
+			BonusPath = "Up_Restart";
+			break;
+		case 5:
+			BonusPath = "Right_Restart";
+			break;
+		default:
+			break;
+		}
+
+		GameObject.Find ("CubePl").GetComponent<Unfold> ().CreateBonusWay (BonusPath);
+		CreateArrowsBonus (BonusPath);
+		answer = 3;
+		TrasBonusPreg.gameObject.SetActive (true);
 	}
-		
+	void CreateArrowsBonus(string path)
+	{
+		string[] way;
+		way = path.Split ('_');
+
+		for (int i = 0; i < way.Length-1; i++) {
+			string Move = way [way.Length-2-i];
+			MArrows [i].GetComponent<CanvasGroup>().alpha =1;
+			switch (Move) { //Do the opposite Move
+			case "Up":
+				Arrows [i].sprite = ArrowsSp [0];
+				break;
+			case "Down":
+				Arrows [i].sprite = ArrowsSp [1];
+				break;
+			case "Left":
+				Arrows [i].sprite = ArrowsSp [2];
+				break;
+			case "Right":
+				Arrows [i].sprite = ArrowsSp [3];
+				break;
+			case "Toward-up-right":
+				Arrows [i].sprite = ArrowsSp [4];
+				break;
+			case "Toward-up-left":
+				Arrows [i].sprite = ArrowsSp [5];
+				break;
+			}
+		}
+	}
+
+	public void TrasBonus()
+	{
+		GameObject.Find ("CubePl").GetComponent<Unfold> ().SetAfterBonus ();
+		GameObject.Find ("Camera").GetComponent<Cube> ().GBox [SameCube.Tquest.orientation].GetComponent<Animator> ().SetBool ("Training", false);
+		GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [SameCube.Tquest.orientation].GetComponent<Animator> ().SetBool ("Training", false);
+
+		foreach (Image i in MArrows) {
+			i.GetComponent<CanvasGroup>().alpha=0;
+		}
+		TrasBonusPreg.gameObject.SetActive (false);
+		Explicacion ();
+	}
 }

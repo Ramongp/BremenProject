@@ -28,6 +28,7 @@ public class MapSelect : MonoBehaviour {
 	public void GoTutorial()
 	{
 		NextLevel ="Training";
+		Explic.fontSize = 50;
 		LangExpli = "ExplTraining";
 		ExplLevel ();
 	}
@@ -35,6 +36,7 @@ public class MapSelect : MonoBehaviour {
 	public void GoLockTest()
 	{
 		NextLevel ="LockTraining";
+		Explic.fontSize = 40;
 		LangExpli = "ExplLock";
 		ExplLevel ();
 	}
@@ -43,6 +45,7 @@ public class MapSelect : MonoBehaviour {
 	{
 		NextLevel ="Test Pirate";
 		LangExpli = "ExplTest";
+		Explic.fontSize = 35;
 		ExplLevel ();
 	}
 

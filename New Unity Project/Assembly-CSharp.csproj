@@ -49,6 +49,7 @@
      <Compile Include="Assets\Code\Box.cs" />
      <Compile Include="Assets\Code\Cube.cs" />
      <Compile Include="Assets\Code\CubeRotation.cs" />
+     <Compile Include="Assets\Code\ExitGame.cs" />
      <Compile Include="Assets\Code\Face.cs" />
      <Compile Include="Assets\Code\Grafo.cs" />
      <Compile Include="Assets\Code\InfoRotation.cs" />

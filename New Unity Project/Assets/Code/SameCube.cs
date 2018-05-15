@@ -131,7 +131,7 @@ public class SameCube : MonoBehaviour {
 		case 0:
 			Debug.Log ("Ninguna cara es la misma");
 			Debug.Log ("Mismo cubo");
-			Fx.symbol = "NoFaceSame";
+			Fx.explicacion = "NoFaceSame";
 			IsSameCube = true;
 			break;
 		case 1:
@@ -141,7 +141,7 @@ public class SameCube : MonoBehaviour {
 				(NoVisible2 (T1f,T2f))
 				||(S1.orientation.Equals(4))) {
 
-				Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
+				Tquest.symbol = T1.symbol;Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
 
 				if (S1.orientation.Equals (4)) {
 					string temp = NoOrientR1 [listpos(S1.localization),listpos( So1.localization)];
@@ -149,11 +149,11 @@ public class SameCube : MonoBehaviour {
 					Way = temp;
 					T1f = new Face (T1.symbol, T1.orientation, T1.localization);
 					MoveFace (Way, T1f);
-					Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
+					Tquest.symbol = T1.symbol;Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
 				}
 
 				Debug.Log ("Mismo cubo");
-				Fx.symbol = "FollowPath";
+				Fx.explicacion = "FollowPath";
 
 				IsSameCube = true;
 			} else {
@@ -224,9 +224,9 @@ public class SameCube : MonoBehaviour {
 				Face T1f2R =new Face (T1.symbol,T1.orientation,T1.localization);
 				if (NoVisible (T1f2R)) {
 					Debug.Log ("Mismo cubo");
-					Fx.symbol = "FollowPath";
+					Fx.explicacion = "FollowPath";
 					Way = S1mov;
-					Tquest.orientation = T1.localization;Tquest.localization = T1f2R.localization; //Localization original and final of the T side
+					Tquest.symbol = T1.symbol;Tquest.orientation = T1.localization;Tquest.localization = T1f2R.localization; //Localization original and final of the T side
 					IsSameCube = true;
 					break;
 				} else {
@@ -271,7 +271,7 @@ public class SameCube : MonoBehaviour {
 				}
 				if (Compare2Sides ()) {
 					Debug.Log ("Mismo cubo");
-					Fx.symbol = "FollowPath";
+				Fx.explicacion = "FollowPath";
 					IsSameCube = true;
 					break;
 				} else {
@@ -292,7 +292,7 @@ public class SameCube : MonoBehaviour {
 				(!string.IsNullOrEmpty(S3mov))&&(Compare3Sides ()))
 				) {
 				Debug.Log ("Mismo cubo");
-				Fx.symbol = "FollowPath";
+				Fx.explicacion = "FollowPath";
 				IsSameCube = true;
 			} 
 			else {
@@ -479,7 +479,7 @@ public class SameCube : MonoBehaviour {
 			Face T1f = new Face(T1.symbol,T1.orientation, T1.localization);
 			if (NoVisible (T1f)) {
 				Way = S1mov;
-				Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
+				Tquest.symbol = T1.symbol;Tquest.orientation = T1.localization;Tquest.localization = T1f.localization; //Localization original and final of the T side
 				return true;
 
 			} 
@@ -579,13 +579,13 @@ public class SameCube : MonoBehaviour {
 		bool found=false;
 		foreach (Face Fo in SidesO) {
 			if (Fo.symbol.Equals (Fx.symbol)) {
-				Fx.symbol = "Has changed its orientation";
+				Fx.explicacion = "Has changed its orientation";
 				found = true;
 			}
 		}
 		if (!found) 
 		{
-			Fx.symbol = "has changed its symbol";
+			Fx.explicacion = "has changed its symbol";
 
 			}
 		}
