@@ -15,7 +15,9 @@ public class Training : MonoBehaviour {
 	public Image Anchor, Movement, MLetrero;
 	public Sprite[] MovsSprites;
 	public Image[] Arrows;
+	public static bool ShowSide;
 	void Start () {
+		ShowSide = false;
 		TrainingCube.help = false;
 		Mtext.text=LangTest.LMan.getString ("MSign");
 		PathButton.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Path");
@@ -58,7 +60,6 @@ public class Training : MonoBehaviour {
 			SceneManager.LoadScene ("Map Select Level");	
 		}
 		next.gameObject.SetActive (false);
-		TrainingCube.help = true;
 		currentOrder += 1;
 
 	}
@@ -190,10 +191,12 @@ public class Training : MonoBehaviour {
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
 			break;
 		case 13://Explica Unfold
+			TrainingCube.help = false;
 			text.text = LangTest.LMan.getString ("Training13");
 			GameObject.Find("UnfoldChest").GetComponent<CanvasGroup>().interactable=true;
 			break;
 		case 14://Explica Caras desplegadas
+			TrainingCube.help = false;
 			text.text = LangTest.LMan.getString ("Training14");
 			GameObject.Find ("UnFront").GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Front");
 			GameObject.Find ("UnRight").GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Right");
@@ -207,12 +210,14 @@ public class Training : MonoBehaviour {
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
 			break;
 		case 15: //Explica plegar
+			TrainingCube.help = false;
 			GameObject.Find ("MostrarLados").GetComponent<CanvasGroup> ().alpha = 0;
 			GameObject.Find("UnfoldChest").GetComponent<CanvasGroup>().interactable=true;
 			text.fontSize=22;
 			text.text = LangTest.LMan.getString ("Training15");
 			break;
 		case 16: //Explica camino
+			TrainingCube.help = false;
 			text.fontSize=25;
 			GameObject.Find("UnfoldChest").GetComponent<CanvasGroup>().interactable=false;
 			PathButton.gameObject.SetActive (true);
@@ -234,6 +239,7 @@ public class Training : MonoBehaviour {
 			next.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
 			break;
 		case 18: //Move right
+			ShowSide=true;
 			TrainingCube.MoveNeeded="Right";
 			message.gameObject.SetActive(false);
 			MLetrero.gameObject.SetActive (true);

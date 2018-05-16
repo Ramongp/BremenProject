@@ -36,27 +36,29 @@ public class TrainingCube : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		// Handle native touch events
-		if ((Input.touchCount.Equals (2)) && help) {
-			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
-		} else {
-			foreach (Touch touch in Input.touches) {
-				Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-				HandleTouch (touch.fingerId, cam, touch.phase);
-			}
+		if (help) {
+			if ((Input.touchCount.Equals (2)) && help) {
+				HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
+			} else {
+				foreach (Touch touch in Input.touches) {
+					Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+					HandleTouch (touch.fingerId, cam, touch.phase);
+				}
 
-			// Simulate touch events from mouse events
-			if (Input.touchCount == 0) {
-				if (Input.GetMouseButtonDown (0)) {
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Began);
-				}
-				if (Input.GetMouseButton (0)) {
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Moved);
-				}
-				if (Input.GetMouseButtonUp (0)) {
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Ended);
+				// Simulate touch events from mouse events
+				if (Input.touchCount == 0) {
+					if (Input.GetMouseButtonDown (0)) {
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Began);
+					}
+					if (Input.GetMouseButton (0)) {
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Moved);
+					}
+					if (Input.GetMouseButtonUp (0)) {
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Ended);
+					}
 				}
 			}
 		}
@@ -124,22 +126,28 @@ public class TrainingCube : MonoBehaviour {
 			Assigned = false;
 
 			if (RefAngle > OrigAngle+RotMargin) {
-				CubePL.GetComponent<Unfold> ().MoveUpLeft90 ();
 				if (MoveNeeded.Equals ("TowardUpLeft")) {
+					CubePL.GetComponent<Unfold> ().MoveUpLeft90 ();
 					Training.currentOrder++;
 					Unfold.AfterRandom = CubePL.GetComponent<Unfold> ().finalRotation;
 				} else {
+					if (Training.ShowSide) {
+						CubePL.GetComponent<Unfold> ().MoveUpLeft90 ();
+					}
 					Training.currentOrder--;
 
 				}
 			} else {
 				if (RefAngle < OrigAngle-RotMargin) {
-					CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
 					if (MoveNeeded.Equals ("TowardUpRight")) {
+						CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
 						GBox [4].GetComponent<Animator> ().SetBool ("Training", false); //las movement of the training.
 						Training.currentOrder++;
 						Unfold.AfterRandom = CubePL.GetComponent<Unfold> ().finalRotation;
 					} else {
+						if (Training.ShowSide) {
+							CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
+						}
 						Training.currentOrder--;
 
 					}
@@ -233,22 +241,28 @@ public class TrainingCube : MonoBehaviour {
 		if ((Mathf.Abs (startPosition.y - endPosition.y) > CanvasMargin) || (Mathf.Abs (startPosition.x - endPosition.x) > CanvasMargin)) {
 			if (Mathf.Abs (startPosition.y - endPosition.y) < Mathf.Abs (startPosition.x - endPosition.x)) {
 				if (startPosition.x > endPosition.x) {
-					CubePL.GetComponent<Unfold> ().MoveLeft90 ();
 					if (MoveNeeded.Equals ("Left")) {
+						CubePL.GetComponent<Unfold> ().MoveLeft90 ();
 						Training.currentOrder++;
 						Unfold.AfterRandom = CubePL.GetComponent<Unfold> ().finalRotation;
 					} else {
+						if (Training.ShowSide) {
+							CubePL.GetComponent<Unfold> ().MoveLeft90 ();
+						}
 						Training.currentOrder--;
 					}
 
 					//Debug.Log ("Izquierda");
 				} else {
-					CubePL.GetComponent<Unfold> ().MoveRight90 ();
 					if (MoveNeeded.Equals ("Right")) {
+						CubePL.GetComponent<Unfold> ().MoveRight90 ();
 							Training.currentOrder++;
 							Unfold.AfterRandom = CubePL.GetComponent<Unfold>().finalRotation;
 					}
 						else{
+						if (Training.ShowSide) {
+							CubePL.GetComponent<Unfold> ().MoveRight90 ();
+						}
 						Training.currentOrder--;
 
 						}
@@ -257,30 +271,32 @@ public class TrainingCube : MonoBehaviour {
 				}
 			} else {
 					if (startPosition.y > endPosition.y) {
-						CubePL.GetComponent<Unfold> ().MoveDown90 ();
 						if (MoveNeeded.Equals ("Down")) {
+						CubePL.GetComponent<Unfold> ().MoveDown90 ();
 								//GBox [1].GetComponent<Animator> ().SetBool ("Training", true);
 								Training.currentOrder++;
 								Unfold.AfterRandom = CubePL.GetComponent<Unfold>().finalRotation;
 						}
 								else{
-							
-
+									if (Training.ShowSide) {
+							CubePL.GetComponent<Unfold> ().MoveDown90 ();
+							}
 							Training.currentOrder--;
 								}
 
 						}
 
 					else {
-					CubePL.GetComponent<Unfold> ().MoveUp90 ();
 						if (MoveNeeded.Equals ("Up")) {
+						CubePL.GetComponent<Unfold> ().MoveUp90 ();
 							//GBox [1].GetComponent<Animator> ().SetBool ("Training", true);
 							Training.currentOrder++;
 							Unfold.AfterRandom = CubePL.GetComponent<Unfold>().finalRotation;
 						}
 						else{
-
-
+						if (Training.ShowSide) {
+							CubePL.GetComponent<Unfold> ().MoveUp90 ();
+						}
 							Training.currentOrder--;
 						}
 					}

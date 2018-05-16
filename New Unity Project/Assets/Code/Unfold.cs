@@ -21,7 +21,7 @@ public class Unfold : MonoBehaviour {
 	void Start () {
 		MaxScale = 1;
 		MinScale = 0.7F;
-		seedMove = 20;
+		seedMove = 40;
 		//FoldPosition.localPosition = 
 		//UnfoldPositon.localPosition = new Vector3 (-10, 0, 10);
 		button = false;

@@ -75,40 +75,38 @@ public class Cube : MonoBehaviour {
 		Unfold.Test = true;
 		CanvasMargin = (Screen.height/20);
 		PreGame ();
-
+		help = false;
 		//CubeFake.transform.rotation = Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
 		//CubeFake.transform.rotation = Quaternion.Euler(-15, 30	,-10)*Quaternion.Euler(90 * Random.Range (0, 3), 90 * Random.Range (0, 3), 90 * Random.Range (0, 3));
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		/*if(Input.GetMouseButton(0)){
-			MovePL ();
-		}*/
-			// Handle native touch events
-		if ((Input.touchCount.Equals (2)) && help) {
-			HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
-		} else {
-			foreach (Touch touch in Input.touches) {
-				Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-				HandleTouch (touch.fingerId, cam, touch.phase);
-			}
+		if (help) {
+			if ((Input.touchCount.Equals (2)) && help) {
+				HandleTouch2 (Input.GetTouch (0), Input.GetTouch (1));
+			} else {
+				foreach (Touch touch in Input.touches) {
+					Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+					HandleTouch (touch.fingerId, cam, touch.phase);
+				}
 
-			// Simulate touch events from mouse events
-			if (Input.touchCount == 0) {
-				if (Input.GetMouseButtonDown (0)) {
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Began);
-				}
-				if (Input.GetMouseButton (0)) {
-					//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Moved);
-				}
-				if (Input.GetMouseButtonUp (0)) {
-					//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
-					Vector3 cam =new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
-					HandleTouch (10, cam, TouchPhase.Ended);
+				// Simulate touch events from mouse events
+				if (Input.touchCount == 0) {
+					if (Input.GetMouseButtonDown (0)) {
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Began);
+					}
+					if (Input.GetMouseButton (0)) {
+						//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Moved);
+					}
+					if (Input.GetMouseButtonUp (0)) {
+						//Vector3 cam = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100));
+						Vector3 cam = new Vector3 (Input.mousePosition.x, Input.mousePosition.y, 100);
+						HandleTouch (10, cam, TouchPhase.Ended);
+					}
 				}
 			}
 		}
@@ -179,11 +177,7 @@ public class Cube : MonoBehaviour {
 
 				restAngle = angle - prevAngle;
 				prevAngle= angle;
-				//angle = (Mathf.Rad2Deg * angle);
-				//Tangle = angle;
 				RefAngle = angle + Quadrant;
-				//	CubePL.transform.rotation= Quaternion.Euler (CubePL.transform.rotation.x, CubePL.transform.rotation.y, CubePL.transform.rotation.z+angle);
-				//CubePL.transform.RotateAround (Vector3.forward, angle*Mathf.Deg2Rad*Time.deltaTime);
 				CubePL.transform.Rotate (Vector3.forward, (Mathf.Deg2Rad* restAngle)/Time.deltaTime, Space.World);
 
 			}
@@ -202,16 +196,7 @@ public class Cube : MonoBehaviour {
 				}
 			}
 			return;
-		}
-
-
-		/*if (p1.position.y < p2.position.y) {
-				Touch temp = p1;
-				p1 = p2;
-				p2 = temp;
-			}*/
-
-		//Conseguir angulo de referencia 
+		} 
 		if (!Assigned) {
 			Assigned = true;
 			Vector3 diff = p2.position - p1.position;
@@ -229,11 +214,6 @@ public class Cube : MonoBehaviour {
 		Mesh mesh = m;
 		Vector2[] UVs = new Vector2[mesh.vertices.Length];
 
-		/*// Front del cubo que hace de cara
-		UVs[0] = new Vector2(0.0f, 0.0f);
-		UVs[1] = new Vector2(1.0f, 0.0f);
-		UVs[2] = new Vector2(0.0f, 1.0f);
-		UVs[3] = new Vector2(1.0f,1.0f);*/
 
 		// Bottom del cubo que hace de cara (plane) //Estan al reves para hacer mirror de la textura
 		UVs[12] = new Vector2(0.0f, 1.0f); //top right
@@ -241,28 +221,11 @@ public class Cube : MonoBehaviour {
 		UVs[14] = new Vector2(1.0f, 0.0f);	//btm left
 		UVs[15] = new Vector2(1.0f, 1.0f);//top left
 
-
 		// Top del cubo que hace de cara (plane)
 		UVs[4] = new Vector2(0.0f, 1.0f); //top l
 		UVs[5] = new Vector2(1.0f, 1.0f);//top r
 		UVs[8] = new Vector2(0.0f, 0.0f);//btm l
 		UVs[9] = new Vector2(1.0f,0.0f);//btm r
-		/*// Back
-		UVs[6]  = new Vector2(0.0f, 0.0f);
-		UVs[7]  = new Vector2(1.0f, 0.0f);
-		UVs[10] = new Vector2(0.0f, 1.0f);
-		UVs[11] = new Vector2(0.0f,0.0f);*/
-
-		/*// Left
-		UVs[16] = new Vector2(1.0f, 0.0f);
-		UVs[17] = new Vector2(1.0f, 0.0f);
-		UVs[18] = new Vector2(1.0f, 0.0f);
-		UVs[19] = new Vector2(1.0f,0.0f);
-		// Right        
-		UVs[20] = new Vector2(1.0f, 1.0f);
-		UVs[21] = new Vector2(0.0f, 1.0f);
-		UVs[22] = new Vector2(1.0f, 0.0f);
-		UVs[23] = new Vector2(0.0f,0.0f);*/
 		mesh.uv = UVs;
 	}
 
@@ -270,51 +233,17 @@ public class Cube : MonoBehaviour {
 		{
 		if ((Mathf.Abs (startPosition.y - endPosition.y) > CanvasMargin) || (Mathf.Abs (startPosition.x - endPosition.x) > CanvasMargin)) {
 			if	(Mathf.Abs (startPosition.y - endPosition.y) < Mathf.Abs (startPosition.x - endPosition.x)){
-		//if (Mathf.Abs (startPosition.y - endPosition.y) < CanvasMargin) {
-				//BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.currentResolution +" "+(startPosition.x - endPosition.x).ToString();
 				if (startPosition.x > endPosition.x) {
 					CubePL.GetComponent<Unfold> ().MoveLeft ();
-					//Debug.Log ("Izquierda");
 				} else {
 					CubePL.GetComponent<Unfold> ().MoveRight ();
-					//Debug.Log ("Derecha");
 				}
 			} else {
-			//	BReset.GetComponentInChildren<Text>().text= "Heigh" +Screen.height.ToString()+" "+(startPosition.y - endPosition.y).ToString();
-			//	if (Mathf.Abs (startPosition.x - endPosition.x) < CanvasMargin) {
 					if (startPosition.y > endPosition.y) {
 						CubePL.GetComponent<Unfold> ().MoveDown ();
-						/*if (startPosition.y - endPosition.y > Screen.height / 2) {
-							CubePL.GetComponent<Unfold> ().MoveDown ();
-						}*/
-						//Debug.Log ("Abajo");
 					} else {
 						CubePL.GetComponent<Unfold> ().MoveUp ();
-					/*	if (endPosition.y - startPosition.y > Screen.height / 2) {
-							CubePL.GetComponent<Unfold> ().MoveUp ();
-						}*/
-						//Debug.Log ("Arriba");
 					}
-			//	}
-				/*else { //Para testear
-					if (startPosition.x > endPosition.x) {
-						if (startPosition.y > endPosition.y) {
-						//	Debug.Log ("Towards-up-left");
-							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
-						} else {
-						//	Debug.Log ("Towards-up-left");
-							CubePL.GetComponent<Unfold> ().MoveUpLeft ();
-						}
-					} else {
-						if (startPosition.y > endPosition.y) {
-						//	Debug.Log ("Towards-up-right");
-							CubePL.GetComponent<Unfold> ().MoveUpRight ();
-						} else {
-						//	Debug.Log ("Towards-up-left");
-							CubePL.GetComponent<Unfold> ().MoveUpRight ();
-						}
-					}
-				}  */
 			}
 		} 
 		else {
@@ -325,11 +254,6 @@ public class Cube : MonoBehaviour {
 
 	void RandomCube()
 	{
-		//b.Front = new Face ("X", 0, 0);
-		//GBox [0].GetComponent<Renderer> ().material.mainTexture = Fake;
-
-		//Debug.Log ("Orig " + b.Status());
-		//int i = Random.Range (1, 4);
 		string Pasos = "Pasos ";
 		while(RandomSure()){
 
@@ -393,7 +317,7 @@ public class Cube : MonoBehaviour {
 		this.GetComponent<SameCube> ().Compare (OrigBox.Front, OrigBox.Up, OrigBox.Right, FinalBox.Front, FinalBox.Up, FinalBox.Right);
 	}
 
-	public void Sethelp()
+	/*public void Sethelp() //La ayuda resalta los simbolos que tienen que ver con el cambio
 	{
 		if (!help) {
 			help = true;
@@ -402,7 +326,7 @@ public class Cube : MonoBehaviour {
 			BReset.gameObject.SetActive (true);
 			BUnfold.gameObject.SetActive (true);
 		}
-	}
+	}*/
 
 	bool RandomSure()
 	{

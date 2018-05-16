@@ -24,7 +24,7 @@
               <string name="LockTest">Cave of treasure</string>
               <string name="FinalTest">Recover stolen chests</string>
               <string name="ExplTraining">I have a treasure at home but I need your help to open it, with the right movements it should be easy.</string>
-              <string name="ExplLock">I have a couple of treasures hidden here. Can you find the right path to open them? Rotate the chest using the movement from the tutorial to put the lock in front of the pirate, the more time you spend the fewer points you get.</string>
+              <string name="ExplLock">I have a couple of treasures hidden here. Can you find the right path to open them?</string>
               <string name="ExplTest">Some time ago this ship stole a few of my chests. When I wanted to recover them, the captain of the ship proposed me a deal. I will get my chests back if I know to differentiate them from theirs, for that I will compare the memory I have of the chest with the chest that they show me.</string>
 
 
@@ -57,13 +57,27 @@
              <string name="ErrorTrainingB">Try Again</string>
 
 
+             	  <string name="LocKExplTimer">Para cada cofre tienes sesenta segundos, cuanto más tiempo tardes peor puntuación y si te quedas sin tiempo no ganarás monedas.</string>
+       		   <string name="LockExplPath">El camino se irá mostrando aquí, como máximo puedes usar tres movimientos, así que piensa el camino antes de empezar a rotar el cubo.</string>
+       		    <string name="LockExplButtons1">Dale al botón "Rendirse" para pasar al siguiente cofre aunque no recibirás monedas.</string>
+       		    <string name="LockExplButtons2">Dale al botón "Deshacer" para deshacer el último movimiento que hayas hecho, esto reducirá un poco la recompensa del cofre.</string>
+       		    <string name="LockExplButtons3">El botón "Pista" aparecerá cuando te quede poco tiempo y el camino para el cofre esté formado por más de un movimiento. Púlsalo para ver el primer movimiento del camino, esto reducirá un poco la recompensa del cofre.</string>
+       		     <string name="LockExpl1">Ahora deberás encontrar los caminos que permiten abrir estos cofres.</string>
+       		     <string name="LockExpl2">Deberás dejar la cerradura igual que en el tutorial, en la cara frontal y con la orientación que ves en el ejemplo.</string>
+       		     <string name="LockExpl3">Si la cerradura no está en una cara visible al principio del test, puedes desplegar el cofre antes de aplicar algún movimiento para ver en que lado está.</string>
+       		      <string name="LockExpl4">Ahora ya sabes todo lo necesario, puedes empezar a abrir cofres.</string>
+       		      <string name="GiveUpButton">Rendirse</string>
+       		       <string name="ResetButton">Deshacer</string>
+       		        <string name="HintButton">Hint</string>
            		 <string name="Path">Path</string>
-           		 <string name="SeePoints">See score</string>
+           		 <string name="SeePoints">See reward</string>
            		  <string name="Continue">Continue</string>
                  <string name="GiveUp">On the right you can see one of the solutions for this test. Keep practicing!</string>
                  <string name="LockTimeUp">Oh, wow. You have run out of time.</string>
                  <string name="PassedLockTest">Well Done!</string>
                  <string name="PassedLockTestLevel">You have opened all of the treasures!</string>
+                  <string name="LockWrongSide">La cerradura no se encuentra en la cara frontal. Pulsa "Deshacer" he inténtalo de nuevo.</string>
+                  <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
 
                  <string name="Understood">Understood</string>
@@ -100,7 +114,7 @@
                     <string name="NoDiff">No, they are different chests.</string>
                     <string name="SameTestTimeUp">They can be the same chest but rotated. Too bad you have run out of time.</string>
            	      <string name="DiffTestTimeUp">They are different chests. Too bad you have run out of time.</string>
-                    <string name="Points">Points</string>
+                    <string name="Points">Coins</string>
                      <string name="Time">Time left</string>
                       <string name="Money">Gold</string>
 
@@ -167,7 +181,7 @@
               <string name="LockTest">Cueva del tesoro</string>
               <string name="FinalTest">Recuperar los cofres robados</string>
               <string name="ExplTraining">Tengo un cofre en casa, pero necesito tu ayuda para abrirlo, con los movimientos adecuados será muy fácil.</string>
-              <string name="ExplLock">Tengo unos cuantos cofres guardados aquí. ¿Puedes encontrar la secuencia de movimientos para abrirlos? Usa los movimientos del tutorial para rotar el cofre y colocar la cerradura en frente del pirata, cuanto más tardes peor será tu puntuación.</string>
+              <string name="ExplLock">Tengo unos cuantos cofres guardados aquí. ¿Puedes encontrar la secuencia de movimientos para abrirlos?</string>
               <string name="ExplTest">Hace un tiempo este barco robó unos cuantos de mis cofres. Cuando los quise recuperar el capitán del barco me propuso un trato. Me devolverá mis cofres si los sé diferenciar de los suyos, para ello compararé el recuerdo que tengo del cofre con el cofre que me muestren.</string>
 
 	
@@ -200,14 +214,30 @@
                <string name="Training19">¡Muy bien! Con el botín de este cofre puedo llegar hasta la cueva donde guardo mis tesoros y allí recaudar más botín.</string>
             <string name="ErrorTraining">Lo siento, pero ese no es el movimiento que necesitamos.</string>
              <string name="ErrorTrainingB">Intentarlo de nuevo</string>
-           
+
+
+
+       		  <string name="LocKExplTimer">Para cada cofre tienes sesenta segundos, cuanto más tiempo tardes peor recompensa y si te quedas sin tiempo no ganarás monedas.</string>
+       		   <string name="LockExplPath">El camino se irá mostrando aquí, como máximo puedes usar tres movimientos, así que piensa el camino antes de empezar a rotar el cubo.</string>
+       		    <string name="LockExplButtons1">Dale al botón "Rendirse" para pasar al siguiente cofre aunque no recibirás monedas.</string>
+       		    <string name="LockExplButtons2">Dale al botón "Deshacer" para dejar el cofre como al principio del test, esto reducirá un poco la recompensa del cofre.</string>
+       		    <string name="LockExplButtons3">El botón "Pista" aparecerá cuando te quede poco tiempo y el camino para el cofre esté formado por más de un movimiento. Púlsalo para ver el primer movimiento del camino, esto reducirá un poco la recompensa del cofre.</string>
+       		     <string name="LockExpl1">Ahora deberás encontrar los caminos que permiten abrir estos cofres.</string>
+       		     <string name="LockExpl2">Deberás dejar la cerradura igual que en el tutorial, en la cara frontal y con la orientación que ves en el ejemplo.</string>
+       		     <string name="LockExpl3">Si la cerradura no está en una cara visible al principio del test, puedes desplegar el cofre antes de aplicar algún movimiento para ver en que lado está.</string>
+       		      <string name="LockExpl4">Ahora ya sabes todo lo necesario, puedes empezar a abrir cofres.</string>
+       		      <string name="GiveUpButton">Rendirse</string>
+       		       <string name="ResetButton">Deshacer</string>
+       		        <string name="HintButton">Pista</string>
           		<string name="Path">Camino</string>
-          		<string name="SeePoints">Ver puntuación</string>
+          		<string name="SeePoints">Ver recompensa</string>
           		 <string name="Continue">Continuar</string>
 			  <string name="GiveUp">A la derecha puedes ver una de las soluciones para esta prueba ¡Sigue practicando!</string>
 			  <string name="LockTimeUp">Oh, vaya. Te has quedado sin tiempo.</string>
            	  <string name="PassedLockTest">¡Conseguido!</string>
            	  <string name="PassedLockTestLevel">¡Has abierto todos los cofres!</string>
+           	   <string name="LockWrongSide">La cerradura no se encuentra en la cara frontal. Pulsa "Deshacer" he inténtalo de nuevo.</string>
+                  <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
 
            	   <string name="Understood">Entendido.</string>
@@ -243,7 +273,7 @@
            	     <string name="NoDiff">No, son cofres diferentes.</string>
            	      <string name="SameTestTimeUp">Pueden ser el mismo cofre con alguna rotación. Lástima que te hayas quedado sin tiempo.</string>
            	      <string name="DiffTestTimeUp">Son cofres diferentes. Lástima que te hayas quedado sin tiempo.</string>
-           	     <string name="Points">Puntos</string>
+           	     <string name="Points">Monedas</string>
            	     <string name="Time">Tiempo restante</string>
            	       <string name="Money">Oro</string>
 
@@ -310,7 +340,7 @@
               <string name="LockTest">Schatzhöhle</string>
               <string name="FinalTest">Erlange gestohlene Truhen</string>
               <string name="ExplTraining">Ich habe eine Truhe zuhause, aber ich brauche deine Hilfe, um sie zu öffnen, mit den richtigen Bewegungen wird es sehr einfach sein.</string>
-              <string name="ExplLock">Ich habe hier ein paar Truhen gespeichert, kannst du die Reihenfolge der Bewegungen finden, um sie zu öffnen? Benutze die Bewegungen des Tutorials, um die Truhe zu drehen und das Schloss vor den Piraten zu setzen, je später dein Punktestand ist.</string>
+              <string name="ExplLock">Ich habe hier ein paar Truhen gespeichert, kannst du die Reihenfolge der Bewegungen finden, um sie zu öffnen?</string>
               <string name="ExplTest">Vor einiger Zeit hat dieses Schiff ein paar meiner Truhen gestohlen. Als ich sie zurückholen wollte, schlug mir der Kapitän des Schiffes einen Handel vor. Ich werde meine Truhen zurückbekommen, wenn ich sie von ihren unterscheiden kann, deshalb werde ich die Erinnerung, die ich von der Truhen habe, mit der Truhen vergleichen, die sie mir zeigen.</string>
 
              																																																															
@@ -342,13 +372,28 @@
             <string name="ErrorTraining">Entschuldigung, aber das war nicht die Bewegung, die wir brauchen</string>
              <string name="ErrorTrainingB">Versuchen Sie es erneut</string>
 
+
+             	  <string name="LocKExplTimer">Para cada cofre tienes sesenta segundos, cuanto más tiempo tardes menos monedas obtendras y si te quedas sin tiempo no ganarás monedas.</string>
+       		   <string name="LockExplPath">El camino se irá mostrando aquí, como máximo puedes usar tres movimientos, así que piensa el camino antes de empezar a rotar el cubo.</string>
+       		    <string name="LockExplButtons1">Dale al botón "Rendirse" para pasar al siguiente cofre aunque no recibirás monedas.</string>
+       		   <string name="LockExplButtons2">Dale al botón "Deshacer" para dejar el cofre como al principio del test, esto reducirá un poco la recompensa del cofre.</string>
+       		    <string name="LockExplButtons3">El botón "Pista" aparecerá cuando te quede poco tiempo y el camino para el cofre esté formado por más de un movimiento. Púlsalo para ver el primer movimiento del camino, esto reducirá un poco la recompensa del cofre.</string>
+       		     <string name="LockExpl1">Ahora deberás encontrar los caminos que permiten abrir estos cofres.</string>
+       		     <string name="LockExpl2">Deberás dejar la cerradura igual que en el tutorial, en la cara frontal y con la orientación que ves en el ejemplo.</string>
+       		     <string name="LockExpl3">Si la cerradura no está en una cara visible al principio del test, puedes desplegar el cofre antes de aplicar algún movimiento para ver en que lado está.</string>
+       		      <string name="LockExpl4">Ahora ya sabes todo lo necesario, puedes empezar a abrir cofres.</string>
+       		      <string name="GiveUpButton">Rendirse</string>
+       		       <string name="ResetButton">Deshacer</string>
+       		        <string name="HintButton">Hinweis</string>
              <string name="Path">Pfad</string>
-              <string name="SeePoints">Siehe Punktzahl</string>
+              <string name="SeePoints">Siehe Belohnung</string>
               <string name="Continue">Fortsetzen</string>
               <string name="GiveUp">Auf der rechten Seite sehen Sie eine der Lösungen für diesen Test.Übe weiter!</string>
                <string name="LockTimeUp">Oh wow. Du hast keine Zeit mehr.</string>
            	  <string name="PassedLockTest">Gut gemacht!</string>
            	  <string name="PassedLockTestLevel">Du hast alle Schätze geöffnet!</string>
+           	   <string name="LockWrongSide">La cerradura no se encuentra en la cara frontal. Pulsa "Deshacer" he inténtalo de nuevo.</string>
+               <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
 
            	   <string name="Understood">Verstanden</string>
@@ -384,7 +429,7 @@
            	     <string name="NoDiff">Nein, sie sind verschiedene Truhen.</string>
            	      <string name="SameTestTimeUp">Sie können die gleiche Truhe aber gedreht sein. Schade, dass dir die Zeit ausgegangen ist.</string>
            	      <string name="DiffTestTimeUp">Sie sind verschiedene Truhen. Schade, dass dir die Zeit ausgegangen ist.</string>
-           	     <string name="Points">Punkte</string>
+           	     <string name="Points">Münzen</string>
            	     <string name="Time">verbleibende Zeit</string>
            	       <string name="Money">Gold</string>
 
