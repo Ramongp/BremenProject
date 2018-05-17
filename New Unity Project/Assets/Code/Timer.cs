@@ -7,38 +7,40 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	public static float TimeLeft, AnimationTime;
 	public Slider TimeSlider;
-	public static bool start, end, animation;
+	public static bool start, end, animation,BonusCorrect, HelpPressed;
 	public static float TimeLevel;
 	public static int pointsLevel, points;
-	public int currentValue, answer;
-	public int moneySpeed; 
+	public int currentValue, answer, ContExpl;
+	public int moneySpeed;
 	public Text Solution, PointText, ExplQuest;
 	public Image TimeFill,Bag, FondoQuest;
-	public Button TaparN, TaparE, NextBoxB, YesQuest, NoQuest, BackC,DownC,LeftC,StartTestButton,TrasBonusPreg;
+	public Button TaparN, TaparE, NextBoxB, YesQuest, NoQuest, BackC,DownC,LeftC,StartTestButton,TrasBonusPreg, ButtonPath;
 	public Image Message, StarSlid1, StarSlid2, StarSlid3, StarP1, StarP2, StarP3;
 	public Image[] MArrows,Arrows;
 	public Color StarOn, StarOff;
 	public Sprite[] ArrowsSp;
+	public Button[] Explicaciones;
 	public float TotalTime;
+	public  bool CorrectAnswer;
 	public GameObject PregQuest, PregCorrectPanel;
 	void Start () {
-		
-		GameObject.Find("ButtonPath").GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Path");
-		TaparN.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("SeePoints");
-		TaparE.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
-		TrasBonusPreg.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
+
+		for (int i = 0; i < Explicaciones.Length; i++) {
+			Explicaciones[i].gameObject.SetActive (false);
+		}
+		ButtonPath.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Path");
+		TaparN.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("SeePoints");
+		TaparE.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
+		TrasBonusPreg.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
 		moneySpeed = 20;
 		ExplHelp ();
 		end = true;
 		StartTestButton.gameObject.SetActive (true);
-		StartTestButton.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Understood");
-		if (LangTest.Help) {
-			Solution.fontSize = 14;
-
-			Solution.text = LangTest.LMan.getString ("NoExplHelp")+" "+LangTest.LMan.getString ("ExplHelp");
-		} else {
-			Solution.text = LangTest.LMan.getString ("NoExplHelp");
-		}
+		StartTestButton.GetComponentInChildren<Text> ().fontSize = 20;
+		ContExpl = 0;
+		StartTestButton.GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Continue");
+			Solution.fontSize = 20;
+			Solution.text = LangTest.LMan.getString ("ExplTest1");
 	}
 	
 	// Update is called once per frame
@@ -70,7 +72,7 @@ public class Timer : MonoBehaviour {
 
 	void ExplHelp()
 	{
-		StartTestButton.gameObject.SetActive (false);
+		ButtonPath.gameObject.SetActive (false);
 		PregCorrectPanel.gameObject.SetActive (false);
 		FondoQuest.gameObject.SetActive (false);
 		PregQuest.SetActive (false);
@@ -102,7 +104,10 @@ public class Timer : MonoBehaviour {
 
 	void SetTimer()
 	{
-		
+		CorrectAnswer = false;
+		HelpPressed = false;
+		BonusCorrect = false;
+		ButtonPath.gameObject.SetActive (false);	
 		StartTestButton.gameObject.SetActive (false);
 		PregCorrectPanel.gameObject.SetActive (false);
 		FondoQuest.gameObject.SetActive (false);
@@ -138,6 +143,7 @@ public class Timer : MonoBehaviour {
 
 	public void TimeUp()
 	{
+		StopSetHelp ();
 		TimeLeft = 0;
 		GameObject.Find ("Camera").GetComponent<Cube> ().Hide ();
 		Solution.fontSize = 20;
@@ -165,8 +171,9 @@ public class Timer : MonoBehaviour {
 		SendGmail.TestString+=","+ TimeLeft.ToString();
 	}
 
-	public void Animation(bool correct,int answer)
+	public void Animation(bool correct,int answer) // Calcular puntuacion sin bonus
 	{
+		StopSetHelp ();
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SaveMove (Unfold.Info);
 		Unfold.Info="";
 		this.answer = answer;
@@ -174,7 +181,7 @@ public class Timer : MonoBehaviour {
 		TaparE.gameObject.SetActive (true);
 		animation = true;
 		AnimationTime = 2;
-
+		CorrectAnswer = correct;
 
 		if (correct) {
 			Solution.fontSize = 30;
@@ -208,15 +215,31 @@ public class Timer : MonoBehaviour {
 		SendGmail.TestString+=","+ TimeLeft.ToString();
 	}
 
-	public void NextBox()
+	public void NextBox() //Calcular los puntos y enviar datos
 	{
+		
 			Solution.color = Color.black;
 			TaparN.gameObject.SetActive (false);
 			Message.gameObject.SetActive (false);
 			//Solution.gameObject.SetActive (false);
 			Unfold.ShowExpl = false;
 		TimeSlider.gameObject.SetActive (false);
-		PointText.text="+"+((int)(TimeLeft*10)).ToString () +" "+ LangTest.LMan.getString ("Points");
+		int ContCorrect = 0;
+		float HelpReductor = 0;
+		int PlusBonus = 0;
+		if (CorrectAnswer) {
+			ContCorrect = 1;
+		}
+		if (HelpPressed) { //usar la ayuda quita un sexo
+			HelpReductor = 1 / 6f;
+		}
+		if (BonusCorrect) {
+			PlusBonus = 50;
+		}
+		SendGmail.TestCorrAns += ContCorrect;
+		SendGmail.TestAvgTime += 60-TimeLeft;
+		SendGmail.TestScore += (int)((((TimeLeft - (TimeLeft * HelpReductor)) * 10)+PlusBonus) * ContCorrect);
+		PointText.text="+"+((int)((((TimeLeft - (TimeLeft * HelpReductor)) * 10)+PlusBonus) * ContCorrect)).ToString () +" "+ LangTest.LMan.getString ("Points");
 		if (TimeLeft < 40) {
 			StarP3.color= StarOff;
 		}
@@ -241,14 +264,15 @@ public class Timer : MonoBehaviour {
 		} else {
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().Send ();
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Questionnaire");
-			FondoQuest.gameObject.SetActive (true);
-			PregQuest.SetActive (true);
-			ExplQuest.text = LangTest.LMan.getString ("ExplQuest");
-			YesQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("YesQuest");
-			NoQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NoQuest");
+			//FondoQuest.gameObject.SetActive (true);
+			//PregQuest.SetActive (true);
+			//ExplQuest.text = LangTest.LMan.getString ("ExplQuest");
+		//	YesQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("YesQuest");
+		//	NoQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NoQuest");
+			SendGmail.Level=2;
 			Cube.help = false;
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
-			//Application.LoadLevel ("Questionnaire");
+			Application.LoadLevel ("Score");
 		}
 	}
 
@@ -292,7 +316,7 @@ public class Timer : MonoBehaviour {
 					if (answer.Equals (1)) {
 						Solution.GetComponent<Animator> ().SetBool ("Correct", false);
 					}
-					Cube.help = true;
+					//Cube.help = true;
 					if (Cube.change.Equals (0)) {
 						Solution.text = LangTest.LMan.getString ("DiffBecause")+ LangTest.LMan.getString (SameCube.Fx.symbol) +" "+ LangTest.LMan.getString ("DiffBecause2")+" "+  LangTest.LMan.getString (TradLocaton (SameCube.Fx.localization)) +" "+ LangTest.LMan.getString ("DontMatchSym")+" "+LangTest.LMan.getString (Cube.SideWithChange.symbol) +".";
 					} else {
@@ -356,6 +380,7 @@ public class Timer : MonoBehaviour {
 
 	void CreateArrows(string path)
 	{
+		ButtonPath.gameObject.SetActive (true);
 		string[] way;
 		way = path.Split ('_');
 
@@ -418,6 +443,7 @@ public class Timer : MonoBehaviour {
 	{
 		PregCorrectPanel.gameObject.SetActive (false);
 		if (i.Equals (SameCube.Tquest.localization)) {
+			BonusCorrect = true;
 			SendGmail.TestString += ",Correct";
 			Solution.text = LangTest.LMan.getString ("Bonus")+" "+LangTest.LMan.getString(TradLocaton(SameCube.Tquest.localization))+".";
 		} else {
@@ -448,6 +474,7 @@ public class Timer : MonoBehaviour {
 	}
 	void CreateArrowsBonus(string path)
 	{
+		ButtonPath.gameObject.SetActive (true);
 		string[] way;
 		way = path.Split ('_');
 
@@ -489,4 +516,127 @@ public class Timer : MonoBehaviour {
 		TrasBonusPreg.gameObject.SetActive (false);
 		Explicacion ();
 	}
+
+	public void Sethelp() //La ayuda resalta los simbolos que tienen que ver con el cambio
+	{
+		HelpPressed = true;
+		Solution.fontSize = 25;
+		GameObject.Find ("Camera").GetComponent<Cube> ().BHelp.gameObject.GetComponent<CanvasGroup>().interactable=false;
+		if (SameCube.SameSymbols > 0) {
+			Message.gameObject.SetActive (true);
+			Face pista = GameObject.Find ("Camera").GetComponent<SameCube> ().So1;
+			GameObject.Find ("Camera").GetComponent<Cube> ().GBox [pista.localization].GetComponent<Animator> ().SetBool ("Training", true);
+			GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [pista.localization].GetComponent<Animator> ().SetBool ("Training", true);
+			Solution.text = LangTest.LMan.getString ("SameSymbolHintPart1")+" "+LangTest.LMan.getString (pista.symbol)+" "+LangTest.LMan.getString ("SameSymbolHintPart2");
+		} 
+		else {
+			Message.gameObject.SetActive (true);
+			Solution.text = LangTest.LMan.getString ("NoSameSymbolHint");
+		}
+		Invoke("StopSetHelp", 3);
+	}
+
+
+	public void StopSetHelp()
+	{
+		if(!end){
+			GameObject.Find ("Camera").GetComponent<Cube> ().BHelp.gameObject.GetComponent<CanvasGroup>().interactable = true;
+			Message.gameObject.SetActive (false);
+		}
+		if (SameCube.SameSymbols > 0) {
+			Face pista = GameObject.Find ("Camera").GetComponent<SameCube> ().So1;
+			GameObject.Find ("Camera").GetComponent<Cube> ().GBox [pista.localization].GetComponent<Animator> ().SetBool ("Training", false);
+			GameObject.Find ("Camera").GetComponent<Cube> ().OGbox [pista.localization].GetComponent<Animator> ().SetBool ("Training", false);
+		}
+	}
+
+
+
+		public void ExplainTest()
+		{
+			switch(ContExpl)
+			{
+		case 0: //Explica Simbolos differents
+			Solution.text = LangTest.LMan.getString ("ExplTest2");
+			GameObject.Find ("Camera").GetComponent<Cube> ().CubePL.GetComponent<Unfold> ().UnfoldBox ();
+			GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", true);
+			ContExpl++;
+			break;
+		case 1: //Explicar Caras visibles
+			Solution.text = LangTest.LMan.getString ("ExplTest3");
+			GameObject.Find ("Camera").GetComponent<Cube> ().CubePL.GetComponent<Unfold> ().UnfoldBox ();
+			GameObject.Find ("CubePl Sin Codigo (L)").GetComponent<Animator> ().SetBool ("Unfold", false);
+			for (int i = 0; i < 6; i++) {
+				Explicaciones [i].gameObject.SetActive (true);
+			}
+			Explicaciones[0].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Front");
+			Explicaciones[5].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Front");
+			Explicaciones[1].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Up");
+			Explicaciones[4].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Up");
+			Explicaciones[2].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Right");
+			Explicaciones[3].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("Right");
+			ContExpl++;
+			break;
+		case 2: //Explicar Cofre izq
+			for (int i = 0; i < 6; i++) {
+				Explicaciones [i].gameObject.SetActive (false);
+			}
+			Explicaciones[6].gameObject.SetActive (true);
+			Solution.text = LangTest.LMan.getString ("ExplTest4");
+			ContExpl++;
+			break;
+		case 3: //Explicar Cofre Der
+			Explicaciones[6].gameObject.SetActive (false);
+			Explicaciones[7].gameObject.SetActive (true);
+			Solution.text = LangTest.LMan.getString ("ExplTest5");
+			ContExpl++;
+			break;
+		case 4: //Explicar Que pueden girar
+			Explicaciones[7].gameObject.SetActive (true);
+			Solution.text = LangTest.LMan.getString ("ExplTest6");
+			GameObject.Find ("Camera").GetComponent<Cube> ().CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
+			ContExpl++;
+			break;
+		case 5: //Explicar Timer
+			Explicaciones[7].gameObject.SetActive (false);
+			Explicaciones[8].gameObject.SetActive (true);
+			Explicaciones[8].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("ExplTest7");
+			Message.gameObject.SetActive (false);
+			ContExpl++;
+			break;
+		case 6: //Explicar Same
+			Explicaciones[8].gameObject.SetActive (false);
+			Explicaciones[9].gameObject.SetActive (true);
+			Explicaciones[9].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("ExplTest8");
+			ContExpl++;
+			break;
+		case 7: //Explicar Different
+			Explicaciones[9].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("ExplTest9");
+			ContExpl++;
+			break;
+		case 8: //Explicar Ayuda
+			ContExpl++;
+			if (LangTest.Help) {
+				Explicaciones [9].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("ExplTestHelp");
+			} 
+			else {
+				ExplainTest ();
+			}
+			break;
+		case 9: //Explicar empezar juego
+			Explicaciones[9].gameObject.SetActive (false);
+			Message.gameObject.SetActive (true);
+			StartTestButton.GetComponentInChildren<Text> ().text=LangTest.LMan.getString ("TrainingB0");
+			Solution.text = LangTest.LMan.getString ("ExplTest10");
+			ContExpl++;
+			break;
+		case 10: //Empezar juego
+			Message.gameObject.SetActive (false);
+			StartTestButton.gameObject.SetActive (false);
+			GameObject.Find ("Camera").GetComponent<Cube> ().Restart ();
+			break;
+			}
+
+			
+		}
 }

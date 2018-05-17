@@ -6,7 +6,7 @@ public class LockTimer : MonoBehaviour {
 
 	public float TimeLeft, maxTime;
 	public Slider TimeSlider;
-	public Button Tapar, TaparNextLevel, NextBoxB, ExplainButton;
+	public Button Tapar, TaparNextLevel, NextBoxB, ExplainButton, Pista;
 	public GameObject Key;
 	public Text Text, PointText, PathText;
 	public ParticleSystem Correct;
@@ -17,9 +17,15 @@ public class LockTimer : MonoBehaviour {
 	public int correctLock;
 	public int ContExpl;
 	public Button[] ExplButtons;
+	public static bool PressedRestart, PressedHint;
 	// Use this for initialization
 	void Start () {
+		SendGmail.LockScore = 0;
+		SendGmail.LockCorrAns = 0;
+		SendGmail.LockAvgTime = 0;
+		Pista.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HintButton");
 		ExplainButton.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
+		Pista.gameObject.SetActive (false);
 		Bag.gameObject.SetActive (false);
 		NextBoxB.gameObject.SetActive (false);
 		TaparNextLevel.gameObject.SetActive (false);
@@ -66,6 +72,10 @@ public class LockTimer : MonoBehaviour {
 				StarSlid1.color= StarOff;
 			}
 			if (TimeLeft < 20) {
+				string[] check = LockCube.move.Split ('_');
+				if (check.Length > 2 && LangTest.Help) {
+					Pista.gameObject.SetActive (true);
+				}
 				StarSlid2.color= StarOff;
 			}
 			if (TimeLeft<1) {
@@ -129,13 +139,25 @@ public class LockTimer : MonoBehaviour {
 		Buttons.SetActive (false);
 		
 	}
-	public void Points()
+	public void Points()   //Se calcula la puntuacion
 	{
 		Message.gameObject.SetActive (false);
 		Unfold.ShowExpl = false;
 		Tapar.interactable = false; 
 		//	GameObject.Find ("Reward").GetComponent<Points> ().RewardAnimation (TimeLeft);
-		PointText.text="+ "+((int)(TimeLeft*10*correctLock)).ToString () +" " + LangTest.LMan.getString ("Points");
+		float hint = 0;
+		float PrRestat =0;
+		if (PressedHint) {
+			hint = 1/2f;
+		}
+		if (PressedRestart) {
+			PrRestat = 1/6f;
+		}
+		SendGmail.LockCorrAns += correctLock;
+
+		SendGmail.LockAvgTime += +60 - TimeLeft;
+		SendGmail.LockScore += (int)((TimeLeft - (hint*TimeLeft) - (PrRestat*TimeLeft))*10* correctLock);
+		PointText.text="+ "+((int)((TimeLeft - (hint*TimeLeft) - (PrRestat*TimeLeft))*10* correctLock)).ToString () +" " + LangTest.LMan.getString ("Points");
 		if (TimeLeft*correctLock < 40) {
 			StarP3.color= StarOff;
 		}
@@ -156,6 +178,9 @@ public class LockTimer : MonoBehaviour {
 	public void Set()
 	{
 		if (LockCube.Test < 10) {
+			PressedHint = false;
+			PressedRestart = false;
+			Pista.gameObject.SetActive (false);
 			Bag.gameObject.SetActive (false);
 			NextBoxB.gameObject.SetActive (false);
 			Message.gameObject.SetActive (false);
@@ -192,7 +217,8 @@ public class LockTimer : MonoBehaviour {
 	}
 	public void nextLvl()
 	{
-		Application.LoadLevel ("Map Select Level");	
+		SendGmail.Level = 1;
+		Application.LoadLevel ("Score");	
 	}
 	public void ExplainTest()
 	{
@@ -225,11 +251,15 @@ public class LockTimer : MonoBehaviour {
 			Message.gameObject.SetActive (false);
 			ContExpl++;
 			break;
-		case 5: //explicar Pista
-			ExplButtons [2].gameObject.SetActive (true);
-			ExplButtons [2].GetComponentInChildren<Text>().text=LangTest.LMan.getString ("LockExplButtons3");
-			Message.gameObject.SetActive (false);
+		case 5: //explicar Pista Solo si tiene ayuda activada
 			ContExpl++;
+			if (LangTest.Help) {
+				ExplButtons [2].gameObject.SetActive (true);
+				ExplButtons [2].GetComponentInChildren<Text> ().text = LangTest.LMan.getString ("LockExplButtons3");
+				Message.gameObject.SetActive (false);
+			} else {
+				ExplainTest ();
+			}
 			break;
 		case 6: //explicar Desplegar
 			ExplButtons [2].gameObject.SetActive (false);

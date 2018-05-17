@@ -6,7 +6,7 @@ public class SameCube : MonoBehaviour {
 	// Use this for initialization
 	public string[,] Forient,Rorient,Uorient,Rot, NoOrientR3,NoOrientR1;
 	Face[] SidesO,SidesF;
-	Face Fo,Uo,Ro,Ff,Uf,Rf,S1,S2,S3,T1,T2,So1,So2,So3; //Caras originales, finales, repetidas (sides) y no repetidas (tapadas)
+	public Face Fo,Uo,Ro,Ff,Uf,Rf,S1,S2,S3,T1,T2,So1,So2,So3; //Caras originales, finales, repetidas (sides) y no repetidas (tapadas)
 	public string[] movs; //Conjunto de strings de movimientos de cada cara
 	string S1mov,S2mov,S3mov;
 	public static Face Fx, Tquest;

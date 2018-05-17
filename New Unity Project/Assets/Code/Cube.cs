@@ -25,6 +25,7 @@ public class Cube : MonoBehaviour {
 	public static bool help,HelpPressed, UnfoldPressed, ResetPressed; //boolean for the button
 
 	void Start () {
+		
 		QuestionsCube = new RandomBox[] { //Box,Moves {} and {Face with change and the change}
 			new RandomBox (new Box (new Face (Symbols[0], 0, 0), new Face (Symbols[1], 0, 1), new Face (Symbols[6], 0, 2), 
 									new Face (Symbols[3], 0, 3), new Face (Symbols[4], 0, 4), new Face (Symbols[5], 0, 5)),new int[] {3},new int[] {0,1}),
@@ -113,12 +114,10 @@ public class Cube : MonoBehaviour {
 	}
 
 		private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase) {
-		//BReset.GetComponentInChildren<Text>().text= touchPosition.x+" x "+touchPosition.y+ " y ";
 			switch (touchPhase) {
 		case TouchPhase.Began:
 			startPosition = touchPosition;
 			endPosition = startPosition;
-		//	Debug.Log ("Sart"+touchPosition.ToString ());
 				break;
 		case TouchPhase.Moved:
 			if (help) {
@@ -316,17 +315,7 @@ public class Cube : MonoBehaviour {
 		Debug.Log ("Final " + FinalBox.Status());
 		this.GetComponent<SameCube> ().Compare (OrigBox.Front, OrigBox.Up, OrigBox.Right, FinalBox.Front, FinalBox.Up, FinalBox.Right);
 	}
-
-	/*public void Sethelp() //La ayuda resalta los simbolos que tienen que ver con el cambio
-	{
-		if (!help) {
-			help = true;
-			CubePL.GetComponent<Unfold> ().WriteHelp ();
-			BHelp.gameObject.SetActive (false);
-			BReset.gameObject.SetActive (true);
-			BUnfold.gameObject.SetActive (true);
-		}
-	}*/
+		
 
 	bool RandomSure()
 	{
@@ -593,9 +582,12 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 
 	public void Restart()
 	{
+		BSame.gameObject.GetComponent<CanvasGroup>().interactable = true;
+		BDiff.gameObject.GetComponent<CanvasGroup>().interactable = true;
 		SendGmail.TestString+=","+ Test.ToString ();
 		if (LangTest.Help) {
 			BHelp.gameObject.SetActive (true);
+			BHelp.gameObject.GetComponent<CanvasGroup>().interactable = true;
 		} else {
 			BHelp.gameObject.SetActive (false);
 		}
@@ -730,6 +722,16 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 	public void PreGame()
 	{
 		Hide ();
+		BSame.gameObject.SetActive (true);
+		BDiff.gameObject.SetActive (true);
+		BSame.gameObject.GetComponent<CanvasGroup>().interactable = false;
+		BDiff.gameObject.GetComponent<CanvasGroup>().interactable = false;
+		BHelp.gameObject.GetComponent<CanvasGroup>().interactable = false;
+		if (LangTest.Help) {
+			BHelp.gameObject.SetActive (true);
+		} else {
+			BHelp.gameObject.SetActive (false);
+		}
 		Box Refbox = QuestionsCube [Test].b;
 		OrigBox =new Box(new Face (Refbox.Sides[0].symbol,Refbox.Sides[0].orientation,Refbox.Sides[0].localization),new Face (Refbox.Sides[1].symbol,Refbox.Sides[1].orientation,Refbox.Sides[1].localization),
 			new Face (Refbox.Sides[2].symbol,Refbox.Sides[2].orientation,Refbox.Sides[2].localization), new Face (Refbox.Sides[3].symbol,Refbox.Sides[3].orientation,Refbox.Sides[3].localization),
@@ -746,10 +748,6 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 			//Box [i].image.TextureWrapMode.Mirror;
 			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[ TradSymbol( FinalBox.Sides[i].symbol)] ;
 			OGbox [i].GetComponent<Renderer> ().material.mainTexture = Faces[ TradSymbol( FinalBox.Sides[i].symbol)];
-			GBox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
-			OGbox [i].GetComponent<Animator> ().SetBool ("Highlight", false);
-			GBox [i].GetComponent<Animator> ().SetBool ("Training", false);
-			OGbox [i].GetComponent<Animator> ().SetBool ("Training", false);
 			switch (FinalBox.Sides [i].orientation) {
 			case 0:
 			case 4:

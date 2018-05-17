@@ -228,7 +228,7 @@ public class Unfold : MonoBehaviour {
 
 		public void WriteHelp()
 	{
-		Cube.HelpPressed = true;
+		//Cube.HelpPressed = true;
 		//Info+="Help used,";
 		startingRotation = AfterRandom;
 		finalRotation = startingRotation;

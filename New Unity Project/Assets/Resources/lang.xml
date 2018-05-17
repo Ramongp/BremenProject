@@ -66,8 +66,8 @@
        		     <string name="LockExpl2">Deberás dejar la cerradura igual que en el tutorial, en la cara frontal y con la orientación que ves en el ejemplo.</string>
        		     <string name="LockExpl3">Si la cerradura no está en una cara visible al principio del test, puedes desplegar el cofre antes de aplicar algún movimiento para ver en que lado está.</string>
        		      <string name="LockExpl4">Ahora ya sabes todo lo necesario, puedes empezar a abrir cofres.</string>
-       		      <string name="GiveUpButton">Rendirse</string>
-       		       <string name="ResetButton">Deshacer</string>
+       		      <string name="GiveUpButton">Give up</string>
+       		       <string name="ResetButton">Reset</string>
        		        <string name="HintButton">Hint</string>
            		 <string name="Path">Path</string>
            		 <string name="SeePoints">See reward</string>
@@ -79,10 +79,19 @@
                   <string name="LockWrongSide">La cerradura no se encuentra en la cara frontal. Pulsa "Deshacer" he inténtalo de nuevo.</string>
                   <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
+                   <string name="ExplTest1">Esta vez verás dos cofres en cada pregunta.</string>
+                 <string name="ExplTest2">Cada cofre tiene un símbolo diferente en cada lado, un cofre no puede tener el mismo símbolo en más de un lado.</string>
+                  <string name="ExplTest3">En esta posición, de cada cofre podemos ver su lado frontal, superior y derecho.</string>
+                    <string name="ExplTest4">A la izquierda está la versión del cofre que yo recuerdo, antes de que me lo robaran.</string>
+                    <string name="ExplTest5">A la derecha está el cofre que me proponen adivinar si puede ser el mismo o no.</string>
+                    <string name="ExplTest6">En algunos casos el cofre de la derecha aparecerá girado.</string>
+                     <string name="ExplTest7">Para cada pregunta tendrás sesenta segundos, cuanto más tarde menos recompensa, pero si respondes de manera incorrecta, no recibirás recompensa.</string>
+                     <string name="ExplTest8">Dale al botón "Igual" para indicar que pueden ser el mismo cofre.</string>
+                      <string name="ExplTest9">Dale al botón "Diferente" para indicar que deben ser cofres distintos.</string>
+                      <string name="ExplTestHelp">Dale al botón "Ayuda" para recibir una pista, esto reducirá un poco la recompensa del cofre.</string>
+                      <string name="ExplTest10">Ahora ya sabes como recuperar mis tesoros. ¿Estás listo?</string>
 
                  <string name="Understood">Understood</string>
-                 <string name="ExplHelp">On the right you have the help button, when you press it you can apply the movements to the chest on the right, the "Reset" button will leave the chest in the original position and "Unfold" allows you to see all the sides of the chest.</string>
-                  <string name="NoExplHelp">Press "Same" if they can be the same chest and "Different" if they are different chests.</string>
                   <string name="ResetB">Reset</string>
                   <string name="NextBox">Next</string>
                   <string name="UnfoldB">Unfold</string>
@@ -118,10 +127,19 @@
                      <string name="Time">Time left</string>
                       <string name="Money">Gold</string>
 
+                      <string name="SameSymbolHintPart1">Fíjate. El lado con</string>
+           	          <string name="SameSymbolHintPart2">es visible en ambos cofres.</string>
+           	           <string name="NoSameSymbolHint">Recuerda que los cofres tienen seis símbolos y ningún símbolo se repite.</string>
+
                       <string name="TryHelp">Try to use the help button next time.</string>
-                       <string name="PregCorrect">In which side of the chest on the right is the </string>
+                       <string name="PregCorrect">In which side of the chest on the right is the</string>
                         <string name="Bonus">Correct! It was on the side located</string>
                          <string name="NoBonus">That is not correct, it was on the side located</string>
+
+                         <string name="Results">Results</string>
+           	           <string name="CorrectAns">Correct answers:</string>
+           	           <string name="Avg">Average response time:</string>
+           	           <string name="Score">Score:</string>
 
                            <string name="ExplQuest">Can you please help scientists in their research by filling in a questionnaire?</string>
                       <string name="YesQuest">Yes</string>
@@ -240,9 +258,20 @@
                   <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
 
+                  <string name="ExplTest1">Esta vez verás dos cofres en cada pregunta.</string>
+                 <string name="ExplTest2">Cada cofre tiene un símbolo diferente en cada lado, un cofre no puede tener el mismo símbolo en más de un lado.</string>
+                  <string name="ExplTest3">En esta posición, de cada cofre podemos ver su lado frontal, superior y derecho.</string>
+                    <string name="ExplTest4">A la izquierda está la versión del cofre que yo recuerdo, antes de que me lo robaran.</string>
+                    <string name="ExplTest5">A la derecha está el cofre que me proponen adivinar si puede ser el mismo o no.</string>
+                    <string name="ExplTest6">En algunos casos el cofre de la derecha aparecerá girado.</string>
+                     <string name="ExplTest7">Para cada pregunta tendrás sesenta segundos, cuanto más tarde menos recompensa, pero si respondes de manera incorrecta, no recibirás recompensa.</string>
+                     <string name="ExplTest8">Dale al botón "Igual" para indicar que pueden ser el mismo cofre.</string>
+                      <string name="ExplTest9">Dale al botón "Diferente" para indicar que deben ser cofres distintos.</string>
+                      <string name="ExplTestHelp">Dale al botón "Ayuda" para recibir una pista, esto reducirá un poco la recompensa del cofre.</string>
+                      <string name="ExplTest10">Ahora ya sabes como recuperar mis tesoros. ¿Estás listo?</string>
+
+
            	   <string name="Understood">Entendido.</string>
-           	  <string name="ExplHelp">A la derecha tienes el botón de ayuda, al apretarlo podrás aplicar movimientos al cofre de la derecha, el botón "Deshacer" dejará el cofre en la posición original y "Desplegar" te permite ver todas las caras del cofre.</string>
-           	   <string name="NoExplHelp">Pulsa "Igual" si pueden ser el mismo cofre y "Diferente" si son cofres distintos.</string>
            	    <string name="ResetB">Deshacer</string>
            	    <string name="NextBox">Siguiente</string>
            	   <string name="UnfoldB">Desplegar</string>
@@ -277,11 +306,20 @@
            	     <string name="Time">Tiempo restante</string>
            	       <string name="Money">Oro</string>
 
+           	        <string name="SameSymbolHintPart1">Fíjate. El lado con</string>
+           	          <string name="SameSymbolHintPart2">es visible en ambos cofres.</string>
+           	           <string name="NoSameSymbolHint">Recuerda que los cofres tienen seis símbolos y ningún símbolo se repite.</string>
 
            	        <string name="TryHelp">Prueba a pulsar el botón de ayuda la próxima vez.</string>
-           	        <string name="PregCorrect">¿En qué lado del cofre derecho se encuentra </string>
+           	        <string name="PregCorrect">¿En qué lado del cofre derecho se encuentra</string>
            	         <string name="Bonus">¡Correcto! Estaba en el lado</string>
            	          <string name="NoBonus">Eso no es correcto, estaba en el lado</string>
+
+
+           	           <string name="Results">Resultados</string>
+           	           <string name="CorrectAns">Respuestas correctas:</string>
+           	           <string name="Avg">Media de tiempo por respuesta:</string>
+           	           <string name="Score">Recompensa obtenida:</string>
 
            	            <string name="ExplQuest">¿Le gustaría ayudar a los científicos en su investigación rellenando un cuestionario?</string>
            	       <string name="YesQuest">Sí</string>
@@ -395,10 +433,19 @@
            	   <string name="LockWrongSide">La cerradura no se encuentra en la cara frontal. Pulsa "Deshacer" he inténtalo de nuevo.</string>
                <string name="LockEWrongOrient">La cerradura no tiene la orientación correcta. Pulsa "Deshacer" he inténtalo de nuevo.</string>
 
+                <string name="ExplTest1">Esta vez verás dos cofres en cada pregunta.</string>
+                 <string name="ExplTest2">Cada cofre tiene un símbolo diferente en cada lado, un cofre no puede tener el mismo símbolo en más de un lado.</string>
+                  <string name="ExplTest3">En esta posición, de cada cofre podemos ver su lado frontal, superior y derecho.</string>
+                    <string name="ExplTest4">A la izquierda está la versión del cofre que yo recuerdo, antes de que me lo robaran.</string>
+                    <string name="ExplTest5">A la derecha está el cofre que me proponen adivinar si puede ser el mismo o no.</string>
+                    <string name="ExplTest6">En algunos casos el cofre de la derecha aparecerá girado.</string>
+                     <string name="ExplTest7">Para cada pregunta tendrás sesenta segundos, cuanto más tarde menos recompensa, pero si respondes de manera incorrecta, no recibirás recompensa.</string>
+                     <string name="ExplTest8">Dale al botón "Igual" para indicar que pueden ser el mismo cofre.</string>
+                      <string name="ExplTest9">Dale al botón "Diferente" para indicar que deben ser cofres distintos.</string>
+                      <string name="ExplTestHelp">Dale al botón "Ayuda" para recibir una pista, esto reducirá un poco la recompensa del cofre.</string>
+                      <string name="ExplTest10">Ahora ya sabes como recuperar mis tesoros. ¿Estás listo?</string>
 
            	   <string name="Understood">Verstanden</string>
-           	  <string name="ExplHelp">Auf der rechten Seite haben Sie die Hilfe-Taste, wenn Sie drücken, können Sie die Bewegungen auf die Truhe auf der rechten Seite anwenden, die Schaltfläche "Zurücksetzen" wird die Truhe in der ursprünglichen Position verlassen und "Entfalten" ermöglicht es Ihnen, alle Gesichter zu sehen die Truhe.</string>
-           	   <string name="NoExplHelp">Drücken Sie "Gleich", wenn sie die gleiche Truhen und "Anders" sein können, wenn sie verschiedene Truhen sind.</string>
            	  <string name="ResetB">Zurücksetzen</string>
            	  <string name="NextBox">Nächster</string>
            	   <string name="UnfoldB">Entfalten</string>
@@ -433,10 +480,19 @@
            	     <string name="Time">verbleibende Zeit</string>
            	       <string name="Money">Gold</string>
 
+           	       <string name="SameSymbolHintPart1">Fíjate. El lado con</string>
+           	          <string name="SameSymbolHintPart2">es visible en ambos cofres.</string>
+           	           <string name="NoSameSymbolHint">Recuerda que los cofres tienen seis símbolos y ningún símbolo se repite.</string>
+
            	        <string name="TryHelp">Versuchen Sie, beim nächsten Mal die Hilfe-Schaltfläche zu verwenden.</string>
-           	         <string name="PregCorrect">In welcher Seite der Box rechts ist </string>
+           	         <string name="PregCorrect">In welcher Seite der Box rechts ist</string>
            	         <string name="Bonus">Richtig! Es war auf der Seite</string>
            	          <string name="NoBonus">Das ist nicht korrekt, es war auf der Seite</string>
+
+           	          <string name="Results">Ergebnisse</string>
+           	           <string name="CorrectAns">Korrekte Antworten:</string>
+           	           <string name="Avg">Durchschnittliche Antwortzeit:</string>
+           	           <string name="Score">Ergebnis:</string>
 
            	       <string name="ExplQuest">Möchten Sie mit unserer Recherche helfen, indem Sie den folgenden Fragebogen ausfüllen?</string>
            	       <string name="YesQuest">Ja</string>

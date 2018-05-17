@@ -14,7 +14,7 @@ public class LockCube : MonoBehaviour {
 	public GameObject[] GBox;
 	public Texture[] Faces;
 	public Box OrigBox;
-	public string move;
+	public static string move;
 	public static string MoveNeeded;
 	public Quaternion startingRotation;
 	//public Button BHelp, BReset, BUnfold;
@@ -28,7 +28,9 @@ public class LockCube : MonoBehaviour {
 	public int LockSide, LockOrientation;
 	public static int Test;
 	public static bool NoTime, WrongPath;
+	public static string LockMoves;
 	void Start () {
+		help = false;
 		CurrentSides = new int[6];
 		Test = 0;
 		Unfold.AfterRandom = CubePL.transform.localRotation;
@@ -168,12 +170,14 @@ public class LockCube : MonoBehaviour {
 			Assigned = false;
 			if (RefAngle > OrigAngle) {
 				CubePL.GetComponent<Unfold> ().MoveUpLeft90 ();
+				LockMoves += "Toward-up-left_";
 					OrigBox.MoveUpLeft ();
 					Arrows [moveCont].gameObject.SetActive (true);
 					Arrows [moveCont].sprite = Movs [5];
 					moveCont++;
 			} else {
 					CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
+				LockMoves += "Toward-up-right_";
 						OrigBox.MoveUpRight ();
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [4];
@@ -279,12 +283,14 @@ public class LockCube : MonoBehaviour {
 				if (Mathf.Abs (startPosition.y - endPosition.y) < Mathf.Abs (startPosition.x - endPosition.x)) {
 					if (startPosition.x > endPosition.x) {
 						CubePL.GetComponent<Unfold> ().MoveLeft90 ();
+					LockMoves += "Left_";
 						OrigBox.MoveLeft ();
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [3];
 						moveCont++;
 					} else {
 						CubePL.GetComponent<Unfold> ().MoveRight90 ();
+					LockMoves += "Right_";
 						OrigBox.MoveRight ();
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [2];
@@ -293,12 +299,14 @@ public class LockCube : MonoBehaviour {
 				} else {
 					if (startPosition.y > endPosition.y) {
 						CubePL.GetComponent<Unfold> ().MoveDown90 ();
+					LockMoves += "Down_";
 						OrigBox.MoveDown ();
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [1];
 						moveCont++;
 					} else {
 						CubePL.GetComponent<Unfold> ().MoveUp90 ();
+					LockMoves += "Up_";
 						OrigBox.MoveUp ();
 						Arrows [moveCont].gameObject.SetActive (true);
 						Arrows [moveCont].sprite = Movs [0];
@@ -399,7 +407,7 @@ public class LockCube : MonoBehaviour {
 			CurrentSides = new int[]{ 4, 12, 1, 8, 10, 6 };
 			LockSide = 1;
 			LockOrientation = 2;
-			move = "Dwon_Down_";
+			move = "Down_Down_";
 			break;
 
 		}
@@ -478,7 +486,8 @@ public class LockCube : MonoBehaviour {
 
 	public	void ResetLock()
 		{
-		if (help || WrongPath) {
+		if ((help || WrongPath)&& !Unfold.moving) {
+			LockTimer.PressedRestart = true;
 			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Message.gameObject.SetActive (false);
 			CanUnfold = true;
 			WrongPath = false;
@@ -497,6 +506,7 @@ public class LockCube : MonoBehaviour {
 
 	public void Set()
 	{
+			LockMoves = " ";
 			WrongPath=false;
 			NoTime = false;
 			CanUnfold = true;
@@ -554,9 +564,75 @@ public class LockCube : MonoBehaviour {
 			}
 		
 		}
+			
 
 	}
 
+	public void Hint()
+	{
+		if (help) {
+			LockTimer.PressedHint = true;
+			CanUnfold = false;
+			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Message.gameObject.SetActive (false);
+			HideArrows ();
+			CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
+			AxX = 0;
+			AxY = 0;
+			AxZ = 0;
+			Test--;
+			CreateTest ();
+			string[] Moves = move.Split ('_');
+			switch (Moves [0]) {
+			case "Up":
+				CubePL.GetComponent<Unfold> ().MoveUp90 ();
+				OrigBox.MoveUp ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [0];
+				moveCont++;
+				break;
+			case "Down":
+				CubePL.GetComponent<Unfold> ().MoveDown90 ();
+				OrigBox.MoveDown ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [1];
+				moveCont++;
+				break;
+
+			case "Left":
+				CubePL.GetComponent<Unfold> ().MoveLeft90 ();
+				OrigBox.MoveLeft ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [3];
+				moveCont++;
+				break;
+
+			case "Right":
+				CubePL.GetComponent<Unfold> ().MoveRight90 ();
+				OrigBox.MoveRight ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [2];
+				moveCont++;
+				break;
+
+			case "Toward-up-right":
+				CubePL.GetComponent<Unfold> ().MoveUpRight90 ();
+				OrigBox.MoveUpRight ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [4];
+				moveCont++;
+				break;
+
+			case "Toward-up-left":
+				CubePL.GetComponent<Unfold> ().MoveUpLeft90 ();
+				OrigBox.MoveUpLeft ();
+				Arrows [moveCont].gameObject.SetActive (true);
+				Arrows [moveCont].sprite = Movs [5];
+				moveCont++;
+				break;
+			}
+			help = true;
+		}
+	}
 
 
 						//Antigua version Compare

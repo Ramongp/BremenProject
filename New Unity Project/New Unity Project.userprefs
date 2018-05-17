@@ -1,14 +1,17 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/LockTimer.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Score.cs">
     <Files>
-      <File FileName="Assets/Code/LangTest.cs" Line="23" Column="41" />
-      <File FileName="Assets/Code/LockTimer.cs" Line="183" Column="76" />
-      <File FileName="Assets/Resources/lang.xml" Line="238" Column="48" />
-      <File FileName="Assets/Code/LockCube.cs" Line="53" Column="83" />
+      <File FileName="Assets/Code/LockCube.cs" Line="501" Column="14" />
+      <File FileName="Assets/Code/Cube.cs" Line="729" Column="69" />
+      <File FileName="Assets/Code/Unfold.cs" Line="81" Column="19" />
       <File FileName="Assets/Code/SameCube.cs" Line="29" Column="202" />
-      <File FileName="Assets/Code/Unfold.cs" Line="61" Column="12" />
-      <File FileName="Assets/Code/TrainingCube.cs" Line="17" Column="23" />
+      <File FileName="Assets/Code/SendGmail.cs" Line="17" Column="53" />
+      <File FileName="Assets/Code/LangTest.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Score.cs" Line="57" Column="17" />
+      <File FileName="Assets/Resources/lang.xml" Line="144" Column="51" />
+      <File FileName="Assets/Code/Timer.cs" Line="241" Column="31" />
+      <File FileName="Assets/Code/PreQuestionnaire.cs" Line="26" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

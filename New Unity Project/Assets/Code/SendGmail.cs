@@ -13,7 +13,10 @@ using UnityEditor;
 #endif
 
 public class SendGmail : MonoBehaviour {
-	public static String TestString;
+	public static String TestString, LockString;
+	public static int LockScore, LockCorrAns, TestScore, TestCorrAns;
+	public static float LockAvgTime, TestAvgTime;
+	public static int Level;
 	void Start()
 	{
 		#if UNITY_EDITOR
