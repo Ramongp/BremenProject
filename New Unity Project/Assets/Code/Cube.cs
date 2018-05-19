@@ -23,6 +23,7 @@ public class Cube : MonoBehaviour {
 	public Button BHelp, BReset, BUnfold, SameDiff, BSame,BDiff;
 	public static int change, Test;
 	public static bool help,HelpPressed, UnfoldPressed, ResetPressed; //boolean for the button
+	public static string expChange;
 
 	void Start () {
 		
@@ -347,7 +348,7 @@ public class Cube : MonoBehaviour {
 
 		SideWithChange = FinalBox.Sides [QuestionsCube [Test].change [0]];
 		change = QuestionsCube [Test].change [1];
-		string expChange="";
+		 expChange="";
 		/*if ((repeatFaces>1)&&(facesWithOri>1)) { // Only when there are two or more visibles sides from the original cube one symbol can be changed, otherwise if the three symbols are different it has to be the same cube, and also one face needs to have visible orientation
 			change = Random.Range (0, 3);
 		}
@@ -466,8 +467,7 @@ public class Cube : MonoBehaviour {
 		if (FinalBox.Right.localization.Equals (SideWithChange.localization)) {
 			FinalBox.Right = SideWithChange;
 		}
-
-		SendGmail.TestString+=","+ expChange;
+			
 	}
 
 		void PaintRotate3Q (Mesh m) { //orientacion igual a tres-cuartos
@@ -552,7 +552,7 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 			Debug.Log ("Correcto Son el mismo cubo ------------");
 
 		} else {
-			Timer.TimeLeft = 0;
+			//Timer.TimeLeft = 0;
 			GameObject.Find ("Time").GetComponent<Timer> ().Animation (false,2);
 			Debug.Log ("Fallo No son el mismo cubo -------------");
 		}
@@ -562,7 +562,7 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 		Hide ();
 		Timer.end = true;
 		if (SameCube.IsSameCube) {
-			Timer.TimeLeft = 0;
+			//Timer.TimeLeft = 0;
 			GameObject.Find ("Time").GetComponent<Timer> ().Animation (false,3);
 			Debug.Log ("Fallo Son el mismo cubo ------------");
 		} else {
@@ -584,7 +584,6 @@ void PaintRotate1Q (Mesh m) { //orientacion igual a tres-cuartos
 	{
 		BSame.gameObject.GetComponent<CanvasGroup>().interactable = true;
 		BDiff.gameObject.GetComponent<CanvasGroup>().interactable = true;
-		SendGmail.TestString+=","+ Test.ToString ();
 		if (LangTest.Help) {
 			BHelp.gameObject.SetActive (true);
 			BHelp.gameObject.GetComponent<CanvasGroup>().interactable = true;

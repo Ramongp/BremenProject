@@ -18,7 +18,7 @@ public class LangTest : MonoBehaviour {
 
 	public static Lang LMan;
 	public static string currentLang = "English";
-	public Text text, textB;
+	public Text text, textB, CubeTest, MasteMode;
 	public Toggle Comment, VFeedbacckToggle;
 	public static bool Help, VisualFeedback;
 	string ToggleText, ToggleTextVFeed;
@@ -57,6 +57,8 @@ public class LangTest : MonoBehaviour {
 			currentLang = "German";
 		}
 		LMan = new Lang( "lang", currentLang, false);
+		CubeTest.text=LMan.getString ("DoCubeTest");
+		MasteMode.text = LMan.getString ("MasterMode");
 		text.text = LMan.getString ("select");
 		textB.text = LMan.getString ("StartButton");
 		VisualFeedback = true;
@@ -91,7 +93,6 @@ public class LangTest : MonoBehaviour {
 
 	public void NextScene()
 	{
-		SendGmail.TestString += "," + Help + "," + VisualFeedback;
 		//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteTest ("Comments"+ Comments.ToString());
 		Application.LoadLevel ("Map Select Level");
 
@@ -101,6 +102,8 @@ public class LangTest : MonoBehaviour {
 	{
 		
 		LMan.setLanguage("lang", currentLang);
+		CubeTest.text=LMan.getString ("DoCubeTest");
+		MasteMode.text = LMan.getString ("MasterMode");
 		text.text = LMan.getString ("select");
 		textB.text = LMan.getString ("StartButton");
 		if (cont.Equals (1)) {
@@ -141,6 +144,11 @@ public class LangTest : MonoBehaviour {
 			ToggleTextVFeed = "NoVfeedBack";
 		}
 		VFeedbacckToggle.GetComponentInChildren<Text> ().text = LMan.getString(ToggleTextVFeed);
+	}
+
+	public void DoTest()
+	{
+		Application.LoadLevel ("Test Pirate");
 	}
 
 }

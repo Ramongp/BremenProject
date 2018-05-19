@@ -30,6 +30,8 @@ public class LockCube : MonoBehaviour {
 	public static bool NoTime, WrongPath;
 	public static string LockMoves;
 	void Start () {
+		Unfold.Llegado = true;
+		Unfold.UnfoldPosition = new Vector3 (-3, -2.5F, 10);
 		help = false;
 		CurrentSides = new int[6];
 		Test = 0;
@@ -40,6 +42,11 @@ public class LockCube : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+		if (Unfold.Llegado) { //Para controlar el boton de Unfold
+			GameObject.Find ("UnfoldButton").GetComponent<CanvasGroup> ().interactable = true;
+			Unfold.Llegado = false;
+		}
 
 		if (WaitUnfold && Unfold.moving.Equals (false)) { 
 			WaitUnfold = false;
@@ -521,10 +528,11 @@ public class LockCube : MonoBehaviour {
 			CanvasMargin = (Screen.height/20);
 			CreateTest ();
 			//Debug.Log (move);
-			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Set ();
 			CubePL.GetComponent<Unfold> ().finalRotation = Unfold.AfterRandom;
 			CubePL.GetComponent<Unfold> ().SetToAfterRandom ();
 			help = true;
+			GameObject.Find ("LockTimeCode").GetComponent<LockTimer> ().Set ();
+			
 	}
 
 	public void SetPreLock() //Colocar cosas para explicar test
@@ -552,6 +560,7 @@ public class LockCube : MonoBehaviour {
 	public void UnfoldButton()
 	{
 		if (CanUnfold && Unfold.moving.Equals(false)) {
+			GameObject.Find ("UnfoldButton").GetComponent<CanvasGroup> ().interactable = false;
 			Unfold.MaxScale = 0.25F;
 			Unfold.MinScale = 0.18F;
 			Unfold.UnfoldPosition = new Vector3 (-3, -2.5F, 10);

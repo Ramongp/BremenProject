@@ -18,6 +18,8 @@ public class Unfold : MonoBehaviour {
 	public static bool moving, button, Test, restart, ShowExpl;
 	public int contWay;
 	public string[] way;
+	public bool SetSize;
+	public static bool Llegado;
 	void Start () {
 		MaxScale = 1;
 		MinScale = 0.7F;
@@ -38,24 +40,32 @@ public class Unfold : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-		if ((Fold.Equals (0))&& (this.transform.localPosition.z>FoldPosition.z)) {
-			//this.gameObject.transform.Translate (FoldPosition.x * Time.deltaTime,FoldPosition.y * Time.deltaTime,FoldPosition.z * Time.deltaTime);
-			this.gameObject.transform.localPosition= Vector3.MoveTowards(this.transform.localPosition,FoldPosition,seedMove*Time.deltaTime);
-			if (this.transform.localScale.x < MaxScale) {
-				this.transform.localScale += new Vector3 (Time.deltaTime, Time.deltaTime, Time.deltaTime);
-			}
+		if (SetSize) {
+			if ((Fold.Equals (0)) && (this.transform.localPosition.z > FoldPosition.z)) {
+				//this.gameObject.transform.Translate (FoldPosition.x * Time.deltaTime,FoldPosition.y * Time.deltaTime,FoldPosition.z * Time.deltaTime);
+				this.gameObject.transform.localPosition = Vector3.MoveTowards (this.transform.localPosition, FoldPosition, seedMove * Time.deltaTime);
+				if (this.transform.localScale.x < MaxScale) {
+					this.transform.localScale += new Vector3 (Time.deltaTime, Time.deltaTime, Time.deltaTime);
+				}
 			} 
+			if ((Fold.Equals (0)) && ((this.transform.localPosition.z < FoldPosition.z + MarginError) && (this.transform.localPosition.z > FoldPosition.z - MarginError))) {
+				Llegado = true;
+				this.transform.localScale = new Vector3 (MaxScale, MaxScale, MaxScale);
+			}
 
-		if ((Fold.Equals (1)) && (this.transform.localPosition.z<UnfoldPosition.z+MarginError)) {
+			if ((Fold.Equals (1)) && (this.transform.localPosition.z < UnfoldPosition.z + MarginError)) {
 				//this.gameObject.transform.Translate (UnfoldPositon.x * Time.deltaTime,UnfoldPositon.y * Time.deltaTime,UnfoldPositon.z * Time.deltaTime);
-			this.gameObject.transform.localPosition= Vector3.MoveTowards(this.transform.localPosition,UnfoldPosition,seedMove*Time.deltaTime);
-			this.gameObject.transform.localRotation = Quaternion.Euler (-80, 0, 0);
-			if (this.transform.localScale.x > MinScale) {
-				this.transform.localScale -= new Vector3 (Time.deltaTime, Time.deltaTime, Time.deltaTime);
-			} 
+				this.gameObject.transform.localPosition = Vector3.MoveTowards (this.transform.localPosition, UnfoldPosition, seedMove * Time.deltaTime);
+				this.gameObject.transform.localRotation = Quaternion.Euler (-80, 0, 0);
+				if (this.transform.localScale.x > MinScale) {
+					this.transform.localScale -= new Vector3 (Time.deltaTime, Time.deltaTime, Time.deltaTime);
+				} 
 			}
-
+			if ((Fold.Equals (1)) && ((this.transform.localPosition.z < UnfoldPosition.z + MarginError) && (this.transform.localPosition.z > UnfoldPosition.z - MarginError))) {
+				Llegado = true;
+				this.transform.localScale = new Vector3 (MinScale, MinScale, MinScale);
+			}
+		}
 		if (Cube.help) {
 			if (Input.GetKeyDown ("up")) {
 				UnfoldBox ();
@@ -133,13 +143,14 @@ public class Unfold : MonoBehaviour {
 	}
 
 	public void UnfoldBox(){
+		SetSize = true;
 		if (this.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("New State")&& Fold.Equals(0)){
 			this.gameObject.GetComponent<Animator> ().SetTrigger ("Open");
 			Fold = 1;
 		} else {
 			if (this.gameObject.GetComponent<Animator> ().GetCurrentAnimatorStateInfo (0).IsName ("Unfold")&& Fold.Equals(1)) {
 				if (restart) {
-					this.gameObject.GetComponent<Animator> ().SetTrigger ("Restart");
+					this.gameObject.GetComponent<Animator> ().SetTrigger ("Restart"); //cambio restart por close
 					restart = false;
 				} else {
 					this.gameObject.GetComponent<Animator> ().SetTrigger ("Close");

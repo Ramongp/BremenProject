@@ -5,7 +5,9 @@
             <string name="description">This script provides convenient multiple language support.</string>
             <string name="select">Select the language of the game.</string>
             <string name="NextButton">Next</string>
-             <string name="StartButton">Start</string>
+             <string name="StartButton">Start Game</string>
+            <string name="DoCubeTest">Do the test</string>
+            <string name="MasterMode">Master Mode</string>
             <string name="Comment">Help activated</string>
               <string name="NoComment">Help off</string>
                  <string name="VFeedBack">Visual feedback activated.</string>
@@ -145,32 +147,32 @@
                       <string name="YesQuest">Yes</string>
                       <string name="NoQuest">No, thanks.</string>
 
-                       <string name="Question0">Which gender do you identify with?</string>
-                       <string name="Question1">How old are you?</string>
-                        <string name="Question2">what is your nationality?</string>
-                         <string name="Question3">What is your native language?</string>
-                       <string name="Question4">What level of education do you have?</string>
-                       <string name="Question5">From what branch are your studies?</string>
+                       <string name="Question0">Gender</string>
+                       <string name="Question1">Age</string>
+                        <string name="Question2">Nationality</string>
+                         <string name="Question3">Native Language</string>
+                       <string name="Question4">Levelof studies</string>
+                       <string name="Question5">Field of studies</string>
                        <string name="RateGame">Rate how much fun the game is.</string>
-                        <string name="RateHelpText">Rate the test help (rotate the cube).</string>
+                        <string name="RateHelpText">Rate the test help.</string>
                      <string name="RateFeedbackText">Rate the visual feedback displayed during the test.</string>
 
 
                      <string name="Male">Male</string>
                      <string name="Female">Female</string>
                      <string name="NoGender">Other</string>
-                         <string name="Estudios0">Educación Básica</string>
-                         <string name="Estudios1">Secundaria</string>
-                         <string name="Estudios2">Bachillerato</string>
-                         <string name="Estudios3">Formación profesional</string>
-                         <string name="Estudios4">Carrera Universitaria</string>
-                         <string name="Estudios5">Doctorado</string>
-                       <string name="Rama0">Artes</string>
-                       <string name="Rama1">Biologia</string>
-                       <string name="Rama2">Letras</string>
-                       <string name="Rama3">Ingenieria</string>
-                       <string name="Rama4">Ciencias Sociales</string>
-                       <string name="Rama5">Música</string>
+                         <string name="Estudios0">Basic education</string>
+                         <string name="Estudios1">Highschool</string>
+                         <string name="Estudios2">Baccalaureate</string>
+                         <string name="Estudios3">Vocational education</string>
+                         <string name="Estudios4">Bachelor student or graduated</string>
+                         <string name="Estudios5">PhD student</string>
+                       <string name="Rama0">Arts</string>
+                       <string name="Rama1">Biology</string>
+                       <string name="Rama2">Philology</string>
+                       <string name="Rama3">Engineering and Technology</string>
+                       <string name="Rama4">Social Sciences</string>
+                       <string name="Rama5">Music</string>
                          <string name="Send">Send</string>
 
 
@@ -182,7 +184,9 @@
             <string name="description">Este script aporta diferentes lenguajes.</string>
             <string name="select">Selecciona el idioma del juego.</string>
             <string name="NextButton">Siguiente</string>
-            <string name="StartButton">Comenzar</string>
+            <string name="StartButton">Empezar el juego</string>
+             <string name="DoCubeTest">Hacer el test</string>
+             <string name="MasterMode">Modo maestro</string>
              <string name="Comment">Ayuda activada.</string>		
               <string name="NoComment">Ayuda desactivada.</string>	
                <string name="VFeedBack">Feedback visual activado.</string>		
@@ -192,6 +196,8 @@
                   <string name="YesExit">Salir del juego</string>
                     <string name="NoExit">Cancelar</string>
                       <string name="ExitQuestion">¿Desea salir del juego?</string>
+
+                         
 
               <string name="Play">Jugar Nivel</string>
               <string name="Cancel">Cancelar</string>
@@ -326,14 +332,14 @@
            	       <string name="NoQuest">No, gracias.</string>
 
 
-           	         <string name="Question0">¿Con qué género te identificas?</string>
-           	        <string name="Question1">¿Qué edad tienes?</string>
-           	         <string name="Question2">¿Cuál es tu nacionalidad?</string>
-           	          <string name="Question3">¿Cuál es tu idioma nativo?</string>
-           	        <string name="Question4">¿Qué nivel de estudios tienes?</string>
-           	        <string name="Question5">¿De qué rama son tus estudios?</string>
+           	         <string name="Question0">Género</string>
+           	        <string name="Question1">Edad</string>
+           	         <string name="Question2">Nacionalidad</string>
+           	          <string name="Question3">Idioma nativo</string>
+           	        <string name="Question4">Nivel de estudios</string>
+           	        <string name="Question5">Rama de estudios</string>
            	        <string name="RateGame">Puntúa lo divertido que te ha parecido el juego.</string>
-           	         <string name="RateHelpText">Puntúa la ayuda del test (rotar el cubo).</string>
+           	         <string name="RateHelpText">Puntúa la ayuda del test.</string>
 					 <string name="RateFeedbackText">Puntúa el Feedback visual mostrado durante el test.</string>
 
 
@@ -348,8 +354,8 @@
            	          <string name="Estudios5">Doctorado</string>
            	        <string name="Rama0">Artes</string>
            	        <string name="Rama1">Biologia</string>
-           	        <string name="Rama2">Letras</string>
-           	        <string name="Rama3">Ingenieria</string>
+           	        <string name="Rama2">Filología</string>
+           	        <string name="Rama3">Ingenieria y Tecnología</string>
            	        <string name="Rama4">Ciencias Sociales</string>
            	        <string name="Rama5">Música</string>
            	          <string name="Send">Enviar</string>
@@ -360,7 +366,9 @@
             <string name="description">Dieses Skript bietet eine komfortable Unterstützung mehrerer Sprachen.</string>
              <string name="select">Wähle die Spielsprache aus.</string>
              <string name="NextButton">Neben</string>
-             <string name="StartButton">Starten</string>
+             <string name="StartButton">Starte das Spiel</string>
+              <string name="DoCubeTest">Mach den Test</string>
+              <string name="MasterMode">Master-Modus</string>
              <string name="Comment">Hilfe aktiviert</string>		
               <string name="NoComment">Hilfe deaktiviert</string>	
                  <string name="VFeedBack">Visuelle Rückmeldung aktiviert.</string>		
@@ -370,7 +378,7 @@
                   <string name="YesExit">Verlasse das Spiel.</string>
                     <string name="NoExit">Stornieren</string>
                       <string name="ExitQuestion">Möchtest du das Spiel verlassen?</string>
-
+                        
 
                <string name="Play">Spielniveau</string>
               <string name="Cancel">Abbrechen</string>
@@ -499,12 +507,12 @@
            	       <string name="NoQuest">Nein, danke.</string>
 
 
-           	        <string name="Question0">Mit welchem Geschlecht identifizieren Sie sich?</string>
-           	        <string name="Question1">Wie alt bist du?</string>
-           	         <string name="Question2">Was ist deine Nationalität?</string>
-           	          <string name="Question3">Was ist deine Muttersprache?</string>
-           	        <string name="Question4">Welches Bildungsniveau hast du?</string>
-           	        <string name="Question5">Aus welchem Zweig stammen deine Studien?</string>
+           	        <string name="Question0">Geschlecht</string>
+           	        <string name="Question1">Alter</string>
+           	         <string name="Question2">Nationalität</string>
+           	          <string name="Question3">Muttersprache</string>
+           	        <string name="Question4">Niveau der Studien</string>
+           	        <string name="Question5">Studienrichtung</string>
 					 <string name="RateGame">Bewerten Sie, wie viel Spaß das Spiel macht.</string>
 					 <string name="RateHelpText">Bewerten Sie die Testhilfe (drehen Sie den Würfel).</string>
 					 <string name="RateFeedbackText">Bewerten Sie die visuelle Rückmeldung, die während des Tests angezeigt wird.</string>
@@ -512,18 +520,18 @@
 					 <string name="Male">Männlich</string>
 					 <string name="Female">Weiblich</string>
 					 <string name="NoGender">Andere</string>
-           	             <string name="Estudios0">Educación Básica</string>
-           	          <string name="Estudios1">Secundaria</string>
-           	          <string name="Estudios2">Bachillerato</string>
-           	          <string name="Estudios3">Formación profesional</string>
-           	          <string name="Estudios4">Carrera Universitaria</string>
-           	          <string name="Estudios5">Doctorado</string>
-           	        <string name="Rama0">Artes</string>
-           	        <string name="Rama1">Biologia</string>
-           	        <string name="Rama2">Letras</string>
-           	        <string name="Rama3">Ingenieria</string>
-           	        <string name="Rama4">Ciencias Sociales</string>
-           	        <string name="Rama5">Música</string>
+           	             <string name="Estudios0">Grundbildung</string>
+           	          <string name="Estudios1">Institut</string>
+           	          <string name="Estudios2">Baccalaureat</string>
+           	          <string name="Estudios3">Berufsausbildung</string>
+           	          <string name="Estudios4">Universitätskarriere</string>
+           	          <string name="Estudios5">Doktortitel</string>
+           	        <string name="Rama0">Kunst</string>
+           	        <string name="Rama1">Biologie</string>
+           	        <string name="Rama2">Philologie</string>
+           	        <string name="Rama3">Technik und Technologie</string>
+           	        <string name="Rama4">Sozialwissenschaften</string>
+           	        <string name="Rama5">Musik</string>
            	           <string name="Send">Senden</string>
 
 

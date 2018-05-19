@@ -20,9 +20,15 @@ public class LockTimer : MonoBehaviour {
 	public static bool PressedRestart, PressedHint;
 	// Use this for initialization
 	void Start () {
+
+		//Empezamos a escribir los datos.
+		SendGmail.LockString+=SystemInfo.deviceUniqueIdentifier+","+System.DateTime.Now.ToString("dd/MM/yyyy")+","+System.DateTime.Now.ToString("hh:mm:ss")+","+LangTest.Help+",";
 		SendGmail.LockScore = 0;
 		SendGmail.LockCorrAns = 0;
 		SendGmail.LockAvgTime = 0;
+		SendGmail.TrainingDone = true;
+		SendGmail.Level = 1;
+
 		Pista.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("HintButton");
 		ExplainButton.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("Continue");
 		Pista.gameObject.SetActive (false);
@@ -102,6 +108,7 @@ public class LockTimer : MonoBehaviour {
 		Text.text = LangTest.LMan.getString ("PassedLockTest");
 		Key.gameObject.GetComponent<Animator> ().SetTrigger ("Passed");
 		Buttons.SetActive (false);
+		Pista.gameObject.SetActive (false);
 
 
 		
@@ -120,6 +127,7 @@ public class LockTimer : MonoBehaviour {
 		//Text.text = LangTest.LMan.getString ("PassedLockTest");
 		//Key.gameObject.GetComponent<Animator> ().SetTrigger ("Passed");
 		Buttons.SetActive (false);
+		Pista.gameObject.SetActive (false);
 
 
 
@@ -137,9 +145,10 @@ public class LockTimer : MonoBehaviour {
 		Tapar.interactable = true; 
 		Tapar.gameObject.SetActive (true);
 		Buttons.SetActive (false);
+		Pista.gameObject.SetActive (false);
 		
 	}
-	public void Points()   //Se calcula la puntuacion
+	public void Points()   //Se calcula la puntuacion y se escriben los datos
 	{
 		Message.gameObject.SetActive (false);
 		Unfold.ShowExpl = false;
@@ -153,10 +162,12 @@ public class LockTimer : MonoBehaviour {
 		if (PressedRestart) {
 			PrRestat = 1/6f;
 		}
-		SendGmail.LockCorrAns += correctLock;
 
-		SendGmail.LockAvgTime += +60 - TimeLeft;
+		SendGmail.LockCorrAns += correctLock;
+		SendGmail.LockAvgTime += 60 - TimeLeft;
 		SendGmail.LockScore += (int)((TimeLeft - (hint*TimeLeft) - (PrRestat*TimeLeft))*10* correctLock);
+		SendGmail.LockString += LockCube.Test+"," + PressedHint+"," + PressedRestart+"," + LockCube.move +","+(60-TimeLeft).ToString()+",";
+
 		PointText.text="+ "+((int)((TimeLeft - (hint*TimeLeft) - (PrRestat*TimeLeft))*10* correctLock)).ToString () +" " + LangTest.LMan.getString ("Points");
 		if (TimeLeft*correctLock < 40) {
 			StarP3.color= StarOff;
@@ -205,19 +216,19 @@ public class LockTimer : MonoBehaviour {
 			StarP3.color= StarOn;
 			NextBoxB.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NextBox");
 		} else {
-			GameObject.Find ("Main Camera").GetComponent<LockCube> ().HideArrows ();
 			LockCube.help = false;
+			GameObject.Find ("Main Camera").GetComponent<LockCube> ().HideArrows ();
 			Bag.gameObject.SetActive (false);
 			NextBoxB.gameObject.SetActive (false);
 			Message.gameObject.SetActive (false);
 			TaparNextLevel.gameObject.SetActive (true);
 			Buttons.SetActive (false);
+			SendGmail.LockString += SendGmail.LockAvgTime + ",";
 			TaparNextLevel.GetComponentInChildren<Text>().text=LangTest.LMan.getString ("PassedLockTestLevel");
 		}
 	}
 	public void nextLvl()
 	{
-		SendGmail.Level = 1;
 		Application.LoadLevel ("Score");	
 	}
 	public void ExplainTest()

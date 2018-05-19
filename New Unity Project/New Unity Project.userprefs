@@ -1,17 +1,20 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/Score.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Code/SendGmail.cs">
     <Files>
-      <File FileName="Assets/Code/LockCube.cs" Line="501" Column="14" />
-      <File FileName="Assets/Code/Cube.cs" Line="729" Column="69" />
-      <File FileName="Assets/Code/Unfold.cs" Line="81" Column="19" />
-      <File FileName="Assets/Code/SameCube.cs" Line="29" Column="202" />
-      <File FileName="Assets/Code/SendGmail.cs" Line="17" Column="53" />
-      <File FileName="Assets/Code/LangTest.cs" Line="1" Column="1" />
-      <File FileName="Assets/Code/Score.cs" Line="57" Column="17" />
-      <File FileName="Assets/Resources/lang.xml" Line="144" Column="51" />
-      <File FileName="Assets/Code/Timer.cs" Line="241" Column="31" />
-      <File FileName="Assets/Code/PreQuestionnaire.cs" Line="26" Column="3" />
+      <File FileName="Assets/Code/LockCube.cs" Line="562" Column="50" />
+      <File FileName="Assets/Code/LockTimer.cs" Line="30" Column="23" />
+      <File FileName="Assets/Code/Cube.cs" Line="579" Column="10" />
+      <File FileName="Assets/Code/Unfold.cs" Line="146" Column="18" />
+      <File FileName="Assets/Code/SameCube.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/SendGmail.cs" Line="181" Column="57" />
+      <File FileName="Assets/Code/LangTest.cs" Line="116" Column="1" />
+      <File FileName="Assets/Code/Score.cs" Line="1" Column="1" />
+      <File FileName="Assets/Resources/lang.xml" Line="370" Column="15" />
+      <File FileName="Assets/Code/Timer.cs" Line="96" Column="12" />
+      <File FileName="Assets/Code/PreQuestionnaire.cs" Line="1" Column="1" />
+      <File FileName="Assets/Code/Questionnarie.cs" Line="147" Column="16" />
+      <File FileName="Assets/Code/TrainingCube.cs" Line="29" Column="52" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

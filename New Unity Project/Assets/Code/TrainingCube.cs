@@ -24,6 +24,9 @@ public class TrainingCube : MonoBehaviour {
 		horizontalSpeed = 0.5F;
 		verticalSpeed = 0.5F;
 		Unfold.Test = false;
+		Unfold.MaxScale = 0.8F;
+		Unfold.MinScale = 0.45f;
+		Unfold.UnfoldPosition = new Vector3 (-6, -8, 20);
 		for (int i = 0; i < Faces.Length; i++) {
 			GBox [i].GetComponent<Renderer> ().material.mainTexture = Faces[i];
 			Paint (GBox [i].GetComponent<MeshFilter> ().mesh);

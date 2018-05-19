@@ -144,6 +144,7 @@ public class Questionnarie : MonoBehaviour {
 			Rama.GetComponent<CanvasGroup>().alpha=1;
 			Rama.GetComponent<CanvasGroup>().blocksRaycasts=true;
 		} else {
+			LangA5 = "";
 			Rama.GetComponent<CanvasGroup>().alpha=0;
 			Rama.GetComponent<CanvasGroup>().blocksRaycasts=false;
 		}
@@ -156,7 +157,7 @@ public class Questionnarie : MonoBehaviour {
 		cont5 = 0;
 	}
 
-	public void SendInfo()
+	public void SendInfo()  //Escribir y enviar datos
 	{
 		String temp = LangTest.currentLang;
 		LangTest.currentLang = "English";
@@ -165,8 +166,22 @@ public class Questionnarie : MonoBehaviour {
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (LangTest.LMan.getString(LangA5));
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (Math.Ceiling (RateFunSlider.value).ToString());*/
 
+		string valueHelp = "";
+		string valueVisFeed = "";
+		if (LangTest.Help) {
+			valueHelp = Math.Ceiling (RateHelpSlider.value).ToString ();
+		}
+		if (LangTest.VisualFeedback) {
+			valueVisFeed = Math.Ceiling (RateFeedSlider.value).ToString();
+		}
+
+
+
+		SendGmail.TestString+=LangA0+","+LangA1+","+Answ2+","+temp+","+Answ3+","+LangTest.LMan.getString(LangA4)+","+LangTest.LMan.getString(LangA5)+","+Math.Ceiling(RateFunSlider.value).ToString()+","+valueHelp+","+valueVisFeed;
+		SendGmail.LockString+=LangA0+","+LangA1+","+Answ2+","+temp+","+Answ3+","+LangTest.LMan.getString(LangA4)+","+LangTest.LMan.getString(LangA5)+","+Math.Ceiling(RateFunSlider.value).ToString()+","+valueHelp+","+valueVisFeed;
 		LangTest.currentLang = temp;
 		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SendTest();
+		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SendTraining();
 		Application.LoadLevel ("Language");
 
 		

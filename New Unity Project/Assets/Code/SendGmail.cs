@@ -17,16 +17,21 @@ public class SendGmail : MonoBehaviour {
 	public static int LockScore, LockCorrAns, TestScore, TestCorrAns;
 	public static float LockAvgTime, TestAvgTime;
 	public static int Level;
+	public string TestCabecera, TrainingCabecera;
+	public static bool TrainingDone;
 	void Start()
 	{
+		TestString = "";
+		LockString = "";
+		Level = 0;
 		#if UNITY_EDITOR
 		DeletePreviousText ();
 		#endif
-		StartInfo ();
 	}
 
-	public void SendLock ()
+	public void SendTraining ()
 	{
+		checkTraining ();
 		MailMessage mail = new MailMessage();
 
 		mail.From = new MailAddress("CubeReasoning@gmail.com");
@@ -37,7 +42,7 @@ public class SendGmail : MonoBehaviour {
 	//	string path = Application.dataPath + "/Moves.csv";
 		//Directory.GetFiles(System.Environment.CurrentDirectory+"/Resources","Moves");
 
-		mail.Attachments.Add(new Attachment( getPath()));
+		mail.Attachments.Add(new Attachment( getPathTraining()));
 		//mail.Attachments.Add(new Attachment("/CSV/Moves.csv"));
 
 		SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
@@ -54,6 +59,7 @@ public class SendGmail : MonoBehaviour {
 
 	public void SendTest ()
 	{
+		checkTest ();
 		MailMessage mail = new MailMessage();
 
 		mail.From = new MailAddress("CubeReasoning@gmail.com");
@@ -64,7 +70,7 @@ public class SendGmail : MonoBehaviour {
 		//	string path = Application.dataPath + "/Moves.csv";
 		//Directory.GetFiles(System.Environment.CurrentDirectory+"/Resources","Moves");
 
-		mail.Attachments.Add(new Attachment( getPath()));
+		mail.Attachments.Add(new Attachment( getPathTest()));
 		//mail.Attachments.Add(new Attachment("/CSV/Moves.csv"));
 
 		SmtpClient smtpServer = new SmtpClient("smtp.gmail.com");
@@ -82,34 +88,48 @@ public class SendGmail : MonoBehaviour {
 	void DeletePreviousText()
 	{
 		//string path = Application.dataPath + "/Moves";
-		string path= getPath();
-		path = path.Replace(Application.dataPath, "Assets");
+		string path1= getPathTest();
+		string path2 = getPathTraining ();
+		path1 = path1.Replace(Application.dataPath, "Assets");
+		path2 = path2.Replace(Application.dataPath, "Assets");
 		#if UNITY_EDITOR
-		AssetDatabase.DeleteAsset (path);
+		AssetDatabase.DeleteAsset (path1);
+		AssetDatabase.DeleteAsset (path2);
 		#endif
 
 	}
-	public string getPath ()
+	public string getPathTest ()
 	{
 		#if UNITY_EDITOR
-		return  Application.dataPath + "/"+"Moves.csv";
+		return  Application.dataPath + "/"+"TestInfo.csv";
 		#elif UNITY_ANDROID
-		/*File file = new File (Environment.getExternalStorageDirectory(),"Moves.csv");
-		Uri uri = Uri.fromFile(file);
-		return Uri.getPath();*/
-		return Application.persistentDataPath+"/"+"Moves.csv";
+		return Application.persistentDataPath+"/"+"TestInfo.csv";
 
 		#elif UNITY_IPHONE
-		return Application.persistentDataPath+"/"+"Moves.csv";
+		return Application.persistentDataPath+"/"+"TestInfo.csv";
 		#else
-		return Application.dataPath +"/"+"Moves.csv";
+		return Application.dataPath +"/"+"TestInfo.csv";
 		#endif
 		} 
+
+		public string getPathTraining ()
+		{
+		#if UNITY_EDITOR
+		return  Application.dataPath + "/"+"TrainingInfo.csv";
+		#elif UNITY_ANDROID
+		return Application.persistentDataPath+"/"+"TrainingInfo.csv";
+
+		#elif UNITY_IPHONE
+		return Application.persistentDataPath+"/"+"TrainingInfo.csv";
+		#else
+		return Application.dataPath +"/"+"TrainingInfo.csv";
+		#endif
+		}
 
 		public void SaveMove (string move)
 		{
 		if(Unfold.Test){
-		string filePath = getPath ();
+		string filePath = getPathTest ();
 		string delimiter = "-";  
 
 		//This is the writer, it writes to the filepath
@@ -126,56 +146,55 @@ public class SendGmail : MonoBehaviour {
 		}
 
 
-		void StartInfo()
+		void checkTest()
 	{
-		if (!File.Exists (getPath ())) {
-		/*WriteFirstCell ("ID_Machine");WriteCell ("Date");WriteCell ("Time");WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");
-																			WriteCell ("Cube");WriteCell ("Changes");WriteCell ("Answer");WriteCell ("Time");*/
+		string filePath = getPathTest ();
+		if (!File.Exists (getPathTest ())) {
 			string Message = "ID_Machine,Date,Time,Test with Help,Test with VisualFeedback," +	
-							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-							"Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ,Answer Bonus Question," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Cube question,Change,HelpUsed,Moves,Unfold,Reset,Answer,Time ," +
-			                "Total Time Test,Gender,Age,Nationality,Lenguage of the Test,Native Lenguage,Level of Study, Field of Study, Rate Game, Rate Help, Rate visual FeedBack,";
-		WriteFirstString (Message);
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+							"Cube question,Change,HelpUsed,Answer,Time,Bonus Question,Answer Bonus Question," +
+			                "Total Time Test,Gender,Age,Nationality,Lenguage of the Test,Native Lenguage,Level of Study,Field of Study,Rate Game,Rate Help,Rate visual FeedBack,";
+		File.AppendAllText (filePath,Message+Environment.NewLine);
 		}
-		TestString= SystemInfo.deviceUniqueIdentifier+","+System.DateTime.Now.ToString("dd/MM/yyyy")+","+System.DateTime.Now.ToString("hh:mm:ss");
 
-		//SendTest ();				//Testeo
+		File.AppendAllText (filePath,TestString+Environment.NewLine);
 	}
 
-		public void WriteString (string info)
-	{
-		string filePath = getPath ();
 
-		File.AppendAllText (filePath, Environment.NewLine + info);
-
-	}
-
-		public void WriteFirstString (string info)
+		void checkTraining()
 		{
-		string filePath = getPath ();
-
-		File.AppendAllText (filePath,info);
-
+		string filePath = getPathTraining ();
+		if (!File.Exists (getPathTraining ())) {
+		string Message = "ID_Machine,Date,Time,Test with Help," +	
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+			"Cube question,HelpUsed,ResetUsed,Moves,Time" +
+		"Total Time Test,Gender,Age,Nationality,Lenguage of the Test,Native Lenguage,Level of Study,Field of Study,Rate Game,Rate Help,Rate visual FeedBack,";
+		File.AppendAllText (filePath,Message+Environment.NewLine);
 		}
+
+		File.AppendAllText (filePath,LockString+Environment.NewLine);
+		}
+
+
 }

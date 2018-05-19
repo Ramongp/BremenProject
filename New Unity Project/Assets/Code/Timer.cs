@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	public static float TimeLeft, AnimationTime;
 	public Slider TimeSlider;
-	public static bool start, end, animation,BonusCorrect, HelpPressed;
+	public static bool start, end, animation, BonusCorrect, HelpPressed, BonusQuestion;
 	public static float TimeLevel;
 	public static int pointsLevel, points;
 	public int currentValue, answer, ContExpl;
@@ -24,6 +24,14 @@ public class Timer : MonoBehaviour {
 	public  bool CorrectAnswer;
 	public GameObject PregQuest, PregCorrectPanel;
 	void Start () {
+
+		//Empezamos a escribir los datos.
+		SendGmail.TestString +=SystemInfo.deviceUniqueIdentifier+","+System.DateTime.Now.ToString("dd/MM/yyyy")+","+System.DateTime.Now.ToString("hh:mm:ss")+","+LangTest.Help+","+LangTest.VisualFeedback+",";
+		SendGmail.TestScore = 0;
+		SendGmail.TestCorrAns = 0;
+		SendGmail.TestAvgTime = 0;
+
+
 
 		for (int i = 0; i < Explicaciones.Length; i++) {
 			Explicaciones[i].gameObject.SetActive (false);
@@ -104,6 +112,7 @@ public class Timer : MonoBehaviour {
 
 	void SetTimer()
 	{
+		BonusQuestion = false;
 		CorrectAnswer = false;
 		HelpPressed = false;
 		BonusCorrect = false;
@@ -165,16 +174,13 @@ public class Timer : MonoBehaviour {
 			Solution.text = LangTest.LMan.getString (resp);
 		}
 
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SaveMove (Unfold.Info);
+
 		Unfold.Info="";
-		SendGmail.TestString+=",TimeOut";
-		SendGmail.TestString+=","+ TimeLeft.ToString();
 	}
 
 	public void Animation(bool correct,int answer) // Calcular puntuacion sin bonus
 	{
 		StopSetHelp ();
-		GameObject.Find ("Lenguage").GetComponent<SendGmail> ().SaveMove (Unfold.Info);
 		Unfold.Info="";
 		this.answer = answer;
 		Message.gameObject.SetActive (true);
@@ -185,7 +191,6 @@ public class Timer : MonoBehaviour {
 
 		if (correct) {
 			Solution.fontSize = 30;
-			SendGmail.TestString+=",Correct";
 			switch (answer) {
 			case 0:
 				Solution.text = LangTest.LMan.getString ("YesSame");
@@ -200,7 +205,6 @@ public class Timer : MonoBehaviour {
 		} 
 		else {
 			Solution.fontSize = 35;
-			SendGmail.TestString+=",Failed";
 			switch (answer) {
 			case 2:
 				Solution.text = LangTest.LMan.getString ("NoDiff");
@@ -212,7 +216,6 @@ public class Timer : MonoBehaviour {
 			Solution.gameObject.SetActive (true);
 			Solution.GetComponent<Animator> ().SetBool ("Wrong", true);
 		}
-		SendGmail.TestString+=","+ TimeLeft.ToString();
 	}
 
 	public void NextBox() //Calcular los puntos y enviar datos
@@ -239,6 +242,8 @@ public class Timer : MonoBehaviour {
 		SendGmail.TestCorrAns += ContCorrect;
 		SendGmail.TestAvgTime += 60-TimeLeft;
 		SendGmail.TestScore += (int)((((TimeLeft - (TimeLeft * HelpReductor)) * 10)+PlusBonus) * ContCorrect);
+		SendGmail.TestString += Cube.Test.ToString() +","+ Cube.expChange +","+ HelpPressed +","+ CorrectAnswer +","+(60-TimeLeft).ToString()+","+ BonusQuestion +","+ BonusCorrect+",";
+
 		PointText.text="+"+((int)((((TimeLeft - (TimeLeft * HelpReductor)) * 10)+PlusBonus) * ContCorrect)).ToString () +" "+ LangTest.LMan.getString ("Points");
 		if (TimeLeft < 40) {
 			StarP3.color= StarOff;
@@ -271,10 +276,12 @@ public class Timer : MonoBehaviour {
 		//	NoQuest.GetComponentInChildren<Text>().text = LangTest.LMan.getString ("NoQuest");
 			SendGmail.Level=2;
 			Cube.help = false;
+			SendGmail.TestString += SendGmail.TestAvgTime+",";
 			//GameObject.Find ("Lenguage").GetComponent<SendGmail> ().WriteCell (TotalTime.ToString());
 			Application.LoadLevel ("Score");
 		}
 	}
+		
 
 	public void Explicacion()
 	{
@@ -416,7 +423,6 @@ public class Timer : MonoBehaviour {
 	}
 	public void YesQuestMethod()
 	{
-		SendGmail.TestString+=","+ TotalTime.ToString();
 		Application.LoadLevel ("Questionnaire");
 	}
 
@@ -441,13 +447,12 @@ public class Timer : MonoBehaviour {
 
 	public void BonusAnswer(int i)
 	{
+		BonusQuestion = true;
 		PregCorrectPanel.gameObject.SetActive (false);
 		if (i.Equals (SameCube.Tquest.localization)) {
 			BonusCorrect = true;
-			SendGmail.TestString += ",Correct";
 			Solution.text = LangTest.LMan.getString ("Bonus")+" "+LangTest.LMan.getString(TradLocaton(SameCube.Tquest.localization))+".";
 		} else {
-			SendGmail.TestString+=",Failed";
 			Solution.text = LangTest.LMan.getString ("NoBonus")+" "+LangTest.LMan.getString(TradLocaton(SameCube.Tquest.localization))+".";
 		}
 
